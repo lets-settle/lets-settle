@@ -20,9 +20,18 @@ Group.belongsToMany(User, {through: 'UserProject'});
 
 
 User.sync().then(function () {  
+  return User.create({
+    name: 'Jerry',
+    username: 'Tang',
+    password: 'jt111588',
+    email: 'jerica0722@gmail.com'
+  });
 });
 
 Group.sync().then(function () { 
+  return User.create({
+   group_name: 'JerryByHimSelf'
+  });
 });
 
 
