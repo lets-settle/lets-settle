@@ -31,6 +31,7 @@
     "mongoose": "^4.9.6",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
+    "react-form": "^2.6.1",
     "request": "^2.81.0",
     "webpack": "^2.2.1"
   }
