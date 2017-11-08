@@ -1,4 +1,6 @@
 import React from 'react';
+import YelpList from './YelpList.jsx';
+import Solo from './Solo.jsx';
 
 class Homepage extends React.Component {
   constructor(props) {
@@ -6,7 +8,8 @@ class Homepage extends React.Component {
 
     this.state = {
         showSolo: false,
-        showFriends: false
+        showFriends: false,
+        isHidden: false
     };
 
     this.onFriendsClick = this.onFriendsClick.bind(this)
@@ -29,15 +32,25 @@ class Homepage extends React.Component {
         });
     }
 
+    toggleHidden () {
+        this.setState({
+          isHidden: !this.state.isHidden
+        })
+      }
+
   render() {
     return (
     <div>
-        <button onClick={this.onSoloClick}>
+        <div >
+        <button class ='soloButton' onClick={this.onSoloClick}>
         Solo
         </button>
-        <button onClick={this.onFriendsClick}>
+        <button class ='friendsButton' onClick={this.onFriendsClick}>
         Friends
         </button>
+        <div>
+        {this.state.showSolo && <Solo />}
+        {this.state.showFriends && <YelpList />}
     </div>
     ) 
   }
