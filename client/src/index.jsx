@@ -25,8 +25,8 @@ class App extends React.Component {
   render () {
     return (
     <div>
+        test
       <Homepage />
-      <Search />
       <Creategroup />
       <Login />
       <Signup />
