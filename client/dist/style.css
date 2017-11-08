@@ -1,0 +1,26 @@
+#title {
+    display: block;
+    margin: 0 auto;
+}
+
+#titlesettle {
+    text-align: center;
+    margin: 35px auto; 
+    margin: -40px 20px;
+}
+
+button {
+    background-color: #D32323;
+    display: block;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
