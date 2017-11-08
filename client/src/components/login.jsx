@@ -8,6 +8,7 @@ class Login extends React.Component {
   render() {
     return (
     <div>
+        Welcome to Yelp Settle
     </div>
     ) 
   }
