@@ -1,1 +1,33 @@
-//this is my turf
+const Sequelize = require('sequelize');
+
+
+const sequelize = new Sequelize('postgres://vhqwwvao:AJGKf_dXDkbDEebQS46mLMYrAbeGs_H9@baasu.db.elephantsql.com:5432/vhqwwvao');
+
+var User = sequelize.define('users', {
+  name: Sequelize.STRING,
+  username: Sequelize.STRING,
+  password: Sequelize.STRING,
+  email: Sequelize.STRING,
+});
+
+
+var Group = sequelize.define('groups', {
+  group_name: Sequelize.STRING
+});
+
+User.belongsToMany(Group, {through: 'UserProject'});
+Group.belongsToMany(User, {through: 'UserProject'});
+
+
+User.sync().then(function () {  
+});
+
+Group.sync().then(function () { 
+});
+
+
+
+// var sequelize = new Sequelize('catsList', 'vhqwwvao', 'AJGKf_dXDkbDEebQS46mLMYrAbeGs_H9', {
+//   host: 'postgres://vhqwwvao:AJGKf_dXDkbDEebQS46mLMYrAbeGs_H9@baasu.db.elephantsql.com:5432/vhqwwvao',
+//   dialect: 'postgres'
+// });
