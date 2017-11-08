@@ -8,6 +8,7 @@ class Solo extends React.Component {
   render() {
     return (
     <div>
+      hello my fellow engineers
     </div>
     ) 
   }
