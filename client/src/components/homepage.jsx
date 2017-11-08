@@ -41,14 +41,14 @@ class Homepage extends React.Component {
   render() {
     return (
     <div>
-        <div >
+        <div>
         <button class ='soloButton' onClick={this.onSoloClick}>
         Solo
         </button>
         <button class ='friendsButton' onClick={this.onFriendsClick}>
         Friends
         </button>
-        <div>
+        </div>
         {this.state.showSolo && <Solo />}
         {this.state.showFriends && <YelpList />}
     </div>
