@@ -42,16 +42,16 @@ class Signup extends React.Component {
       let form = this;
 
       console.log('Form submitted')
-      axios.post('/signup', {
-        name: form.state.fullname,
-        username: form.state.username,
-        password: form.state.password,
-        email: form.state.email
-      }).then(response => {
-        console.log(response);
-      }).catch(err => {
-        console.log(err)
-      })
+      // axios.post('/signup', {
+      //   name: form.state.fullname,
+      //   username: form.state.username,
+      //   password: form.state.password,
+      //   email: form.state.email
+      // }).then(response => {
+      //   console.log(response);
+      // }).catch(err => {
+      //   console.log(err)
+      // })
 
     }
 

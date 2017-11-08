@@ -3,27 +3,35 @@ import React from 'react';
 class Login extends React.Component {
   constructor(props) {
     super(props);
+      this.state = {
+        username: '',
+        password: ''
+      }
+
+      this.loginButton = this.loginButton.bind(this);
     }
 
+    loginButton () {
+      console.log('Im logging in');
+    }
+  
   render() {
     return (
     <div>
       <form className="form-horizontal">
         <div className="form-group">
-          <label for="inputUsername" className="col-sm-2 control-label">Username</label>
           <div className="col-sm-10">
             <input className="form-control" id="inputUsername" placeholder="Username" value={this.state.username} onChange={this.changeUsername}/>
           </div>
         </div>
         <div className="form-group">
-          <label for="inputPassword" className="col-sm-2 control-label">Password</label>
           <div className="col-sm-10">
             <input type="password" className="form-control" id="inputPassword" placeholder="Password" value={this.state.password} onChange={this.changePassword}/>
           </div>
         </div>
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <div class="checkbox">
+        <div className="form-group">
+          <div className="col-sm-offset-2 col-sm-10">
+            <div className="checkbox">
               <label>
                 <input type="checkbox"/> Remember me
               </label>
@@ -32,7 +40,7 @@ class Login extends React.Component {
         </div>
         <div className="form-group">
           <div className="col-sm-offset-2 col-sm-10">
-            <button type="submit" className="btn btn-default" onClick={this.signUpSubmit}>Sign Up</button>
+            <button type="submit" className="btn btn-default" onClick={this.loginButton}>Login</button>
           </div>
         </div>
       </form>
