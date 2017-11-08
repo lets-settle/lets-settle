@@ -7,8 +7,8 @@ class YelpList extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state= {
-      showGroups: false
+    this.state = {
+      showGroups : false
     };
 
     this.groupClick = this.groupClick.bind(this);
@@ -16,7 +16,7 @@ class YelpList extends React.Component {
 
     groupClick (e) {
       this.setState({
-        showGroups:true
+        showGroups : true
       })
     }
 
