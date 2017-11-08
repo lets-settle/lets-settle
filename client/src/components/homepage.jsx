@@ -41,7 +41,7 @@ class Homepage extends React.Component {
   render() {
     return (
     <div>
-        <div>
+        <div >
         <button class ='soloButton' onClick={this.onSoloClick}>
         Solo
         </button>
