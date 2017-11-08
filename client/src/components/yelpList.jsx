@@ -8,6 +8,7 @@ class YelpList extends React.Component {
   render() {
     return (
     <div>
+      HELLO TEAM
     </div>
     ) 
   }
