@@ -9,7 +9,9 @@ class Signup extends React.Component {
         username: '',
         email: '',
         password: '',
-        formErrors: {email: '', password: ''},
+        formErrors: {name: '', username: '', email: '', password: ''},
+        nameValid: false,
+        usernameValid: false,
         emailValid: false,
         passwordValid: false,
         formValid: false
@@ -23,48 +25,62 @@ class Signup extends React.Component {
     }
     
     handleUserInput (e) {
-      const name = e.target.name;
-      const value = e.target.value;
-      this.setState({[name]: value}), () => { this.validateField(name, value) };
-    }
+      let name = e.target.name;
+      let value = e.target.value;
+      this.setState({[name]: value}),
+        () => { this.validateField(name, value) };
 
-    validateField(fieldName, value) {
-      let fieldValidationErrors = this.state.formErrors;
-      let emailValid = this.state.emailValid;
-      let passwordValid = this.state.passwordValid;
-
-      switch(fieldName) {
-        case 'email':
+      }
+      
+      validateField(fieldName, value) {
+        let fieldValidationErrors = this.state.formErrors;
+        let nameValid = this.state.nameValid;
+        let usernameValid = this.state.usernameValid;
+        let emailValid = this.state.emailValid;
+        let passwordValid = this.state.passwordValid;
+        
+        switch(fieldName) {
+          case 'name':
+          nameValid = value.length > 0;
+          fieldValidationErrors.name = nameValid ? '': ' field is empty';
+          case 'username':
+          usernameValid = value.length > 0;
+          fieldValidationErrors.username = usernameValid ? '': ' field is empty';
+          case 'email':
           emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
           fieldValidationErrors.email = emailValid ? '' : ' is invalid';
           break;
-        case 'password':
+          case 'password':
           passwordValid = value.length >= 6;
           fieldValidationErrors.password = passwordValid ? '': ' is too short';
           break;
-        default:
+          default:
           break;
+        }
+        this.setState({formErrors: fieldValidationErrors,
+          nameValid: nameValid,
+          usernameValid: usernameValid,
+          emailValid: emailValid,
+          passwordValid: passwordValid
+        }, this.validateForm);
       }
-      this.setState({formErrors: fieldValidationErrors,
-                      emailValid: emailValid,
-                      passwordValid: passwordValid
-                    }, this.validateForm);
-    }
-
+      
     validateForm() {
-      this.setState({formValid: this.state.emailValid && this.state.passwordValid});
+      this.setState({formValid: this.state.nameValid && this.state.usernameValid && this.state.emailValid && this.state.passwordValid});
+    }
+    
+    errorClass(error) {
+      return(error.length === 0 ? '' : 'has-error');
     }
 
     signUpSubmit (e) {
       let form = this;
       e.preventDefault();
 
-      const formData = {};
-      for (const field in this.refs) {
-        formData[field] = this.refs[field].value;
-      }
-
-      e.target.reset();
+      // const formData = {};
+      // for (const field in this.refs) {
+      //   formData[field] = this.refs[field].value;
+      // }
 
       console.log('Form submitted', formData);
       // axios.post('/signup', formData)
@@ -76,14 +92,11 @@ class Signup extends React.Component {
 
     }
 
-    errorClass(error) {
-      return(error.length === 0 ? '' : 'has-error');
-    }
 
   render() {  
     return (
     <div>
-      <form className="form-horizontal" onSubmit={this.signUpSubmit}>
+      <form className="form-horizontal">
         <div className='formErrors'>
           {Object.keys(this.state.formErrors).map((fieldName, i) => {
             if(this.state.formErrors[fieldName].length > 0){
@@ -95,9 +108,13 @@ class Signup extends React.Component {
             }
           })}
         </div>
+<<<<<<< HEAD
         <div className="form-group">
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+        <div className={`form-group ${this.errorClass(this.state.formErrors.name)}`}>
+>>>>>>> [add] refactoring sign up validation
           <label htmlFor="inputName" className="col-sm-2 control-label">Full Name</label>
 =======
           <label htmlfor="inputName" className="col-sm-2 control-label">Full Name</label>
@@ -109,6 +126,7 @@ class Signup extends React.Component {
             <input className="form-control" id="inputName" placeholder="Full Name" name="name" value={this.state.name} onChange={this.handleUserInput}/> 
           </div>
         </div>
+<<<<<<< HEAD
         <div className="form-group">
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -117,6 +135,9 @@ class Signup extends React.Component {
           <label htmlfor="inputUsername" className="col-sm-2 control-label">Username</label>
 >>>>>>> [add] console logs to check if inputs values are correct
 =======
+=======
+        <div className={`form-group ${this.errorClass(this.state.formErrors.username)}`}>
+>>>>>>> [add] refactoring sign up validation
           <label htmlFor="inputUsername" className="col-sm-2 control-label">Username</label>
 >>>>>>> [add] working on validating sign up form. email and password.
           <div className="col-sm-10">
