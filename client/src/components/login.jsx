@@ -15,8 +15,7 @@ class Login extends React.Component {
         user: null,
         username: '',
         email: '',
-        password: '',
-        loggedIn: false,
+        password: ''
       }
       this.handleLoginInput = this.handleLoginInput.bind(this);
       this.loginButton = this.loginButton.bind(this);
