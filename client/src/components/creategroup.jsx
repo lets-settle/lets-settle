@@ -6,10 +6,11 @@ class CreateGroup extends React.Component {
 
     this.addFriend = this.addFriend.bind(this);
     this.pushFriend = this.pushFriend.bind(this);
+    this.sendGroup = this.sendGroup.bind(this);
 
     this.state = {
       friend: null,
-      friendsList : ['test']
+      friendsList : ['username']
     }
   };
 
@@ -25,7 +26,26 @@ class CreateGroup extends React.Component {
       friend: ''
     })
     console.log('submit friend', this.state.friendsList);
-  }
+  };
+
+  sendGroup() {
+    const create = {
+      users : this.state.friendsList
+    };
+    for (const ref in this.refs) {
+      create[ref] = this.refs[ref].value;
+    }
+    console.log(create);
+
+    // axios.post('/search', create)
+    // .then(response => {
+    //  //get back the list of groups?
+    //   console.log(response);
+    // }).catch(err => {
+    //   console.log(err)
+    // })
+  };
+
     
   render() {
     return (
@@ -33,24 +53,24 @@ class CreateGroup extends React.Component {
       GROUP PAGE
       <form className="form-horizontal">
         <div className="input-group">
-          <input ref="newgroup" type="text" placeholder="New Group"/>
+          <input ref="group_name" type="text" placeholder="New Group"/>
 
             <label htmlFor="inputName" className="col-sm-2 control-label">Add Friends: </label>
-            <input ref="friendsList" type="text" className="col-sm-2 control-label" value={this.state.friend} onChange={this.addFriend}/>
+            <input type="text" className="col-sm-2 control-label" value={this.state.friend} onChange={this.addFriend}/>
             <span className="input-group-btn">
               <button className="btn btn-default" type="button" onClick={this.pushFriend}>Add!</button>
             </span> 
  
         </div>
       </form>
-      <form>
-        <div>
+      <div>
+        <ul className="list-group">
           {this.state.friendsList.map( f => 
-            <div>{f}</div>
+            <li className="list-group-item">{f}</li>
           )}
-        </div>
-        <button>Create Group</button>
-      </form>    
+        </ul>
+        <button onClick={this.sendGroup}>Create Group</button>
+      </div>    
     </div>
     ) 
   }
