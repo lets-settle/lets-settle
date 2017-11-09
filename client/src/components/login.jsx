@@ -1,25 +1,18 @@
 import React from 'react';
 import Signup from './Signup.jsx';
 import Homepage from './Homepage.jsx';
-
+const axios = require('axios');
 const config = require('../../../fireconfig.js')
-const firebase = require('firebase');
+const firebase = require('firebase/app');
 
-const app = firebase.initializeApp({
-  config: 
-    apikey: firekey,
-    authDomain: "yelpsettle.firebaseapp.com",
-    databaseURL: "https://yelpsettle.firebaseio.com",
-    projectId: "yelpsettle",
-    storageBucket: "yelpsettle.appspot.com",
-    messagingSenderId: "737656551674"
-});
+const app = firebase.initializeApp(config);
 
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
       this.state = {
+        user: null,
         username: '',
         email: '',
         password: ''
@@ -28,7 +21,13 @@ class Login extends React.Component {
       this.loginButton = this.loginButton.bind(this);
     }
 
-
+    componentDidMount() {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          this.setState({ user });
+        }
+      });
+    };
 
     handleLoginInput (e) {
       let name = e.target.name;
@@ -48,21 +47,28 @@ class Login extends React.Component {
         var errorCode = error.code;
         var errorMessage = error.message;
         console.log('Login Error!', errorCode, errorMessage)
+      }).then((result) => {
+        console.log('im in login: ', result);
+        console.log('im in login2: ', result.user);
+        let user = result.user;
+        this.setState({
+          user
+        });
       });
 
-      axios.get('/login', {
+      axios.get('api/login', {
         email: email,
         password: password
       }).then(response => {
         this.setState({
           username: response.data.username
-        })
-      })
+        });
+      });
 
       this.setState({
         email: '',
         password: ''
-      })
+      });
     }
   
   render() {
