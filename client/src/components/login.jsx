@@ -5,10 +5,6 @@ import Homepage from './Homepage.jsx';
 class Login extends React.Component {
   constructor(props) {
     super(props);
-      this.state = {
-        username: '',
-        password: ''
-      }
 
       this.loginButton = this.loginButton.bind(this);
     }
@@ -16,6 +12,18 @@ class Login extends React.Component {
     loginButton (e) {
       e.preventDefault();
       console.log('Im logging in');
+
+      const formData = {};
+      for (const field in this.refs) {
+        formData[field] = this.refs[field].value;
+      }
+      
+      axios.post('/login', formData)
+        .then(response => {
+            console.log(response);
+          }).catch(err => {
+            console.log(err)
+          })
     }
   
   render() {
@@ -24,12 +32,12 @@ class Login extends React.Component {
       <form className="form-horizontal">
         <div className="form-group">
           <div className="col-sm-10">
-            <input className="form-control" id="inputUsername" placeholder="Username" value={this.state.username} onChange={this.changeUsername}/>
+            <input className="form-control" id="inputUsername" placeholder="Username" ref="username" onChange={this.changeUsername}/>
           </div>
         </div>
         <div className="form-group">
           <div className="col-sm-10">
-            <input type="password" className="form-control" id="inputPassword" placeholder="Password" value={this.state.password} onChange={this.changePassword}/>
+            <input type="password" className="form-control" id="inputPassword" placeholder="Password" ref="password" onChange={this.changePassword}/>
           </div>
         </div>
         <div className="form-group">

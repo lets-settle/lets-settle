@@ -27,32 +27,32 @@ class Signup extends React.Component {
 
     }
 
-  render() {
+  render() {  
     return (
     <div>
       <form className="form-horizontal">
         <div className="form-group">
           <label htmlFor="inputName" className="col-sm-2 control-label">Full Name</label>
           <div className="col-sm-10">
-            <input className="form-control" id="inputName" placeholder="Full Name" ref={name} onChange={this.changeName}/> 
+            <input className="form-control" id="inputName" placeholder="Full Name" ref="name" onChange={this.changeName}/> 
           </div>
         </div>
         <div className="form-group">
           <label htmlFor="inputUsername" className="col-sm-2 control-label">Username</label>
           <div className="col-sm-10">
-            <input className="form-control" id="inputUsername" placeholder="Username" ref={username} onChange={this.changeUsername}/>
+            <input className="form-control" id="inputUsername" placeholder="Username" ref="username" onChange={this.changeUsername}/>
           </div>
         </div>
         <div className="form-group">
           <label htmlFor="inputPassword" className="col-sm-2 control-label">Password</label>
           <div className="col-sm-10">
-            <input type="password" className="form-control" id="inputPassword" placeholder="Password" ref={password} onChange={this.changePassword}/>
+            <input type="password" className="form-control" id="inputPassword" placeholder="Password" ref="password" onChange={this.changePassword}/>
           </div>
         </div>
         <div className="form-group">
           <label htmlFor="inputEmail" className="col-sm-2 control-label">Email</label>
           <div className="col-sm-10">
-            <input type="email" className="form-control" id="inputEmail" placeholder="Email" ref={email} onChange={this.changeEmail}/>
+            <input type="email" className="form-control" id="inputEmail" placeholder="Email" ref="email" onChange={this.changeEmail}/>
           </div>
         </div>
         <div className="form-group">
