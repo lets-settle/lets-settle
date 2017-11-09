@@ -48,25 +48,24 @@ class YelpList extends React.Component {
 
     return (
     <div>
-      <form onSubmit={this.handleSubmit} class="form-inline">
+      <form onSubmit={this.handleSubmit}>
         <select ref="group" id="inlineFormCustomSelect">
           <option>Group</option>
-          {this.groups.map(group => <option key={group} value={group}>{group}</option>)}
+          {this.groups.map((group, i) => <option key={i} value={group}>{group}</option>)}
         </select>
 
-        <input type="text" className="form-control" id="inlineFormInput" placeholder="type" ref="type"/>
-
+        <div className="form-inline">
+        <input type="text" className="form-control" id="inlineFormInput" placeholder="type" ref="term"/>
         <input type="text" className="form-control" id="inlineFormInputGroup" placeholder="location" ref="location"/>
-
-        <select ref="cost" id="inlineFormCustomSelect">
-          <option>Cost</option>
+        <select ref="price" id="inlineFormCustomSelect">
+          <option>Price</option>
           <option>$</option>
           <option>$$</option>
           <option>$$$</option>
           <option>$$$$</option>
         </select>
-
         <button type="submit" className="btn btn-primary" onClick={this.getSearch}>Search</button>
+        </div>
       </form>
 
       {this.state.resturants.map( suggestion => 
