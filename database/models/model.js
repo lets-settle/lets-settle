@@ -21,21 +21,21 @@ var UserGroup = db.define('usergroup', {
 
 
 db.sync().then(function() {
-    return User.create({
-      name: 'Jerry',
-      username: 'Tang',
-      password: 'jt111588',
-      email: 'jerica0722@gmail.com'
-    })
+    // return User.create({
+    //   name: 'Jerry',
+    //   username: 'Tang',
+    //   password: 'jt111588',
+    //   email: 'jerica0722@gmail.com'
+    // })
   }).then(function() {
-    return Group.create({
-      group_name: 'theTestGroup'
-    });
+    // return Group.create({
+    //   group_name: 'theTestGroup'
+    // });
   }).then(function() {
-    return UserGroup.create({
-      userid:1,
-      groupid:1
-    })
+    // return UserGroup.create({
+    //   userid:1,
+    //   groupid:1
+    // })
   })
   
 exports.User = User;

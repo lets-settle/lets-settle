@@ -4,7 +4,7 @@ var db = require('../../database/index.js')
 var key = require('../config.js')
 
   
-  exports.signupHandler = function (req, res) {
+  module.exports.signupHandler = function (req, res) {
     var name = req.body.name;
     var username = req.body.username;
     var password = req.body.password;
@@ -21,7 +21,7 @@ var key = require('../config.js')
     })
   }
 
-  exports.soloHandler = function(req, res) {
+  module.exports.soloHandler = function(req, res) {
     console.log('this is req.body==================', req.body)    
     var params = {};
     params.location = req.body.location;
@@ -37,6 +37,24 @@ var key = require('../config.js')
     })
   }
 
+  // module.exports.addNewGroup = function(req, res) {
+  //   var users = req.body.users
+  //   var group_name = req.body.group_name; 
+  //   //takes the group and create the group instanly
+  //   model.Group.create({
+  //     group_name: group_name
+  //   }).then(function(newGroup) {
+       
+
+
+
+  //   })
+  //   //after the group is created, then 
+  //     //find each user in the arr in our database
+  //     //whenever a user is found 
+  //       //add this userid to usergroup and add this groupid to usergroup
+
+  // }
 
 
 
