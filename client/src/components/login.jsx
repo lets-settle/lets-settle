@@ -13,7 +13,8 @@ class Login extends React.Component {
       this.loginButton = this.loginButton.bind(this);
     }
 
-    loginButton () {
+    loginButton (e) {
+      e.preventDefault();
       console.log('Im logging in');
     }
   

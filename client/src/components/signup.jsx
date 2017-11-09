@@ -4,55 +4,26 @@ import Homepage from './Homepage.jsx';
 class Signup extends React.Component {
   constructor(props) {
     super(props);
-      this.state = {
-        fullname: '',
-        username: '',
-        password: '',
-        email: ''
-      }
 
-      this.changeName = this.changeName.bind(this);
-      this.changeUsername = this.changeUsername.bind(this);
-      this.changePassword = this.changePassword.bind(this);
-      this.changeEmail = this.changeEmail.bind(this);
       this.signUpSubmit = this.signUpSubmit.bind(this);
     }
-
-    changeName (value) {
-      this.setState({
-        fullname: value.target.value
-      })
-    }
-    changeUsername (value) {
-      this.setState({
-        username: value.target.value
-      })
-    }
-    changePassword (value) {
-      this.setState({
-        password: value.target.value
-      })
-    }
-    changeEmail (value) {
-      this.setState({
-        email: value.target.value
-      })
-    }
     
-    signUpSubmit () {
+    signUpSubmit (e) {
       let form = this;
+      e.preventDefault();
+
+      const formData = {};
+      for (const field in this.refs) {
+        formData[field] = this.refs[field].value;
+      }
 
       console.log('Form submitted')
-      // axios.post('/signup', {
-      //   name: form.state.fullname,
-      //   username: form.state.username,
-      //   password: form.state.password,
-      //   email: form.state.email
-      // }).then(response => {
-      //   console.log(response);
-      // }).catch(err => {
-      //   console.log(err)
-      // })
+      axios.post('/signup', formData)
+        .then(response => {
+          console.log(response);
+        }).catch(err => {
+          console.log(err)
+        })
 
     }
 
@@ -63,25 +34,25 @@ class Signup extends React.Component {
         <div className="form-group">
           <label htmlFor="inputName" className="col-sm-2 control-label">Full Name</label>
           <div className="col-sm-10">
-            <input className="form-control" id="inputName" placeholder="Full Name" value={this.state.fullname} onChange={this.changeName}/> 
+            <input className="form-control" id="inputName" placeholder="Full Name" ref={name} onChange={this.changeName}/> 
           </div>
         </div>
         <div className="form-group">
           <label htmlFor="inputUsername" className="col-sm-2 control-label">Username</label>
           <div className="col-sm-10">
-            <input className="form-control" id="inputUsername" placeholder="Username" value={this.state.username} onChange={this.changeUsername}/>
+            <input className="form-control" id="inputUsername" placeholder="Username" ref={username} onChange={this.changeUsername}/>
           </div>
         </div>
         <div className="form-group">
           <label htmlFor="inputPassword" className="col-sm-2 control-label">Password</label>
           <div className="col-sm-10">
-            <input type="password" className="form-control" id="inputPassword" placeholder="Password" value={this.state.password} onChange={this.changePassword}/>
+            <input type="password" className="form-control" id="inputPassword" placeholder="Password" ref={password} onChange={this.changePassword}/>
           </div>
         </div>
         <div className="form-group">
           <label htmlFor="inputEmail" className="col-sm-2 control-label">Email</label>
           <div className="col-sm-10">
-            <input type="email" className="form-control" id="inputEmail" placeholder="Email" value={this.state.email} onChange={this.changeEmail}/>
+            <input type="email" className="form-control" id="inputEmail" placeholder="Email" ref={email} onChange={this.changeEmail}/>
           </div>
         </div>
         <div className="form-group">
