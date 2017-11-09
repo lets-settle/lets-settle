@@ -15,7 +15,8 @@ class Login extends React.Component {
         user: null,
         username: '',
         email: '',
-        password: ''
+        password: '',
+        loggedIn: false,
       }
       this.handleLoginInput = this.handleLoginInput.bind(this);
       this.loginButton = this.loginButton.bind(this);
@@ -52,6 +53,7 @@ class Login extends React.Component {
         console.log('im in login2: ', result.user);
         let user = result.user;
         this.setState({
+          loggedIn: true,
           user
         });
       });

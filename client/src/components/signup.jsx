@@ -20,7 +20,7 @@ class Signup extends React.Component {
         emailValid: false,
         passwordValid: false,
         formValid: false,
-        user: ''
+        user: '',
       }
 
       this.handleUserInput = this.handleUserInput.bind(this);
@@ -118,7 +118,8 @@ class Signup extends React.Component {
             name: '',
             username: '',
             email: '',
-            password: ''
+            password: '',
+            loggedIn: true
           })
         }).catch(err => {
           console.log('FAILED TO POST: ', err);

@@ -10,7 +10,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
+<<<<<<< HEAD
       isLoggedIn: false
+=======
+      groups: [],
+      loggedIn: false
+>>>>>>> [add] working on firebase login sessions
     }
   }
 
@@ -24,8 +29,18 @@ class App extends React.Component {
   render () {
     return (
     <div>
+<<<<<<< HEAD
     {/* <img id='title' src = {logo}/> */}
+<<<<<<< HEAD
       <Login checkLogin = {this.checkLogin.bind(this)} isLoggedIn = {this.state.isLoggedIn}/>
+=======
+      {<Login isLoggedIn = {this.loggedIn}/>}
+=======
+    {/* <img id='title' src = {require('../dist/images/logo.png')}/> */}
+        This goes to homepage or login
+      {<Login loggedIn={this.state.loggedIn}/>}
+>>>>>>> [add] working on firebase login sessions
+>>>>>>> [add] working on firebase login sessions
     </div>
     )
   }
