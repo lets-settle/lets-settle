@@ -16,10 +16,9 @@ class App extends React.Component {
   render () {
     return (
     <div>
-    <img id='title' src = 'http://baymeadowsfgc.com/wp-content/uploads/2014/05/yelp-logo.png'/>
-    <h1 id='titlesettle'>Settle</h1>
+    {/* <img id='title' src = {require('../dist/images/logo.png')}/> */}
         This goes to homepage or login
-      <Login />
+      {<Login />}
     </div>
     )
   }
