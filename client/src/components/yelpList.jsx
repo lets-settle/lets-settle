@@ -7,21 +7,24 @@ class YelpList extends React.Component {
   constructor(props) {
     super(props);
   
+    
     this.state = {
-      groups: ['coolGrp', 'lameGrp', 'partyGrp'],
-      selectGroup : null,
-      group: '',
-      type: '',
-      location: '',
-      cost: ''
+      groups : ['coolGrp', 'lameGrp', 'partyGrp']
     };
 
-    this.handleChange = this.handleChange.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
     this.getSearch = this.getSearch.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange(e) {
-      this.setState({selectGroup:e.target.value});
+    handleSubmit(e) {
+      e.preventDefault();
+
+      const searchData = {};
+      for (const ref in this.refs) {
+        searchData[ref] = this.refs[ref].value;
+      }
+      console.log('////', searchData)
     }
 
     getSearch() {
@@ -40,27 +43,26 @@ class YelpList extends React.Component {
 
     return (
     <div>
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <div class="form-group">
           <select
-          value={this.state.selectGroup} 
-          onChange={this.handleChange}>
+          ref="group">
             {this.state.groups.map(group => 
               <option key={group} value={group}>{group}</option>)}
           </select>
         </div> 
 
         <label className="sr-only" htmlFor="inlineFormInput">Type</label>
-        <input type="text" className="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="type" />
+        <input type="text" className="col-sm-2" id="inlineFormInput" placeholder="type" ref="type"/>
 
         <label className="sr-only" htmlFor="inlineFormInputGroup">Location</label>
-        <div className="input-group mb-2 mr-sm-2 mb-sm-0">
-          <input type="text" className="form-control" id="inlineFormInputGroup" placeholder="location" />
+        <div className="col-sm-2">
+          <input type="text" className="form-control" id="inlineFormInputGroup" placeholder="location" ref="location"/>
         </div>
 
         <div className="btn-group" htmlFor="inlineFormInputGroup">
           <div class="form-group">
-          <select>
+          <select ref="cost">
               <option>$</option>
               <option>$$</option>
               <option>$$$</option>
@@ -69,11 +71,8 @@ class YelpList extends React.Component {
         </div> 
       </div>
 
-        <button type="submit" className="btn btn-primary" onClick={this.getSearch}>Search</button>
+        <button type="submit" className="btn btn-primary">Search</button>
       </form>
-
-
-    
     </div>
     ) 
   }
