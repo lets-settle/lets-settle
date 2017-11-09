@@ -10,6 +10,10 @@ class YelpList extends React.Component {
     this.state = {
       groups: ['coolGrp', 'lameGrp', 'partyGrp'],
       selectGroup : null,
+      group: '',
+      type: '',
+      location: '',
+      cost: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
