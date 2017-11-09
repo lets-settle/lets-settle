@@ -5,30 +5,40 @@ import Homepage from './Homepage.jsx';
 class Login extends React.Component {
   constructor(props) {
     super(props);
-      this.state = {
-        username: '',
-        password: ''
-      }
 
       this.loginButton = this.loginButton.bind(this);
     }
 
-    loginButton () {
-      console.log('Im logging in');
+    loginButton (e) {
+      e.preventDefault();
+      
+      const formData = {};
+      for (const field in this.refs) {
+        formData[field] = this.refs[field].value;
+      }
+    
+      console.log('Im logging in', formData, e.target);
+      e.target.reset();
+      // axios.post('/login', formData)
+      //   .then(response => {
+      //       console.log(response);
+      //     }).catch(err => {
+      //       console.log(err)
+      //     })
     }
   
   render() {
     return (
     <div>
-      <form className="form-horizontal">
+      <form className="form-horizontal" onSubmit={this.loginButton}>
         <div className="form-group">
           <div className="col-sm-10">
-            <input className="form-control" id="inputUsername" placeholder="Username" value={this.state.username} onChange={this.changeUsername}/>
+            <input className="form-control" id="inputUsername" placeholder="Username" ref="username" onChange={this.changeUsername}/>
           </div>
         </div>
         <div className="form-group">
           <div className="col-sm-10">
-            <input type="password" className="form-control" id="inputPassword" placeholder="Password" value={this.state.password} onChange={this.changePassword}/>
+            <input type="password" className="form-control" id="inputPassword" placeholder="Password" ref="password" onChange={this.changePassword}/>
           </div>
         </div>
         <div className="form-group">
@@ -42,7 +52,7 @@ class Login extends React.Component {
         </div>
         <div className="form-group">
           <div className="col-sm-offset-2 col-sm-10">
-            <button type="submit" className="btn btn-default" onClick={this.loginButton}>Login</button>
+            <button type="submit" className="btn btn-default">Login</button>
           </div>
         </div>
       </form>
