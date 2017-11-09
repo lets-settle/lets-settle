@@ -1,4 +1,5 @@
 import React from 'react';
+import Result from './Result.jsx';
 
 
 class Solo extends React.Component {
@@ -9,7 +10,8 @@ class Solo extends React.Component {
   render() {
     return (
     <div>
-      hello my fellow engineers
+      hello my fellow engineers this is the solo page
+      <Result />
     </div>
     ) 
   }

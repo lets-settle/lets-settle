@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Creategroup extends React.Component {
+class CreateGroup extends React.Component {
   constructor(props) {
     super(props);
     }
@@ -8,9 +8,10 @@ class Creategroup extends React.Component {
   render() {
     return (
     <div>
+      this is the create group page
     </div>
     ) 
   }
 }
 
-export default Creategroup;
+export default CreateGroup;

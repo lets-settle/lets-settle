@@ -1,11 +1,14 @@
 import React from 'react';
+import Result from './Result.jsx';
+import YelpListEntry from './YelpListEntry.jsx';
+import CreateGroup from './CreateGroup.jsx';
 
 class YelpList extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      showGroups = false
+    this.state= {
+      showGroups: false
     };
 
     this.groupClick = this.groupClick.bind(this);
@@ -13,7 +16,7 @@ class YelpList extends React.Component {
 
     groupClick (e) {
       this.setState({
-        showGroups = true
+        showGroups:true
       })
     }
 
@@ -54,7 +57,9 @@ class YelpList extends React.Component {
 
         <button type="submit" className="btn btn-primary" >Search</button>
       </form>
-
+      <YelpListEntry />
+      <Result />
+      <CreateGroup/>
     </div>
     ) 
   }

@@ -1,4 +1,6 @@
 import React from 'react';
+import Signup from './Signup.jsx';
+import Homepage from './Homepage.jsx';
 
 class Login extends React.Component {
   constructor(props) {
@@ -44,6 +46,8 @@ class Login extends React.Component {
           </div>
         </div>
       </form>
+      <Homepage />
+      <Signup />
     </div>
     ) 
   }
