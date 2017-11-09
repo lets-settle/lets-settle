@@ -43,9 +43,11 @@ class Signup extends React.Component {
         case 'name':
         nameValid = value.length > 0;
         fieldValidationErrors.name = nameValid ? '': ' field is empty';
+        break;
         case 'username':
         usernameValid = value.length > 0;
         fieldValidationErrors.username = usernameValid ? '': ' field is empty';
+        break;
         case 'email':
         emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
         fieldValidationErrors.email = emailValid ? '' : ' is invalid';
@@ -77,18 +79,18 @@ class Signup extends React.Component {
       let form = this;
       e.preventDefault();
 
-      // const formData = {};
-      // for (const field in this.refs) {
-      //   formData[field] = this.refs[field].value;
-      // }
-
-      console.log('Form submitted', formData);
-      // axios.post('/signup', formData)
-      //   .then(response => {
-      //     console.log(response);
-      //   }).catch(err => {
-      //     console.log(err)
-      //   })
+      console.log('Form submitted', );
+      axios.post('/signup', {
+        name: this.state.name,
+        username: this.state.username,
+        password: this.state.password,
+        email: this.state.email
+      })
+        .then(response => {
+          console.log('Submit User Info to Server/DB', response);
+        }).catch(err => {
+          console.log(err)
+        })
 
     }
 
@@ -108,68 +110,26 @@ class Signup extends React.Component {
             }
           })}
         </div>
-<<<<<<< HEAD
-        <div className="form-group">
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
         <div className={`form-group ${this.errorClass(this.state.formErrors.name)}`}>
->>>>>>> [add] refactoring sign up validation
           <label htmlFor="inputName" className="col-sm-2 control-label">Full Name</label>
-=======
-          <label htmlfor="inputName" className="col-sm-2 control-label">Full Name</label>
->>>>>>> [add] console logs to check if inputs values are correct
-=======
-          <label htmlFor="inputName" className="col-sm-2 control-label">Full Name</label>
->>>>>>> [add] working on validating sign up form. email and password.
           <div className="col-sm-10">
             <input className="form-control" id="inputName" placeholder="Full Name" name="name" value={this.state.name} onChange={this.handleUserInput}/> 
           </div>
         </div>
-<<<<<<< HEAD
-        <div className="form-group">
-<<<<<<< HEAD
-<<<<<<< HEAD
-          <label htmlFor="inputUsername" className="col-sm-2 control-label">Username</label>
-=======
-          <label htmlfor="inputUsername" className="col-sm-2 control-label">Username</label>
->>>>>>> [add] console logs to check if inputs values are correct
-=======
-=======
         <div className={`form-group ${this.errorClass(this.state.formErrors.username)}`}>
->>>>>>> [add] refactoring sign up validation
           <label htmlFor="inputUsername" className="col-sm-2 control-label">Username</label>
->>>>>>> [add] working on validating sign up form. email and password.
           <div className="col-sm-10">
             <input className="form-control" id="inputUsername" placeholder="Username" name="username" value={this.state.username} onChange={this.handleUserInput}/>
           </div>
         </div>
-<<<<<<< HEAD
-        <div className="form-group">
-<<<<<<< HEAD
-          <label htmlFor="inputPassword" className="col-sm-2 control-label">Password</label>
-=======
-          <label htmlfor="inputPassword" className="col-sm-2 control-label">Password</label>
->>>>>>> [add] console logs to check if inputs values are correct
-=======
         <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
           <label htmlFor="inputEmail" className="col-sm-2 control-label">Email</label>
->>>>>>> [add] working on validating sign up form. email and password.
           <div className="col-sm-10">
             <input type="email" className="form-control" id="inputEmail" placeholder="Email" name="email" value={this.state.email} onChange={this.handleUserInput}/>
           </div>
         </div>
-<<<<<<< HEAD
-        <div className="form-group">
-<<<<<<< HEAD
-          <label htmlFor="inputEmail" className="col-sm-2 control-label">Email</label>
-=======
-          <label htmlfor="inputEmail" className="col-sm-2 control-label">Email</label>
->>>>>>> [add] console logs to check if inputs values are correct
-=======
         <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
           <label htmlFor="inputPassword" className="col-sm-2 control-label">Password</label>
->>>>>>> [add] working on validating sign up form. email and password.
           <div className="col-sm-10">
             <input type="password" className="form-control" id="inputPassword" placeholder="Password" name="password" value={this.state.password} onChange={this.handleUserInput}/>
           </div>
