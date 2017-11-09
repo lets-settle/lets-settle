@@ -7,72 +7,72 @@ class YelpList extends React.Component {
   constructor(props) {
     super(props);
   
+    this.groups = ['coolGrp', 'lameGrp', 'partyGrp'];
     
     this.state = {
-      groups : ['coolGrp', 'lameGrp', 'partyGrp']
+      resturants : []
     };
 
-    // this.handleChange = this.handleChange.bind(this);
-    this.getSearch = this.getSearch.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    }
+    this.getSearch = this.getSearch.bind(this);
+    };
 
     handleSubmit(e) {
       e.preventDefault();
-
       const searchData = {};
       for (const ref in this.refs) {
         searchData[ref] = this.refs[ref].value;
       }
+      e.target.reset();
+
       console.log('////', searchData)
-    }
+    };
 
     getSearch() {
+      this.setState({
+        resturants : ['test1', 'test2']
+      });  
       // axios.post('/search', {
-      //   type: form.state.type,
-      //   location: form.state.location,
-      //   cost: form.state.cost
+      //   searchData
       // }).then(response => {
+      //  this.resturants = response.data;
       //   console.log(response);
       // }).catch(err => {
       //   console.log(err)
       // })
-    }
+
+
+    };
 
   render() {
 
     return (
     <div>
-      <form onSubmit={this.handleSubmit}>
-        <div class="form-group">
-          <select
-          ref="group">
-            {this.state.groups.map(group => 
-              <option key={group} value={group}>{group}</option>)}
-          </select>
-        </div> 
+      <form onSubmit={this.handleSubmit} class="form-inline">
+        <select ref="group" id="inlineFormCustomSelect">
+          <option>Group</option>
+          {this.groups.map(group => <option key={group} value={group}>{group}</option>)}
+        </select>
 
-        <label className="sr-only" htmlFor="inlineFormInput">Type</label>
-        <input type="text" className="col-sm-2" id="inlineFormInput" placeholder="type" ref="type"/>
+        <input type="text" className="form-control" id="inlineFormInput" placeholder="type" ref="type"/>
 
-        <label className="sr-only" htmlFor="inlineFormInputGroup">Location</label>
-        <div className="col-sm-2">
-          <input type="text" className="form-control" id="inlineFormInputGroup" placeholder="location" ref="location"/>
-        </div>
+        <input type="text" className="form-control" id="inlineFormInputGroup" placeholder="location" ref="location"/>
 
-        <div className="btn-group" htmlFor="inlineFormInputGroup">
-          <div class="form-group">
-          <select ref="cost">
-              <option>$</option>
-              <option>$$</option>
-              <option>$$$</option>
-              <option>$$$$</option>
-          </select>
-        </div> 
-      </div>
+        <select ref="cost" id="inlineFormCustomSelect">
+          <option>Cost</option>
+          <option>$</option>
+          <option>$$</option>
+          <option>$$$</option>
+          <option>$$$$</option>
+        </select>
 
-        <button type="submit" className="btn btn-primary">Search</button>
+        <button type="submit" className="btn btn-primary" onClick={this.getSearch}>Search</button>
       </form>
+
+      {this.state.resturants.map( suggestion => 
+        (<YelpListEntry suggestion={suggestion}/>)
+      )}
+
     </div>
     ) 
   }
