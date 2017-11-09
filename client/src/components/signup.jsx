@@ -17,6 +17,8 @@ class Signup extends React.Component {
         formData[field] = this.refs[field].value;
       }
 
+      e.target.reset();
+
       console.log('Form submitted', formData);
       // axios.post('/signup', formData)
       //   .then(response => {
@@ -30,7 +32,7 @@ class Signup extends React.Component {
   render() {  
     return (
     <div>
-      <form className="form-horizontal">
+      <form className="form-horizontal" onSubmit={this.signUpSubmit}>
         <div className="form-group">
 <<<<<<< HEAD
           <label htmlFor="inputName" className="col-sm-2 control-label">Full Name</label>
@@ -73,7 +75,7 @@ class Signup extends React.Component {
         </div>
         <div className="form-group">
           <div className="col-sm-offset-2 col-sm-10">
-            <button type="submit" className="btn btn-default" onClick={this.signUpSubmit}>Sign Up</button>
+            <button type="submit" className="btn btn-default">Sign Up</button>
           </div>
         </div>
       </form>

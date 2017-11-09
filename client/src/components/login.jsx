@@ -16,8 +16,9 @@ class Login extends React.Component {
       for (const field in this.refs) {
         formData[field] = this.refs[field].value;
       }
-      
-      console.log('Im logging in', formData);
+    
+      console.log('Im logging in', formData, e.target);
+      e.target.reset();
       // axios.post('/login', formData)
       //   .then(response => {
       //       console.log(response);
@@ -29,7 +30,7 @@ class Login extends React.Component {
   render() {
     return (
     <div>
-      <form className="form-horizontal">
+      <form className="form-horizontal" onSubmit={this.loginButton}>
         <div className="form-group">
           <div className="col-sm-10">
             <input className="form-control" id="inputUsername" placeholder="Username" ref="username" onChange={this.changeUsername}/>
@@ -51,7 +52,7 @@ class Login extends React.Component {
         </div>
         <div className="form-group">
           <div className="col-sm-offset-2 col-sm-10">
-            <button type="submit" className="btn btn-default" onClick={this.loginButton}>Login</button>
+            <button type="submit" className="btn btn-default">Login</button>
           </div>
         </div>
       </form>
