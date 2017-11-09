@@ -6,37 +6,46 @@ import CreateGroup from './CreateGroup.jsx';
 class YelpList extends React.Component {
   constructor(props) {
     super(props);
-
+  
     this.state = {
-      showGroups : false
+      groups: ['coolGrp', 'lameGrp', 'partyGrp'],
+      selectGroup : null,
     };
 
-    this.groupClick = this.groupClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.getSearch = this.getSearch.bind(this);
     }
 
-    groupClick (e) {
-      this.setState({
-        showGroups : true
-      })
+    handleChange(e) {
+      this.setState({selectGroup:e.target.value});
+    }
+
+    getSearch() {
+      // axios.post('/search', {
+      //   type: form.state.type,
+      //   location: form.state.location,
+      //   cost: form.state.cost
+      // }).then(response => {
+      //   console.log(response);
+      // }).catch(err => {
+      //   console.log(err)
+      // })
     }
 
   render() {
 
     return (
     <div>
-      <div classNameName="dropdown">
-        <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Groups
-        </button>
-        <div  onClick={this.groupClick} className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a className="dropdown-item">Action</a>
-          {/* <a className="dropdown-item" href="#">Another action</a>
-          <a className="dropdown-item" href="#">Something else here</a> */}
-        </div>
-      </div>
+      <form>
+        <div class="form-group">
+          <select
+          value={this.state.selectGroup} 
+          onChange={this.handleChange}>
+            {this.state.groups.map(group => 
+              <option key={group} value={group}>{group}</option>)}
+          </select>
+        </div> 
 
-
-      <form className="form-inline">
         <label className="sr-only" htmlFor="inlineFormInput">Type</label>
         <input type="text" className="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="type" />
 
@@ -46,20 +55,21 @@ class YelpList extends React.Component {
         </div>
 
         <div className="btn-group" htmlFor="inlineFormInputGroup">
-          <button type="button" className="btn btn-danger">cost</button>
-          <button type="button" className="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span className="sr-only">Toggle Dropdown</span>
-          </button>
-          <div className="dropdown-menu">
-            <a className="dropdown-item" href="#">$$$</a>
-          </div>
-        </div>
+          <div class="form-group">
+          <select>
+              <option>$</option>
+              <option>$$</option>
+              <option>$$$</option>
+              <option>$$$$</option>
+          </select>
+        </div> 
+      </div>
 
-        <button type="submit" className="btn btn-primary" >Search</button>
+        <button type="submit" className="btn btn-primary" onClick={this.getSearch}>Search</button>
       </form>
-      <YelpListEntry />
-      <Result />
-      <CreateGroup/>
+
+
+    
     </div>
     ) 
   }
