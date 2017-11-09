@@ -9,7 +9,7 @@ class YelpListEntry extends React.Component {
   render() {
     return (
     <div>
-     this is the yelplistentry
+     {this.props.suggestion}
     </div>
     ) 
   }

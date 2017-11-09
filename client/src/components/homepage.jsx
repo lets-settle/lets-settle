@@ -43,10 +43,10 @@ class Homepage extends React.Component {
     return (
     <div>
         <div>
-        <button class ='soloButton' onClick={this.onSoloClick}>
+        <button className ='soloButton' onClick={this.onSoloClick}>
         Solo
         </button>
-        <button class ='friendsButton' onClick={this.onFriendsClick}>
+        <button className ='friendsButton' onClick={this.onFriendsClick}>
         Friends
         </button>
         </div>

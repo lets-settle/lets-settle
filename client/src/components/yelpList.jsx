@@ -6,60 +6,72 @@ import CreateGroup from './CreateGroup.jsx';
 class YelpList extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state= {
-      showGroups: false
+  
+    this.groups = ['coolGrp', 'lameGrp', 'partyGrp'];
+    
+    this.state = {
+      resturants : []
     };
 
-    this.groupClick = this.groupClick.bind(this);
-    }
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.getSearch = this.getSearch.bind(this);
+    };
 
-    groupClick (e) {
+    handleSubmit(e) {
+      e.preventDefault();
+      const searchData = {};
+      for (const ref in this.refs) {
+        searchData[ref] = this.refs[ref].value;
+      }
+      e.target.reset();
+
+      console.log('////', searchData)
+    };
+
+    getSearch() {
       this.setState({
-        showGroups:true
-      })
-    }
+        resturants : ['test1', 'test2']
+      });  
+      // axios.post('/search', {
+      //   searchData
+      // }).then(response => {
+      //  this.resturants = response.data;
+      //   console.log(response);
+      // }).catch(err => {
+      //   console.log(err)
+      // })
+
+
+    };
 
   render() {
 
     return (
     <div>
-      <div classNameName="dropdown">
-        <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Groups
-        </button>
-        <div  onClick={this.groupClick} className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a className="dropdown-item">Action</a>
-          {/* <a className="dropdown-item" href="#">Another action</a>
-          <a className="dropdown-item" href="#">Something else here</a> */}
+      <form onSubmit={this.handleSubmit}>
+        <select ref="group" id="inlineFormCustomSelect">
+          <option>Group</option>
+          {this.groups.map((group, i) => <option key={i} value={group}>{group}</option>)}
+        </select>
+
+        <div className="form-inline">
+        <input type="text" className="form-control" id="inlineFormInput" placeholder="type" ref="term"/>
+        <input type="text" className="form-control" id="inlineFormInputGroup" placeholder="location" ref="location"/>
+        <select ref="price" id="inlineFormCustomSelect">
+          <option>Price</option>
+          <option>$</option>
+          <option>$$</option>
+          <option>$$$</option>
+          <option>$$$$</option>
+        </select>
+        <button type="submit" className="btn btn-primary" onClick={this.getSearch}>Search</button>
         </div>
-      </div>
-
-
-      <form className="form-inline">
-        <label className="sr-only" htmlFor="inlineFormInput">Type</label>
-        <input type="text" className="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="type" />
-
-        <label className="sr-only" htmlFor="inlineFormInputGroup">Location</label>
-        <div className="input-group mb-2 mr-sm-2 mb-sm-0">
-          <input type="text" className="form-control" id="inlineFormInputGroup" placeholder="location" />
-        </div>
-
-        <div className="btn-group" htmlFor="inlineFormInputGroup">
-          <button type="button" className="btn btn-danger">cost</button>
-          <button type="button" className="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span className="sr-only">Toggle Dropdown</span>
-          </button>
-          <div className="dropdown-menu">
-            <a className="dropdown-item" href="#">$$$</a>
-          </div>
-        </div>
-
-        <button type="submit" className="btn btn-primary" >Search</button>
       </form>
-      <YelpListEntry />
-      <Result />
-      <CreateGroup/>
+
+      {this.state.resturants.map( suggestion => 
+        (<YelpListEntry suggestion={suggestion}/>)
+      )}
+
     </div>
     ) 
   }

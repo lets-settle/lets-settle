@@ -8,7 +8,10 @@ class CreateGroup extends React.Component {
   render() {
     return (
     <div>
-      this is the create group page
+      GROUP PAGE
+      <form>
+        <input ref="newgroup" type="text" placeholder="New Group"/>
+      </form>
     </div>
     ) 
   }
