@@ -20,8 +20,8 @@ class Signup extends React.Component {
       this.handleUserInput = this.handleUserInput.bind(this);
       this.validateField = this.validateField.bind(this);
       this.validateForm = this.validateForm.bind(this);
-      this.signUpSubmit = this.signUpSubmit.bind(this);
       this.errorClass = this.errorClass.bind(this);
+      this.signUpSubmit = this.signUpSubmit.bind(this);
     }
     
     handleUserInput (e) {
@@ -76,10 +76,9 @@ class Signup extends React.Component {
     }
 
     signUpSubmit (e) {
-      let form = this;
       e.preventDefault();
 
-      console.log('Form submitted', );
+      console.log('Form submitted');
       axios.post('/signup', {
         name: this.state.name,
         username: this.state.username,
@@ -136,11 +135,11 @@ class Signup extends React.Component {
         </div>
         <div className="form-group">
           <div className="col-sm-offset-2 col-sm-10">
-            <button type="submit" className="btn btn-default" disabled={!this.state.formValid}>Sign Up</button>
+            <button type="submit" className="btn btn-default" disabled={!this.state.formValid} onClick={this.signUpSubmit}>Sign Up</button>
           </div>
         </div>
       </form>
-      <Homepage />
+      <Homepage username={this.state.username}/>
     </div>
     ) 
   }
