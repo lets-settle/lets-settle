@@ -61,25 +61,25 @@ class Signup extends React.Component {
     <div>
       <form className="form-horizontal">
         <div className="form-group">
-          <label for="inputName" className="col-sm-2 control-label">Full Name</label>
+          <label htmlFor="inputName" className="col-sm-2 control-label">Full Name</label>
           <div className="col-sm-10">
             <input className="form-control" id="inputName" placeholder="Full Name" value={this.state.fullname} onChange={this.changeName}/> 
           </div>
         </div>
         <div className="form-group">
-          <label for="inputUsername" className="col-sm-2 control-label">Username</label>
+          <label htmlFor="inputUsername" className="col-sm-2 control-label">Username</label>
           <div className="col-sm-10">
             <input className="form-control" id="inputUsername" placeholder="Username" value={this.state.username} onChange={this.changeUsername}/>
           </div>
         </div>
         <div className="form-group">
-          <label for="inputPassword" className="col-sm-2 control-label">Password</label>
+          <label htmlFor="inputPassword" className="col-sm-2 control-label">Password</label>
           <div className="col-sm-10">
             <input type="password" className="form-control" id="inputPassword" placeholder="Password" value={this.state.password} onChange={this.changePassword}/>
           </div>
         </div>
         <div className="form-group">
-          <label for="inputEmail" className="col-sm-2 control-label">Email</label>
+          <label htmlFor="inputEmail" className="col-sm-2 control-label">Email</label>
           <div className="col-sm-10">
             <input type="email" className="form-control" id="inputEmail" placeholder="Email" value={this.state.email} onChange={this.changeEmail}/>
           </div>
