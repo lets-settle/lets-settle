@@ -1,6 +1,6 @@
 const express = require('express');
 let app = express();
-let db = require('../database/index');
+// let db = require('../database/index');
 let bodyParser = require('body-parser');
 let axios = require('axios');
 
@@ -12,15 +12,6 @@ app.use(bodyParser.json())
 
 app.use(express.static(__dirname + '/../client/dist'));
 
-app.post('/repos', function (req, res) {
-  // TODO - your code here!
-});
-
-app.get('/repos', function (req, res) {
-  // TODO - your code here!
-  // This route should send back the top 25 repos
-  res.send("this is the get server speaking")
-});
 
 let port = 1128;
 

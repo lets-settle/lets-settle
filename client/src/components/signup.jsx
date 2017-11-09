@@ -1,4 +1,5 @@
 import React from 'react';
+import Homepage from './Homepage.jsx';
 
 class Signup extends React.Component {
   constructor(props) {
@@ -89,6 +90,7 @@ class Signup extends React.Component {
           </div>
         </div>
       </form>
+      <Homepage />
     </div>
     ) 
   }

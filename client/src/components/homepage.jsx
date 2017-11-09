@@ -1,6 +1,7 @@
 import React from 'react';
 import YelpList from './YelpList.jsx';
 import Solo from './Solo.jsx';
+import CreateGroup from './CreateGroup.jsx';
 
 class Homepage extends React.Component {
   constructor(props) {
@@ -41,7 +42,7 @@ class Homepage extends React.Component {
   render() {
     return (
     <div>
-        <div >
+        <div>
         <button class ='soloButton' onClick={this.onSoloClick}>
         Solo
         </button>
@@ -51,6 +52,7 @@ class Homepage extends React.Component {
         </div>
         {this.state.showSolo && <Solo />}
         {this.state.showFriends && <YelpList />}
+        <CreateGroup/>
     </div>
     ) 
   }
