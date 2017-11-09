@@ -27,43 +27,43 @@ class Signup extends React.Component {
     handleUserInput (e) {
       let name = e.target.name;
       let value = e.target.value;
-      this.setState({[name]: value}),
-        () => { this.validateField(name, value) };
+      this.setState({[name]: value},
+        () => { this.validateField(name, value) });
 
-      }
+    }
       
-      validateField(fieldName, value) {
-        let fieldValidationErrors = this.state.formErrors;
-        let nameValid = this.state.nameValid;
-        let usernameValid = this.state.usernameValid;
-        let emailValid = this.state.emailValid;
-        let passwordValid = this.state.passwordValid;
-        
-        switch(fieldName) {
-          case 'name':
-          nameValid = value.length > 0;
-          fieldValidationErrors.name = nameValid ? '': ' field is empty';
-          case 'username':
-          usernameValid = value.length > 0;
-          fieldValidationErrors.username = usernameValid ? '': ' field is empty';
-          case 'email':
-          emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-          fieldValidationErrors.email = emailValid ? '' : ' is invalid';
-          break;
-          case 'password':
-          passwordValid = value.length >= 6;
-          fieldValidationErrors.password = passwordValid ? '': ' is too short';
-          break;
-          default:
-          break;
-        }
-        this.setState({formErrors: fieldValidationErrors,
-          nameValid: nameValid,
-          usernameValid: usernameValid,
-          emailValid: emailValid,
-          passwordValid: passwordValid
-        }, this.validateForm);
+    validateField(fieldName, value) {
+      let fieldValidationErrors = this.state.formErrors;
+      let nameValid = this.state.nameValid;
+      let usernameValid = this.state.usernameValid;
+      let emailValid = this.state.emailValid;
+      let passwordValid = this.state.passwordValid;
+      
+      switch(fieldName) {
+        case 'name':
+        nameValid = value.length > 0;
+        fieldValidationErrors.name = nameValid ? '': ' field is empty';
+        case 'username':
+        usernameValid = value.length > 0;
+        fieldValidationErrors.username = usernameValid ? '': ' field is empty';
+        case 'email':
+        emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+        fieldValidationErrors.email = emailValid ? '' : ' is invalid';
+        break;
+        case 'password':
+        passwordValid = value.length >= 6;
+        fieldValidationErrors.password = passwordValid ? '': ' is too short';
+        break;
+        default:
+        break;
       }
+      this.setState({formErrors: fieldValidationErrors,
+        nameValid: nameValid,
+        usernameValid: usernameValid,
+        emailValid: emailValid,
+        passwordValid: passwordValid
+      }, this.validateForm);
+    }
       
     validateForm() {
       this.setState({formValid: this.state.nameValid && this.state.usernameValid && this.state.emailValid && this.state.passwordValid});
