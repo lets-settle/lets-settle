@@ -11,19 +11,19 @@ class Login extends React.Component {
 
     loginButton (e) {
       e.preventDefault();
-      console.log('Im logging in');
-
+      
       const formData = {};
       for (const field in this.refs) {
         formData[field] = this.refs[field].value;
       }
       
-      axios.post('/login', formData)
-        .then(response => {
-            console.log(response);
-          }).catch(err => {
-            console.log(err)
-          })
+      console.log('Im logging in', formData);
+      // axios.post('/login', formData)
+      //   .then(response => {
+      //       console.log(response);
+      //     }).catch(err => {
+      //       console.log(err)
+      //     })
     }
   
   render() {
