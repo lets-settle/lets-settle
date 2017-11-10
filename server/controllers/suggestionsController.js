@@ -37,24 +37,28 @@ var key = require('../config.js')
     })
   }
 
-  // module.exports.addNewGroup = function(req, res) {
-  //   var users = req.body.users
-  //   var group_name = req.body.group_name; 
-  //   //takes the group and create the group instanly
-  //   model.Group.create({
-  //     group_name: group_name
-  //   }).then(function(newGroup) {
-       
+  module.exports.addNewGroup = function(req, res) {
+    var users = req.body.users
+    var group_name = req.body.group_name; 
+    //takes the group and create the group instanly
+    model.Group.create({
+      group_name: group_name
+    //after the group is created, then 
+    }).then(function(newGroup) {
+      //find each user in the arr in our database
+      var promise = users.map(function(user) {
+        
+      })
+     
+      
+      //whenever a user is found 
+        //add this userid to usergroup and add this groupid to usergroup
+    })
+    
+      
+      
 
-
-
-  //   })
-  //   //after the group is created, then 
-  //     //find each user in the arr in our database
-  //     //whenever a user is found 
-  //       //add this userid to usergroup and add this groupid to usergroup
-
-  // }
+  }
 
 
 
