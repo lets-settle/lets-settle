@@ -6,7 +6,12 @@ router.post('/signup', controllers.signupHandler);
 
 router.post('/solo', controllers.soloHandler);
 
-//router.post('/newgroup', controllers.addNewGroup);
+router.post('/newgroup', controllers.addNewGroup);
+
+router.post('/login', controllers.loginHandler);
+
+router.post('/group', controllers.groupHandler);
+
 
 module.exports = router;
 

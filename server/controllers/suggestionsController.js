@@ -37,29 +37,56 @@ var key = require('../config.js')
     })
   }
 
-  // module.exports.addNewGroup = function(req, res) {
-  //   var users = req.body.users
-  //   var group_name = req.body.group_name; 
-  //   //takes the group and create the group instanly
-  //   model.Group.create({
-  //     group_name: group_name
-  //   }).then(function(newGroup) {
-       
+  module.exports.addNewGroup = function(req, res) {
+    var users = req.body.users
+    var group_name = req.body.group_name; 
+    //takes the group and create the group instanly
+    model.Group.create({
+      group_name: group_name
+    //after the group is created, then 
+    }).then(function(newGroup) {
+      //find each user in the arr in our database
+      users.forEach(function(user) {
+        model.User.findOne({where: {username: user}}).then(function(targetUser) {
+          if(targetUser) {
+            model.UserGroup.create({
+              userid: targetUser.id,
+              groupid: newGroup.id
+            })
+          } else {
+            newGroup.destroy();
+            res.send("user does not exist!")
+          }
+        }).then(function() {
+          console.log('user and group relationship created!')
+          res.send('user and group relationship created!')
+        })
+      })  
+    })
+  
+  }
 
+  module.exports.loginHandler = function(req, res) {
+    var email = req.body.email
+    model.User.findOne({where: {email: email}}).then(function(user) {
+      if(user) {
+        res.send(user.username);
+      } else {
+        res.send('invalid email')
+      }  
+    })
+  }
 
-
-  //   })
-  //   //after the group is created, then 
-  //     //find each user in the arr in our database
-  //     //whenever a user is found 
-  //       //add this userid to usergroup and add this groupid to usergroup
-
-  // }
-
-
-
-
-
+  module.exports.groupHandler = function(req, res) {
+    var params = {};
+    params.location = req.body.location;
+    params.term = req.body.term;
+    params.price = req.body.price;
+    params.limit = 5
+    yelpRequest(params, key, function(response) {
+      res.json(response.data.businesses);
+    })
+  }
 
 
 
