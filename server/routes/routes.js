@@ -10,7 +10,11 @@ router.post('/newgroup', controllers.addNewGroup);
 
 router.post('/login', controllers.loginHandler);
 
-router.post('/group', controllers.selectionHandler);
+router.post('/group', controllers.groupHandler);
+
+router.post('/selection', controllers.selectionHandler);
+
+
 
 
 

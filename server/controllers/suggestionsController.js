@@ -77,6 +77,25 @@ var key = require('../config.js')
     })
   }
 
+
+  module.exports.groupHandler = function(req, res) {
+    var username = req.body.username;
+    //find all the group this user is in and send those groups back to client
+    model.User.findOne({where: {username: username}}).then(function(user){
+      console.log('====================groupHandler is being invloked!! ==========================')
+      model.UserGroup.findAll({where: {userid: user.id}}).then(function(usergroups) {
+        
+        var groupids = usergroups.map(function(usergroup) {
+          return usergroup.groupid
+        })
+
+        model.Group.findAll({where: {id: groupids}}).then(function(groups){
+          res.json(groups);
+        })
+      })  
+    })
+  }
+
   module.exports.selectionHandler = function(req, res) {
     var params = {};
     params.location = req.body.location;
@@ -84,7 +103,6 @@ var key = require('../config.js')
     params.price = req.body.price;
     params.limit = 5
     yelpRequest(params, key, function(response) {
-    
       res.json(response.data.businesses);
     })
   }
