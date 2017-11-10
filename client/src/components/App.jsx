@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 const $ = require('jquery');
-import Login from './components/Login.jsx';
+import Login from './Login.jsx';
 import axios from 'axios';
 import bodyParser from 'body-parser';
-// import {BrowserRouter as Router, Link} from 'react-router-dom'
+import {BrowserRouter as Router, Link} from 'react-router-dom'
 
 class App extends React.Component {
   constructor(props) {
@@ -31,7 +31,6 @@ class App extends React.Component {
   }
 }
 
+export default App;
 
 
-
-ReactDOM.render(<App />, document.getElementById('app'));

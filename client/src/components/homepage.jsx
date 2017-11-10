@@ -83,9 +83,9 @@ class Homepage extends React.Component {
           <Button bsStyle="danger" bsSize="large" onClick = {this.onFriendsClick}>Friends</Button>
         </ButtonToolbar>}
         
-        {this.state.showSolo && <Solo />}
-        {this.state.showFriends && <YelpList />}
-        {this.state.createGroup && <CreateGroup/>}
+        {this.state.showSolo && <Solo username={this.props.username}/>}
+        {this.state.showFriends && <YelpList username={this.props.username}/>}
+        {this.state.createGroup && <CreateGroup username={this.props.username}/>}
     </div>
     ) 
   }
