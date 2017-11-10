@@ -36,37 +36,52 @@ class Login extends React.Component {
       const password = this.state.password;
       
       console.log('Im logging in', this.state.email, this.state.password);
-      console.log(this.props.isLoggedIn)
-      
-      firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log('Login Error!', errorCode, errorMessage)
-      }).then((result) => {
-        this.props.isLoggedIn = true
-        console.log('im in login: ', result);
-        console.log('im in login2: ', result.user);
-        // const user = result.user;
-        // this.setState({
-          //   user
-          // });
+
+      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+        .then(function() {
+          // Existing and future Auth states are now persisted in the current
+          // session only. Closing the window would clear any existing state even
+          // if a user forgets to sign out.
+          // ...
+          // New sign-in will be persisted with session persistence.
+          return firebase.auth().signInWithEmailAndPassword(email, password);
+        })
+        .catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
         });
+      
+      // firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+      //   // Handle Errors here.
+      //   const errorCode = error.code;
+      //   const errorMessage = error.message;
+      //   console.log('Login Error!', errorCode, errorMessage)
+      // }).then((result) => {
+      //   console.log('im in login: ', result);
+      //   console.log('im in login2: ', result.user);
+      //   // const user = result.user;
+      //   // this.setState({
+      //     //   user
+      //     // });
+      //   });
         
-        axios.post('/api/login', {
-            email: this.state.email
-          }).then(response => {
-              console.log('getting username back', response.data)
-              this.setState({username: response.data.username})
-          }, err => {
-            console.log('cant get', err)
+      axios.post('/api/login', {
+        email: this.state.email
+      }).then(response => {
+          console.log('getting username back', response.data)
+          this.setState({
+            username: response.data 
           })
+          this.props.checkLogin(true);
+        }, err => {
+          console.log('cant get', err)
+        })
                 
       this.setState({
         email: '',
         password: ''
       });
-      console.log(this.props.isLoggedIn)
     };
     
     signUpButton(e) {

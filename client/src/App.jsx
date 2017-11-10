@@ -9,11 +9,12 @@ import bodyParser from 'body-parser';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       isLoggedIn: false
     }
   }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
  checkLogin(status) {
     this.setState({
@@ -23,11 +24,21 @@ class App extends React.Component {
   }
 =======
 >>>>>>> [rebase] working on login authentication
+=======
+  checkLogin(status) {
+    this.setState({
+      isLoggedIn: status
+    });
 
-  render () {
+    console.log(this.state.isLoggedIn)
+  }
+>>>>>>> [add] working on login persistence
+
+ render () {
     return (
     <div>
     {/* <img id='title' src = {logo}/> */}
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
       <Login checkLogin = {this.checkLogin.bind(this)} isLoggedIn = {this.state.isLoggedIn}/>
@@ -42,6 +53,9 @@ class App extends React.Component {
 =======
       {<Login isLoggedIn = {this.state.isLoggedIn}/>}
 >>>>>>> [rebase] working on login authentication
+=======
+      <Login checkLogin={this.checkLogin.bind(this)} isLoggedIn={this.state.isLoggedIn}/>
+>>>>>>> [add] working on login persistence
     </div>
     )
   }
