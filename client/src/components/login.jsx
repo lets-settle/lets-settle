@@ -66,6 +66,15 @@ class Login extends React.Component {
           //   user
           // });
         });
+
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+          console.log(user, 'is logged in')
+        } else {
+          // No user is signed in.
+        }
+      });
         
       axios.post('/api/login', {
         email: this.state.email
