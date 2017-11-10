@@ -21,27 +21,27 @@ class YelpList extends React.Component {
       e.preventDefault();
       const searchData = {};
       for (const ref in this.refs) {
-        searchData[ref] = this.refs[ref].value;
+        if (ref === 'price') {
+          searchData[ref] = this.refs[ref].value.length;
+        } else {
+          searchData[ref] = this.refs[ref].value;
+        }
       }
-      e.target.reset();
-
-      console.log('////', searchData)
+      // axios.post('/api/solo',searchData)
+      // .then(response => {
+      //    console.log(response.data);
+      //    this.setState({
+      //      resturant : response.data
+      //    });  
+      //   }).catch(err => {
+      //     console.log(err)
+      //   })  
     };
-
+      
     getSearch() {
       this.setState({
         resturants : ['test1', 'test2']
       });  
-      // axios.post('/search', {
-      //   searchData
-      // }).then(response => {
-      //  this.resturants = response.data;
-      //   console.log(response);
-      // }).catch(err => {
-      //   console.log(err)
-      // })
-
-
     };
 
   render() {
