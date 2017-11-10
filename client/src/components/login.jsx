@@ -2,16 +2,33 @@ import React from 'react';
 import Signup from './Signup.jsx';
 import Homepage from './Homepage.jsx';
 
+const config = require('../../../fireconfig.js')
+const firebase = require('firebase');
+
+const app = firebase.initializeApp({
+  config: 
+    apikey: firekey,
+    authDomain: "yelpsettle.firebaseapp.com",
+    databaseURL: "https://yelpsettle.firebaseio.com",
+    projectId: "yelpsettle",
+    storageBucket: "yelpsettle.appspot.com",
+    messagingSenderId: "737656551674"
+});
+
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
       this.state = {
+        username: '',
         email: '',
         password: ''
       }
       this.handleLoginInput = this.handleLoginInput.bind(this);
       this.loginButton = this.loginButton.bind(this);
     }
+
+
 
     handleLoginInput (e) {
       let name = e.target.name;
@@ -21,14 +38,26 @@ class Login extends React.Component {
 
     loginButton (e) {
       e.preventDefault();
-    
+      let email = this.state.email;
+      let password = this.state.password;
+
       console.log('Im logging in', this.state.email, this.state.password);
-      // axios.post('/login', formData)
-      //   .then(response => {
-      //       console.log(response);
-      //     }).catch(err => {
-      //       console.log(err)
-      //     })
+
+      firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log('Login Error!', errorCode, errorMessage)
+      });
+
+      axios.get('/login', {
+        email: email,
+        password: password
+      }).then(response => {
+        this.setState({
+          username: response.data.username
+        })
+      })
 
       this.setState({
         email: '',
@@ -65,7 +94,7 @@ class Login extends React.Component {
           </div>
         </div>
       </form>
-      <Homepage />
+      <Homepage username={this.state.username}/>
       <Signup />
     </div>
     ) 

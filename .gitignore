@@ -1,3 +1,6 @@
 node_modules
 bundle.js
 server/config.js
+client/src/components/config.js
+client/firebasekey.js
+client\yelpsettle-firebase-adminsdk-cvwol-79415c56fd.json
