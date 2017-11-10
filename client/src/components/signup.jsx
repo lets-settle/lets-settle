@@ -1,5 +1,10 @@
 import React from 'react';
 import Homepage from './Homepage.jsx';
+const axios = require('axios');
+const config = require('../../../fireconfig.js')
+const firebase = require('firebase');
+
+// const app = firebase.initializeApp(config);
 
 class Signup extends React.Component {
   constructor(props) {
@@ -14,15 +19,25 @@ class Signup extends React.Component {
         usernameValid: false,
         emailValid: false,
         passwordValid: false,
-        formValid: false
+        formValid: false,
+        user: '',
+        isLoggedIn: false
       }
 
       this.handleUserInput = this.handleUserInput.bind(this);
       this.validateField = this.validateField.bind(this);
       this.validateForm = this.validateForm.bind(this);
-      this.signUpSubmit = this.signUpSubmit.bind(this);
       this.errorClass = this.errorClass.bind(this);
+      this.signUpSubmit = this.signUpSubmit.bind(this);
     }
+
+    componentDidMount() {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          this.setState({ user });
+        }
+      });
+    };
     
     handleUserInput (e) {
       let name = e.target.name;
@@ -76,21 +91,41 @@ class Signup extends React.Component {
     }
 
     signUpSubmit (e) {
-      let form = this;
       e.preventDefault();
+      let email = this.state.email;
+      let password = this.state.password;
 
-      console.log('Form submitted', );
-      axios.post('/signup', {
+      console.log('Form submitted');
+      firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log('Sign Up Error!', erroroCode, errorMessage);
+      }).then((result) => {
+        let user = result.user;
+        this.setState({
+          user
+        });
+      });
+
+      axios.post('/api/signup', {
         name: this.state.name,
         username: this.state.username,
         password: this.state.password,
         email: this.state.email
-      })
-        .then(response => {
+      }).then(response => {
           console.log('Submit User Info to Server/DB', response);
+          this.setState({
+            name: '',
+            username: '',
+            email: '',
+            password: '',
+            isLoggedIn: true,
+          })
         }).catch(err => {
-          console.log(err)
+          console.log('FAILED TO POST: ', err);
         })
+
 
     }
 
@@ -136,11 +171,11 @@ class Signup extends React.Component {
         </div>
         <div className="form-group">
           <div className="col-sm-offset-2 col-sm-10">
-            <button type="submit" className="btn btn-default" disabled={!this.state.formValid}>Sign Up</button>
+            <button type="submit" className="btn btn-danger" disabled={!this.state.formValid} onClick={this.signUpSubmit}>Sign Me Up!</button>
           </div>
         </div>
       </form>
-      <Homepage />
+      {this.state.isLoggedIn && <Homepage username={this.state.username}/>}
     </div>
     ) 
   }

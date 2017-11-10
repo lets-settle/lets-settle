@@ -70,7 +70,7 @@ class Homepage extends React.Component {
             </Navbar.Brand>
         </Navbar.Header>
           <Nav>
-            <NavDropdown eventKey={3} title='Jamie'  id="basic-nav-dropdown">
+            <NavDropdown eventKey={3} title={this.props.username}  id="basic-nav-dropdown">
               <MenuItem onSelect={this.onCreateGroupClick} eventKey={3.1}>Create Group</MenuItem>
               <MenuItem divider />
               <MenuItem eventKey={3.2}>Log Out</MenuItem>
