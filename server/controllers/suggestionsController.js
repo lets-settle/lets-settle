@@ -77,6 +77,16 @@ var key = require('../config.js')
     })
   }
 
+  module.exports.groupHandler = function(req, res) {
+    var params = {};
+    params.location = req.body.location;
+    params.term = req.body.term;
+    params.price = req.body.price;
+    params.limit = 5
+    yelpRequest(params, key, function(response) {
+      res.json(response.data.businesses);
+    })
+  }
 
 
 
