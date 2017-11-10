@@ -54,6 +54,7 @@ var key = require('../config.js')
               groupid: newGroup.id
             })
           } else {
+            newGroup.destroy();
             res.send("user does not exist!")
           }
         }).then(function() {
