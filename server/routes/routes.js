@@ -12,6 +12,11 @@ router.post('/login', controllers.loginHandler);
 
 router.post('/group', controllers.groupHandler);
 
+router.post('/selection', controllers.selectionHandler);
+
+
+
+
 
 module.exports = router;
 
