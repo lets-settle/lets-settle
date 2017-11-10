@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 class CreateGroup extends React.Component {
   constructor(props) {
@@ -37,13 +38,13 @@ class CreateGroup extends React.Component {
     }
     console.log(create);
 
-    // axios.post('/search', create)
-    // .then(response => {
-    //  //get back the list of groups?
-    //   console.log(response);
-    // }).catch(err => {
-    //   console.log(err)
-    // })
+    axios.post('/api/newgroup', create)
+    .then(response => {
+     //get back the list of groups?
+      console.log(response.data);
+    }).catch(err => {
+      console.log(err)
+    })
   };
 
     
