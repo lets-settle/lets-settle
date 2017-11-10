@@ -11,9 +11,7 @@ const axios = require('axios');
 class YelpList extends React.Component {
   constructor(props) {
     super(props);
-  
-    
-    
+
     this.state = {
       resturants : [],
       groups: []
@@ -24,14 +22,17 @@ class YelpList extends React.Component {
     };
 
     componentWillMount() {
-      this.groups = ['coolGrp', 'lameGrp', 'partyGrp'];
-      console.log(this.props.username);
-      // axios.get('/api/group', {username: username})
-      // .then(response => {
-      //   this.setState({
-      //     this.state.groups = response.data
-      //   })
-      // })
+      let username = this.props.username;
+      axios.post('/api/group', {username: username})
+      .then(response => {
+        const groupList = [];
+        for (const res in response.data) {
+          groupList.push(response.data[res].group_name)
+        }
+        this.setState({
+          groups : groupList
+        })
+      })
     };
 
     handleSubmit(e) {
@@ -44,15 +45,11 @@ class YelpList extends React.Component {
           searchData[ref] = this.refs[ref].value;
         }
       }
-      axios.post('/api/group',searchData)
+      axios.post('/api/selection',searchData)
       .then(response => {
          console.log(response.data);
-         const groupList = [];
-         for (const res in response.data) {
-           groupList.push(res.group_name)
-         }
          this.setState({
-           resturants : groupList
+           resturants : response.data
          });  
         }).catch(err => {
           console.log(err)
@@ -67,7 +64,7 @@ class YelpList extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <select ref="group" id="inlineFormCustomSelect">
           <option>Group</option>
-          {this.groups.map((group, i) => <option key={i} value={group}>{group}</option>)}
+          {this.state.groups.map((group, i) => <option key={i} value={group}>{group}</option>)}
         </select>
 
         <div className="form-inline">
