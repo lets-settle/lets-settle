@@ -10,27 +10,25 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-<<<<<<< HEAD
       isLoggedIn: false
-=======
-      groups: [],
-      loggedIn: false
->>>>>>> [add] working on firebase login sessions
     }
   }
 
+<<<<<<< HEAD
  checkLogin(status) {
     this.setState({
       isLoggedIn: status
     });
     console.log(this.state.isLoggedIn)
   }
+=======
+>>>>>>> [rebase] working on login authentication
 
   render () {
     return (
     <div>
-<<<<<<< HEAD
     {/* <img id='title' src = {logo}/> */}
+<<<<<<< HEAD
 <<<<<<< HEAD
       <Login checkLogin = {this.checkLogin.bind(this)} isLoggedIn = {this.state.isLoggedIn}/>
 =======
@@ -41,6 +39,9 @@ class App extends React.Component {
       {<Login loggedIn={this.state.loggedIn}/>}
 >>>>>>> [add] working on firebase login sessions
 >>>>>>> [add] working on firebase login sessions
+=======
+      {<Login isLoggedIn = {this.state.isLoggedIn}/>}
+>>>>>>> [rebase] working on login authentication
     </div>
     )
   }

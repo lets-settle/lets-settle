@@ -15,62 +15,67 @@ class Login extends React.Component {
         user: null,
         username: '',
         email: '',
-        password: ''
-      }
+        password: '',
+        needSignUp: false
+      };
+
       this.handleLoginInput = this.handleLoginInput.bind(this);
       this.loginButton = this.loginButton.bind(this);
+      this.signUpButton = this.signUpButton.bind(this);
     }
-
-    componentDidMount() {
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          this.setState({ user });
-        }
-      });
-    };
 
     handleLoginInput (e) {
-      let name = e.target.name;
-      let value = e.target.value;
+      const name = e.target.name;
+      const value = e.target.value;
       this.setState({[name]: value})
     }
-
+    
     loginButton (e) {
       e.preventDefault();
-      let email = this.state.email;
-      let password = this.state.password;
-
+      const email = this.state.email;
+      const password = this.state.password;
+      
       console.log('Im logging in', this.state.email, this.state.password);
-
+      console.log(this.props.isLoggedIn)
+      
       firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
         // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        const errorCode = error.code;
+        const errorMessage = error.message;
         console.log('Login Error!', errorCode, errorMessage)
       }).then((result) => {
+        this.props.isLoggedIn = true
         console.log('im in login: ', result);
         console.log('im in login2: ', result.user);
-        let user = result.user;
-        this.setState({
-          loggedIn: true,
-          user
+        // const user = result.user;
+        // this.setState({
+          //   user
+          // });
         });
-      });
-
-      axios.get('api/login', {
-        email: email,
-        password: password
-      }).then(response => {
-        this.setState({
-          username: response.data.username
-        });
-      });
-
+        
+        axios.post('/api/login', {
+            email: this.state.email
+          }).then(response => {
+              console.log('getting username back', response.data)
+              this.setState({username: response.data.username})
+          }, err => {
+            console.log('cant get', err)
+          })
+                
       this.setState({
         email: '',
         password: ''
       });
-    }
+      console.log(this.props.isLoggedIn)
+    };
+    
+    signUpButton(e) {
+      e.preventDefault();
+
+      this.setState({
+        needSignUp: true
+      })
+    };
   
   render() {
     return (
@@ -97,12 +102,17 @@ class Login extends React.Component {
         </div>
         <div className="form-group">
           <div className="col-sm-offset-2 col-sm-10">
-            <button type="submit" className="btn btn-default" onClick={this.loginButton}>Login</button>
+            <button type="submit" className="btn btn-danger" onClick={this.loginButton}>Login</button>
+          </div>
+        </div>
+        <div className="form-group">
+          <div className="col-sm-offset-2 col-sm-10">
+            <button type="submit" className="btn btn-danger" onClick={this.signUpButton}>Sign Up</button>
           </div>
         </div>
       </form>
-      <Homepage username={this.state.username}/>
-      <Signup />
+      {this.props.isLoggedIn && <Homepage username={this.state.username}/>}
+      {this.state.needSignUp && <Signup />}
     </div>
     ) 
   }

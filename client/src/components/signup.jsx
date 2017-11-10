@@ -21,6 +21,7 @@ class Signup extends React.Component {
         passwordValid: false,
         formValid: false,
         user: '',
+        isLoggedIn: false
       }
 
       this.handleUserInput = this.handleUserInput.bind(this);
@@ -118,7 +119,8 @@ class Signup extends React.Component {
             name: '',
             username: '',
             email: '',
-            password: ''
+            password: '',
+            isLoggedIn: true,
           })
         }).catch(err => {
           console.log('FAILED TO POST: ', err);
@@ -169,11 +171,11 @@ class Signup extends React.Component {
         </div>
         <div className="form-group">
           <div className="col-sm-offset-2 col-sm-10">
-            <button type="submit" className="btn btn-default" disabled={!this.state.formValid} onClick={this.signUpSubmit}>Sign Up</button>
+            <button type="submit" className="btn btn-danger" disabled={!this.state.formValid} onClick={this.signUpSubmit}>Sign Me Up!</button>
           </div>
         </div>
       </form>
-      <Homepage username={this.state.username}/>
+      {this.state.isLoggedIn && <Homepage username={this.state.username}/>}
     </div>
     ) 
   }

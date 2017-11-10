@@ -10,7 +10,7 @@ app.use(express.static(__dirname + '/../client/dist'), bodyParser());
 app.use('/api', routes)
 
 
-let port = 1128;
+const port = 1128;
 
 app.listen(port, function() {
 

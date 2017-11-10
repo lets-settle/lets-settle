@@ -63,6 +63,7 @@ class Homepage extends React.Component {
   render() {
     return (
     <div>
+<<<<<<< HEAD
       <Navbar>
         <Navbar.Header>
             <Navbar.Brand>
@@ -83,6 +84,30 @@ class Homepage extends React.Component {
           <Button bsStyle="danger" bsSize="large" onClick = {this.onFriendsClick}>Friends</Button>
         </ButtonToolbar>}
         
+=======
+                <Navbar>
+    <Navbar.Header>
+      <Navbar.Brand>
+        <a href="#">Yelp Settle</a>
+      </Navbar.Brand>
+    </Navbar.Header>
+    <Nav>
+      <NavDropdown eventKey={3} title={this.props.username} id="basic-nav-dropdown">
+        <MenuItem onSelect={this.onCreateGroupClick} eventKey={3.1}>Create Group</MenuItem>
+        <MenuItem divider />
+        <MenuItem eventKey={3.2}>Log Out</MenuItem>
+      </NavDropdown>
+    </Nav>
+  </Navbar>
+        <div>
+        <button className ='soloButton' onClick={this.onSoloClick}>
+        Solo
+        </button>
+        <button className ='friendsButton' onClick={this.onFriendsClick}>
+        Friends
+        </button>
+        </div>
+>>>>>>> [rebase] working on login authentication
         {this.state.showSolo && <Solo />}
         {this.state.showFriends && <YelpList />}
         {this.state.createGroup && <CreateGroup/>}
