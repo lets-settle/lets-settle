@@ -118,8 +118,7 @@ class Signup extends React.Component {
             name: '',
             username: '',
             email: '',
-            password: '',
-            loggedIn: true
+            password: ''
           })
         }).catch(err => {
           console.log('FAILED TO POST: ', err);
