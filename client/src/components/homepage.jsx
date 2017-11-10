@@ -39,7 +39,7 @@ class Homepage extends React.Component {
         });
     }
 
-    onCreateGroupClick(e) {
+    onCreateGroupClick() {
   
         console.log('create was clicked')
         this.setState({
@@ -78,15 +78,14 @@ class Homepage extends React.Component {
           </Nav>
         </Navbar>
         
-        {(!this.state.showSolo && <ButtonToolbar>
-          <Button bsStyle="primary" bsSize="large" onClick = {this.onSoloClick}>Solo</Button>
-          <Button bsStyle="primary" bsSize="large" onClick = {this.onFriendsClick}>Friends</Button>
+        {(!this.state.showSolo &&!this.state.showFriends) && <ButtonToolbar>
+          <Button bsStyle="danger" bsSize="large" onClick = {this.onSoloClick}>Solo</Button>
+          <Button bsStyle="danger" bsSize="large" onClick = {this.onFriendsClick}>Friends</Button>
         </ButtonToolbar>}
         
         {this.state.showSolo && <Solo />}
         {this.state.showFriends && <YelpList />}
-
-        <CreateGroup/>
+        {this.state.createGroup && <CreateGroup/>}
     </div>
     ) 
   }
