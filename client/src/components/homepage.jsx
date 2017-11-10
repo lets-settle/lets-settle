@@ -3,7 +3,7 @@ import YelpList from './YelpList.jsx';
 import Solo from './Solo.jsx';
 import CreateGroup from './CreateGroup.jsx';
 const $ = require('jquery');
-import {Button,Navbar,Nav,NavItem,NavDropdown,MenuItem } from 'react-bootstrap';
+import {Button, ButtonToolbar,Navbar,Nav,NavItem,NavDropdown,MenuItem } from 'react-bootstrap';
 
 class Homepage extends React.Component {
   constructor(props) {
@@ -18,17 +18,20 @@ class Homepage extends React.Component {
 
     this.onFriendsClick = this.onFriendsClick.bind(this)
     this.onSoloClick = this.onSoloClick.bind(this)
+    this.onCreateGroupClick = this.onCreateGroupClick.bind(this)
     }
 
     onFriendsClick (e) {
+      e.preventDefault();
         console.log('friends was clicked')
         this.setState({
             showSolo: false,
-            showFriends: true,
+            showFriends: true
             
         });
       }
     onSoloClick (e) {
+      e.preventDefault();
         console.log('solo was clicked')
         this.setState({
             showSolo: true,
@@ -36,7 +39,8 @@ class Homepage extends React.Component {
         });
     }
 
-    onCreateGroupClick() {
+    onCreateGroupClick(e) {
+  
         console.log('create was clicked')
         this.setState({
             createGroup: true
@@ -59,28 +63,26 @@ class Homepage extends React.Component {
   render() {
     return (
     <div>
-                <Navbar>
-    <Navbar.Header>
-      <Navbar.Brand>
-        <a href="#">Yelp Settle</a>
-      </Navbar.Brand>
-    </Navbar.Header>
-    <Nav>
-      <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-        <MenuItem onSelect={this.onCreateGroupClick} eventKey={3.1}>Create Group</MenuItem>
-        <MenuItem divider />
-        <MenuItem eventKey={3.2}>Log Out</MenuItem>
-      </NavDropdown>
-    </Nav>
-  </Navbar>
-        <div>
-        <button className ='soloButton' onClick={this.onSoloClick}>
-        Solo
-        </button>
-        <button className ='friendsButton' onClick={this.onFriendsClick}>
-        Friends
-        </button>
-        </div>
+      <Navbar>
+        <Navbar.Header>
+            <Navbar.Brand>
+              <a href="#">Yelp Settle</a>
+            </Navbar.Brand>
+        </Navbar.Header>
+          <Nav>
+            <NavDropdown eventKey={3} title='Jamie'  id="basic-nav-dropdown">
+              <MenuItem onSelect={this.onCreateGroupClick} eventKey={3.1}>Create Group</MenuItem>
+              <MenuItem divider />
+              <MenuItem eventKey={3.2}>Log Out</MenuItem>
+            </NavDropdown>
+          </Nav>
+        </Navbar>
+        
+        {(!this.state.showSolo && <ButtonToolbar>
+          <Button bsStyle="primary" bsSize="large" onClick = {this.onSoloClick}>Solo</Button>
+          <Button bsStyle="primary" bsSize="large" onClick = {this.onFriendsClick}>Friends</Button>
+        </ButtonToolbar>}
+        
         {this.state.showSolo && <Solo />}
         {this.state.showFriends && <YelpList />}
 

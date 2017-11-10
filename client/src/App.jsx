@@ -4,6 +4,7 @@ const $ = require('jquery');
 import Login from './components/Login.jsx';
 import axios from 'axios';
 import bodyParser from 'body-parser';
+// import {BrowserRouter as Router, Link} from 'react-router-dom'
 
 
 
@@ -15,22 +16,21 @@ class App extends React.Component {
     }
   }
 
-  loggedIn() {
-    this.setState({
-      isLoggedIn: true
-    });  
-}
-
 
   render () {
     return (
+    
     <div>
     {/* <img id='title' src = {logo}/> */}
-      {<Login isLoggedIn = {this.loggedIn}/>}
+  
+      <Login isLoggedIn = {this.state.isLoggedIn}/>
     </div>
+
     )
   }
 }
+
+
 
 
 ReactDOM.render(<App />, document.getElementById('app'));
