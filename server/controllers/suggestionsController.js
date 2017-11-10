@@ -46,18 +46,23 @@ var key = require('../config.js')
     //after the group is created, then 
     }).then(function(newGroup) {
       //find each user in the arr in our database
-      var promise = users.map(function(user) {
-        
-      })
-     
-      
-      //whenever a user is found 
-        //add this userid to usergroup and add this groupid to usergroup
+      users.forEach(function(user) {
+        model.User.findOne({where: {username: user}}).then(function(targetUser) {
+          if(targetUser) {
+            model.UserGroup.create({
+              userid: targetUser.id,
+              groupid: newGroup.id
+            })
+          } else {
+            res.send("user does not exist!")
+          }
+        }).then(function() {
+          console.log('user and group relationship created!')
+          res.send('user and group relationship created!')
+        })
+      })  
     })
-    
-      
-      
-
+  
   }
 
 
