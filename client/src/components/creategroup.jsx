@@ -9,7 +9,7 @@ class CreateGroup extends React.Component {
     this.sendGroup = this.sendGroup.bind(this);
 
     this.state = {
-      friend: null,
+      friend: '',
       friendsList : ['username']
     }
   };
