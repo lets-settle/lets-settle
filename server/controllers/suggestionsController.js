@@ -66,9 +66,16 @@ var key = require('../config.js')
   
   }
 
-
-
-
+  module.exports.loginHandler = function(req, res) {
+    var email = req.body.email
+    model.User.findOne({where: {email: email}}).then(function(user) {
+      if(user) {
+        res.send(user.username);
+      } else {
+        res.send('invalid email')
+      }  
+    })
+  }
 
 
 

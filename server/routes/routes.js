@@ -8,6 +8,8 @@ router.post('/solo', controllers.soloHandler);
 
 router.post('/newgroup', controllers.addNewGroup);
 
+router.post('/login', controllers.loginHandler);
+
 module.exports = router;
 
 
