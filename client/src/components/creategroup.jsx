@@ -11,7 +11,7 @@ class CreateGroup extends React.Component {
 
     this.state = {
       friend: '',
-      friendsList : ['username']
+      friendsList : []
     }
   };
 
@@ -22,6 +22,9 @@ class CreateGroup extends React.Component {
   };
 
   pushFriend (e) {
+    const list = this.state.friendsList;
+    list.unshift(this.props.username);
+
     this.setState({
       friendList: this.state.friendsList.push(this.state.friend),
       friend: ''
@@ -36,7 +39,7 @@ class CreateGroup extends React.Component {
     for (const ref in this.refs) {
       create[ref] = this.refs[ref].value;
     }
-    console.log(create);
+    console.log('CREATEDDDDD', create);
 
     axios.post('/api/newgroup', create)
     .then(response => {

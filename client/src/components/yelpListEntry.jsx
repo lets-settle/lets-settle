@@ -31,11 +31,14 @@ class YelpListEntry extends React.Component {
   render() {
     let bgColor = this.state.color ? "white" : "green"
     return (
-    <div style={{backgroundColor: bgColor}} value={this.state.suggestion}  onClick={this.changeColor}>
-     {this.props.suggestion}
+    <div>
+     <img src ={this.props.suggestion.image_url} className="rounded"/> <h3>{this.props.suggestion.name}</h3>
     </div>
     ) 
   }
 }
 
 export default YelpListEntry;
+
+// style={{backgroundColor: bgColor}} value={this.state.suggestion}  onClick={this.changeColor}
+     /* {this.props.suggestion} */

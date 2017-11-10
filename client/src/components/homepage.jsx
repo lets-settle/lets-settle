@@ -110,6 +110,7 @@ class Homepage extends React.Component {
             <Button bsStyle="danger" bsSize="large" onClick = {this.onSoloClick}><Link to='/solo'>Solo</Link></Button>
             <Button bsStyle="danger" bsSize="large" onClick = {this.onFriendsClick}><Link to='/friends'>Friends</Link></Button>
         </ButtonToolbar>}
+<<<<<<< HEAD
 
         {this.state.createGroup && <CreateGroup setUsername = {this.props.setUsername}/>}
     
@@ -117,6 +118,12 @@ class Homepage extends React.Component {
         <Route path='/solo' component={Solo}/>
         <Route path='/friends' component={YelpList}/>
         <Route path='/createGroup' component={CreateGroup}/>
+=======
+        
+        {this.state.showSolo && <Solo username={this.props.username}/>}
+        {this.state.showFriends && <YelpList username={this.props.username}/>}
+        {this.state.createGroup && <CreateGroup username={this.props.username}/>}
+>>>>>>> [add] Render 5 resturants for group suggestion, prep code for server data
     </div>
     </Router>
     ) 

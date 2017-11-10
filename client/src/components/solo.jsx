@@ -1,7 +1,11 @@
 import React from 'react';
 import Result from './Result.jsx';
+<<<<<<< HEAD
 import axios from 'axios';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+=======
+const axios = require('axios');
+>>>>>>> [add] Render 5 resturants for group suggestion, prep code for server data
 
 class Solo extends React.Component {
   constructor(props) {
@@ -58,7 +62,6 @@ class Solo extends React.Component {
         </div>
       </form>
       <img src ={this.state.resturant.image_url} className="rounded"/> <h3>{this.state.resturant.name}</h3>
-      <Result />
     </div>
     ) 
   }
