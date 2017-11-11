@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import {BrowserRouter as Router, Link} from 'react-router-dom';
 
 class CreateGroup extends React.Component {
   constructor(props) {
@@ -86,7 +87,11 @@ class CreateGroup extends React.Component {
             <li className="list-group-item">{f}</li>
           )}
         </ul>
-        <button onClick={this.sendGroup}>Create Group</button>
+        <Link to = '/creategroup'> 
+          <button>
+            Create Group
+          </button>
+        </Link>
       </div>   
     </div>
     ) 

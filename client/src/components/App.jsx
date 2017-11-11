@@ -2,14 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 const $ = require('jquery');
 import Login from './Login.jsx';
+import CreateGroup from './CreateGroup.jsx';
+import Decisions from './Decisions.jsx';
 import Signup from './Signup.jsx';
+import Solo from './Solo.jsx';
+import YelpList from './YelpList.jsx';
 import Homepage from './Homepage.jsx';
 import axios from 'axios';
 import bodyParser from 'body-parser';
-import {BrowserRouter as Router, Link} from 'react-router-dom'
+import {BrowserRouter as Router, Link} from 'react-router-dom';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
-import {Button, ButtonToolbar,Navbar,Nav,NavItem,NavDropdown,MenuItem } from 'react-bootstrap';
+import {Button, Redirect, ButtonToolbar,Navbar,Nav,NavItem,NavDropdown,MenuItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+
 
 
 
@@ -51,24 +56,22 @@ class App extends React.Component {
       checkLogin: this.checkLogin,
       checkSignup: this.checkSignup,
       isLoggedIn: this.state.isLoggedIn,
-      setUsername = this.setUsername,
-      username = this.state.username
+      setUsername: this.setUsername,
+      username: this.state.username
     }
   }
-
-
 
   render () {
     return (
     <Router>
-    <div>
-    {/* <img id ='title' src={require('../../dist/images/logo.png')} /> */}
-
-    {(!this.state.needSignUp && !this.state.isLoggedIn) && <Login {...this.getComponentProps()} />}
-    {(this.state.needSignUp && !this.state.isLoggedIn) && <Signup  {...this.getComponentProps()} />}
-    {this.state.isLoggedIn  && <Homepage {...this.getComponentProps()} />}
-
-<Route path="/login" render = {() => {<Login {...this.getComponentProps()}/>}}/>
+      <div>
+        <Route exact path="/" render = {() => <Login {...this.getComponentProps()}/>}/>
+        <Route exact path="/signup" render = {() => <Signup {...this.getComponentProps()}/>}/>
+        <Route path="/homepage" render = {() => <Homepage {...this.getComponentProps()}/>}/>
+        <Route exact path="/homepage/decisions" render = {() => <Decisions {...this.getComponentProps()}/>}/>
+        <Route exact path="/homepage/creategroup" render = {() => <CreateGroup {...this.getComponentProps()}/>}/>
+        <Route exact path="/homepage/solo" render = {() => <Solo {...this.getComponentProps()}/>}/>
+        <Route exact path="/homepage/friends" render = {() => <YelpList {...this.getComponentProps()}/>}/>
     </div>
     </Router>
     )

@@ -97,29 +97,59 @@ class Login extends React.Component {
   
   render() {
     return (
-      <Router>
     <div>
-    <img id ='title' src={require('../../dist/images/logo.png')} />
-      <form className="form-horizontal" onSubmit={this.loginButton}>
+      <Link to = '/'>
+        <img 
+          id ='title' 
+          src={require('../../dist/images/logo.png')}/>
+      </Link>
+      <form 
+        className="form-horizontal" 
+        onSubmit={this.loginButton}>
         <div className="form-group">
           <div className="col-sm-10">
-            <input className="form-control" id="inputEmail" placeholder="Email" name="email" value={this.state.email} onChange={this.handleLoginInput}/>
+            <input className="form-control" 
+              id="inputEmail" 
+              placeholder="Email" 
+              name="email" 
+              value={this.state.email} 
+              onChange={this.handleLoginInput}/>
           </div>
         </div>
         <div className="form-group">
           <div className="col-sm-10">
-            <input type="password" className="form-control" id="inputPassword" placeholder="Password" name="password" value={this.state.password} onChange={this.handleLoginInput}/>
+            <input 
+              type="password" 
+              className="form-control" 
+              id="inputPassword" 
+              placeholder="Password" 
+              name="password" 
+              value={this.state.password} 
+              onChange={this.handleLoginInput}/>
           </div>
         </div>
         <div className="form-group">
           <div className="col-sm-offset-2 col-sm-10">
-            <button type="submit" className="btn btn-danger" onSubmit={() => {this.props.checkLogin(true)}}>Login</button>
+            <Link to ='/homepage/decisions'>
+              <button 
+                type="submit" 
+                className="btn btn-danger" 
+                onSubmit={() => {this.props.checkLogin(true)}}>
+                Login
+              </button>
+            </Link>
           </div>
         </div>
       </form>
-      <button type="click" className="btn btn-danger" onClick={() => this.props.checkSignup()}>Signup</button>
+      <Link to = '/signup'>
+        <button 
+          type="click" 
+          className="btn btn-danger" 
+          onClick={() => this.props.checkSignup()}>
+          signup
+        </button>
+      </Link>
     </div>
-    </Router>
     ) 
   }
 }

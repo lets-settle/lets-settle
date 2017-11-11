@@ -88,21 +88,12 @@ class Decisions extends React.Component {
 
   render() {
     return (
-        <Router>
         <div>
-
-        {(!this.state.showSolo && !this.state.showFriends && !this.state.createGroup) && <ButtonToolbar>
-            <Button bsStyle="danger" bsSize="large" onClick = {this.onSoloClick}><Link to = '/solo'>Solo</Link></Button>
-            <Button bsStyle="danger" bsSize="large" onClick = {this.onFriendsClick}><Link to = '/friends'>Friends</Link></Button>
-        </ButtonToolbar>}
-
-
-
-        <Route path='/solo' component={Solo}/>
-        <Route path='/friends' component={YelpList}/> 
-
+            <ButtonToolbar>
+                <Link to = "/homepage/solo"><Button bsStyle="danger" bsSize="large" >Solo</Button></Link>
+                <Link to = "/homepage/friends"><Button bsStyle="danger" bsSize="large" >Friends</Button></Link>
+            </ButtonToolbar>
         </div>
-        </Router>
     ) 
   }
 }
