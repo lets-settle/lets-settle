@@ -1,10 +1,6 @@
 import React from 'react';
-<<<<<<< HEAD
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
-=======
 import Result from './Result.jsx';
->>>>>>> Rebase
-
 
 class YelpListEntry extends React.Component {
   constructor(props) {
@@ -15,16 +11,8 @@ class YelpListEntry extends React.Component {
       suggestion: ''
     };
 
-    this.changeColor = this.changeColor.bind(this);
     this.sendSuggestion = this.sendSuggestion.bind(this);
   }
-
-  changeColor() {
-    this.setState({
-      color: !this.state.color
-    })
-  };
-
 
   sendSuggestion() {
     this.setState({

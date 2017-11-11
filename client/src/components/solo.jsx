@@ -1,11 +1,7 @@
 import React from 'react';
 import Result from './Result.jsx';
-<<<<<<< HEAD
 import axios from 'axios';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
-=======
-const axios = require('axios');
->>>>>>> [add] Render 5 resturants for group suggestion, prep code for server data
 
 class Solo extends React.Component {
   constructor(props) {
