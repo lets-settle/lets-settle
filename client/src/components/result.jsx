@@ -9,7 +9,8 @@ class Result extends React.Component {
   render() {
     return (
     <div>
-      RESULT
+      RESULTTTTTTTTT
+      {this.props.suggestion}
     </div>
     ) 
   }

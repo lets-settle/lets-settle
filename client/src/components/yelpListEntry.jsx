@@ -1,5 +1,9 @@
 import React from 'react';
+<<<<<<< HEAD
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+=======
+import Result from './Result.jsx';
+>>>>>>> Rebase
 
 
 class YelpListEntry extends React.Component {
@@ -12,7 +16,7 @@ class YelpListEntry extends React.Component {
     };
 
     this.changeColor = this.changeColor.bind(this);
-    this.suggestionSelected = this.suggestionSelected.bind(this);
+    this.sendSuggestion = this.sendSuggestion.bind(this);
   }
 
   changeColor() {
@@ -21,18 +25,23 @@ class YelpListEntry extends React.Component {
     })
   };
 
-  suggestionSelected(e) {
+
+  sendSuggestion() {
     this.setState({
-      suggestion: e.target.value
-    })
-    console.log('SUGGESTIONNN', this.state.suggestion);
+      suggestion: this.props.suggestion.name
+    }, function() {
+      console.log('send suggestionnnnn', this.state.suggestion);
+    });
   }
 
   render() {
 
     return (
     <div>
-     <img src ={this.props.suggestion.image_url} className="rounded"/> <h3>{this.props.suggestion.name}</h3>
+     <img src ={this.props.suggestion.image_url} className="rounded img-fluid img-thumbnail"/> 
+     <h3><a href={this.props.suggestion.url} target="_blank">{this.props.suggestion.name}</a></h3> 
+     <button onClick={this.sendSuggestion}>Suggest!</button>
+     <Result suggestion={this.state.suggestion}/>
     </div>
     ) 
   }

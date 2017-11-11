@@ -11,8 +11,15 @@ class CreateGroup extends React.Component {
 
     this.state = {
       friend: '',
-      friendsList : []
+      friendsList : [],
+      created: false
     }
+  };
+
+  componentWillMount() {
+    this.setState({
+      friendList: this.state.friendsList.unshift(this.props.username)
+    });
   };
 
   addFriend (e) {
@@ -21,10 +28,7 @@ class CreateGroup extends React.Component {
     });
   };
 
-  pushFriend (e) {
-    const list = this.state.friendsList;
-    list.unshift(this.props.username);
-
+  pushFriend () {
     this.setState({
       friendList: this.state.friendsList.push(this.state.friend),
       friend: ''
@@ -33,6 +37,7 @@ class CreateGroup extends React.Component {
   };
 
   sendGroup() {
+
     const create = {
       users : this.state.friendsList
     };
@@ -44,10 +49,18 @@ class CreateGroup extends React.Component {
     axios.post('/api/newgroup', create)
     .then(response => {
      //get back the list of groups?
-      console.log(response.data);
+      console.log('DB CREATEEEEEEEDDDD');
     }).catch(err => {
       console.log(err)
     })
+
+    this.setState({
+      friendList: []
+    })
+
+    alert('GROUP CREATED')
+    
+
   };
 
     
@@ -74,7 +87,7 @@ class CreateGroup extends React.Component {
           )}
         </ul>
         <button onClick={this.sendGroup}>Create Group</button>
-      </div>    
+      </div>   
     </div>
     ) 
   }

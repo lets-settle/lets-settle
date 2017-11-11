@@ -45,6 +45,8 @@ class YelpList extends React.Component {
           searchData[ref] = this.refs[ref].value;
         }
       }
+      e.target.reset();
+      console.log('SEARCHED DATAAAAAAA', searchData);
       axios.post('/api/selection',searchData)
       .then(response => {
          console.log(response.data);
@@ -63,7 +65,7 @@ class YelpList extends React.Component {
     <div>
       <form onSubmit={this.handleSubmit}>
         <select ref="group" id="inlineFormCustomSelect">
-          <option>Group</option>
+          <option value="">Group</option>
           {this.state.groups.map((group, i) => <option key={i} value={group}>{group}</option>)}
         </select>
 

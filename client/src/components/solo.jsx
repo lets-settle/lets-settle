@@ -29,7 +29,7 @@ class Solo extends React.Component {
         searchData[ref] = this.refs[ref].value;
       }
     }
-
+    console.log('SOLOOOOO DATA', searchData);
     e.target.reset();
 
     axios.post('/api/solo',searchData)
@@ -61,7 +61,8 @@ class Solo extends React.Component {
         <button type="submit" className="btn btn-primary">Search</button>
         </div>
       </form>
-      <img src ={this.state.resturant.image_url} className="rounded"/> <h3>{this.state.resturant.name}</h3>
+      <img src ={this.state.resturant.image_url} className="rounded img-fluid img-thumbnail"/> 
+      <h3><a href={this.state.resturant.url} target="_blank">{this.state.resturant.name}</a></h3> 
     </div>
     ) 
   }
