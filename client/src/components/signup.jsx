@@ -101,9 +101,9 @@ class Signup extends React.Component {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
-        console.log('Sign Up Error!', erroroCode, errorMessage);
+        console.log('Sign Up Error!', errorCode, errorMessage);
       }).then((result) => {
-        // this.props.checkLogin(true);
+        this.props.checkLogin(true);
         let user = result.user;
         this.setState({
           user
@@ -124,6 +124,7 @@ class Signup extends React.Component {
             password: '',
             isLoggedIn: true,
           })
+          this.props.setUsername(this.state.username); 
         }).catch(err => {
           console.log('FAILED TO POST: ', err);
         })
@@ -174,11 +175,7 @@ class Signup extends React.Component {
         </div>
         <div className="form-group">
           <div className="col-sm-offset-2 col-sm-10">
-            <button type="submit" className="btn btn-danger" disabled={!this.state.formValid} onClick={ () => {
-              this.signUpSubmit();
-              
-            }
-          }>Sign Me Up!</button>
+            <button type="submit" className="btn btn-danger" disabled={!this.state.formValid} onClick={this.signUpSubmit}>Sign Me Up!</button>
           </div>
         </div>
       </form>

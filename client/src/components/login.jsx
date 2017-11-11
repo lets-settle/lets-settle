@@ -70,9 +70,7 @@ class Login extends React.Component {
         email: this.state.email
       }).then(response => {
           console.log('getting username back', response.data)
-          this.setState({
-            username: response.data 
-          })
+          this.props.setUsername(response.data);
           this.props.checkLogin(true);
         }, err => {
           console.log('cant get', err)
@@ -124,9 +122,6 @@ class Login extends React.Component {
         </div>
       </form>
       <button type="click" className="btn btn-danger" onClick={() => this.props.checkSignup()}>Signup</button>
-
-      {/* {this.props.isLoggedIn && <Homepage username={this.state.username} isLoggedIn = {this.props.isLoggedIn} checkLogin = {this.props.checkLogin} />} */}
-      {/* {this.state.needSignUp && <Signup />} */}
     </div>
     </Router>
     ) 

@@ -52,9 +52,9 @@ class App extends React.Component {
     <div>
     {/* <img id ='title' src={require('../../dist/images/logo.png')} /> */}
 
-    {(!this.state.needSignUp && !this.state.isLoggedIn) && <Login checkLogin = {this.checkLogin} checkSignup = {this.checkSignup} isLoggedIn = {this.state.isLoggedIn} needSignUp = {this.state.needSignUp} />}
-    {(this.state.needSignUp && !this.state.isLoggedIn) && <Signup checkLogin = {this.checkLogin} checkSignup = {this.checkSignup} isLoggedIn = {this.state.isLoggedIn} />}
-    {this.state.isLoggedIn  && <Homepage checkLogin = {this.checkLogin} checkSignup = {this.checkSignup} isLoggedIn = {this.state.isLoggedIn} />}
+    {(!this.state.needSignUp && !this.state.isLoggedIn) && <Login checkLogin = {this.checkLogin} checkSignup = {this.checkSignup} isLoggedIn = {this.state.isLoggedIn} needSignUp = {this.state.needSignUp} setUsername = {this.setUsername} username = {this.state.username} />}
+    {(this.state.needSignUp && !this.state.isLoggedIn) && <Signup checkLogin = {this.checkLogin} checkSignup = {this.checkSignup} isLoggedIn = {this.state.isLoggedIn} setUsername = {this.setUsername} username = {this.state.username} />}
+    {this.state.isLoggedIn  && <Homepage checkLogin = {this.checkLogin} checkSignup = {this.checkSignup} isLoggedIn = {this.state.isLoggedIn}  setUsername = {this.setUsername} username = {this.state.username}  />}
 
     </div>
     </Router>

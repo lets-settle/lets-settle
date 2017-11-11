@@ -1,5 +1,6 @@
 import React from 'react';
 import YelpList from './YelpList.jsx';
+import App from './App.jsx';
 import Solo from './Solo.jsx';
 import Login from './Login.jsx';
 import CreateGroup from './CreateGroup.jsx';
@@ -64,11 +65,13 @@ class Homepage extends React.Component {
 
     onCreateGroupClick() {
         console.log('create was clicked')
+
         this.setState({
             createGroup: true
         });
+        <Link to='/createGroup'></Link>
     }
-//create a function that triggers this
+
     onLogoutClick() {
         this.props.checkLogin(false);
         console.log('is it logged in?:', this.props.isLoggedIn)
@@ -79,18 +82,6 @@ class Homepage extends React.Component {
            }).catch(function(error) {
             // An error happened.
            });
-    }
-
-    toggleHidden () {
-        this.setState({
-          isHidden: !this.state.isHidden
-        })
-      }
-
-    get() {
-        this.setState({
-          resturants : ['test1', 'test2']
-        });  
     }
 
   render() {
@@ -105,25 +96,24 @@ class Homepage extends React.Component {
         </Navbar.Header>
           <Nav>
             <NavDropdown eventKey={3} title={this.props.username}  id="basic-nav-dropdown">
-            <LinkContainer to="/createGroup">
               <MenuItem onSelect={this.onCreateGroupClick} eventKey={3.1}>Create Group</MenuItem>
-            </LinkContainer>
               <MenuItem divider />
-            <LinkContainer to="/login">
-              <MenuItem onSelect={this.onLogoutClick} eventKey={3.2}>Log Out</MenuItem>
-            </LinkContainer>
+              <MenuItem onSelect={() => {this.props.checkLogin(false)}} eventKey={3.2}>Log Out</MenuItem>
+
             </NavDropdown>
           </Nav>
         </Navbar>
         
         <img id ='title' src={require('../../dist/images/logo.png')} />
 
-        {(!this.state.showSolo &&!this.state.showFriends) && <ButtonToolbar>
+        {(!this.state.showSolo && !this.state.showFriends && !this.state.createGroup) && <ButtonToolbar>
             <Button bsStyle="danger" bsSize="large" onClick = {this.onSoloClick}><Link to='/solo'>Solo</Link></Button>
             <Button bsStyle="danger" bsSize="large" onClick = {this.onFriendsClick}><Link to='/friends'>Friends</Link></Button>
         </ButtonToolbar>}
 
-        <Route path='/login' component={Login}/>
+        {this.state.createGroup && <CreateGroup setUsername = {this.props.setUsername}/>}
+    
+        {/* <Route path='/' component={App}/> */}
         <Route path='/solo' component={Solo}/>
         <Route path='/friends' component={YelpList}/>
         <Route path='/createGroup' component={CreateGroup}/>
