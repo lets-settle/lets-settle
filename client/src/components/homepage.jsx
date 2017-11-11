@@ -4,12 +4,16 @@ import App from './App.jsx';
 import Solo from './Solo.jsx';
 import Login from './Login.jsx';
 import CreateGroup from './CreateGroup.jsx';
+import Result from './result'
 const $ = require('jquery');
 import {Button, ButtonToolbar,Navbar,Nav,NavItem,NavDropdown,MenuItem } from 'react-bootstrap';
 import socketIOClient from "socket.io-client";
 import firebase, {auth} from '../../../fireconfig.js';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
+
+//   const endpoint = "http://127.0.0.1:1128";
+const socket = socketIOClient("http://127.0.0.1:1128");
 
 class Homepage extends React.Component {
   constructor(props) {
@@ -19,24 +23,38 @@ class Homepage extends React.Component {
       showSolo: false,
       showFriends: false,
       isHidden: false,
-      createGroup: false
+      createGroup: false,
+      suggestion: '',
+      showResult: false,
+      userResturants: []
     };
 
     this.onFriendsClick = this.onFriendsClick.bind(this)
     this.onSoloClick = this.onSoloClick.bind(this)
     this.onCreateGroupClick = this.onCreateGroupClick.bind(this)
     this.onLogoutClick = this.onLogoutClick.bind(this)
+    this.sendSuggestion = this.sendSuggestion.bind(this)
+    // this.selectedResturant = this.selectedResturant.bind(this)
     }
 
-    componentDidMount() {
-      const endpoint = "http://127.0.0.1:1128";
-      const socket = socketIOClient("http://127.0.0.1:1128");
-      
-      socket.emit('randomNumber', {number: Math.random()});
-      socket.on('heardRandomNumber', function(data){
-          console.log('data', data);
+    componentWillMount() {      
+      socket.on('showSuggestion', data => {
+          console.log('dataaaaaaaaSOCKET', data);
+          console.log('stateeeee', this.state);
+          let rest = this.state.userResturants.concat([data]);
+          this.setState({
+            userResturants: rest
+        })
       })
     }
+
+    // selectedResturant(data) {
+    //     this.setState({
+    //         userResturants: this.state.userResturants.push(data)
+    //     }, function() {
+    //         console.log('selectedResturanttttt', this.state.userResturants);
+    //       });
+    // }
 
     handleEvent(){
       this.state.socket.emit
@@ -48,7 +66,8 @@ class Homepage extends React.Component {
         this.setState({
             showSolo: false,
             showFriends: true,
-            createGroup: false
+            createGroup: false,
+            showResult: false
         });
       }
     onSoloClick (e) {
@@ -57,27 +76,19 @@ class Homepage extends React.Component {
         this.setState({
             showSolo: true,
             showFriends: false,
-            createGroup: false
+            createGroup: false,
+            showResult: false
         });
     }
 
     onCreateGroupClick() {
-<<<<<<< HEAD
-      console.log('create was clicked')
-
+      console.log('create was clicked creategroup', this.state.createGroup, this.state.showSolo, this.state.showFriends)
       this.setState({
-        createGroup: true
+          createGroup: true,
+          showSolo: false,
+          showFriends: false,
+          showResult: false
       });
-      <Link to='/createGroup'></Link>
-=======
-        console.log('create was clicked creategroup', this.state.createGroup, this.state.showSolo, this.state.showFriends)
-
-        this.setState({
-            createGroup: true,
-            showSolo: false,
-            showFriends: false
-        });
->>>>>>> [rebase]
     }
 
     onLogoutClick() {
@@ -90,6 +101,21 @@ class Homepage extends React.Component {
         // An error happened.
         });
     }
+
+    sendSuggestion(restname) {
+        this.setState({
+          suggestion: restname,
+          showResult: true,
+          showSolo: false,
+          showFriends: false,
+          createGroup: false
+        }, function() {
+          console.log('send suggestionnnnn', this.state.suggestion);
+          socket.emit('aSuggestion', this.state.suggestion);
+        });
+    }
+
+
 
   render() {
     return (
@@ -118,20 +144,15 @@ class Homepage extends React.Component {
             <Button bsStyle="danger" bsSize="large" onClick = {this.onFriendsClick}>Friends</Button>
         </ButtonToolbar>}
 
-<<<<<<< HEAD
-        {this.state.createGroup && <CreateGroup setUsername = {this.props.setUsername} username={this.props.username}/>}
-    
-        {/* <Route path='/' component={App}/> */}
-=======
 
 {/* 
->>>>>>> [rebase]
         <Route path='/solo' component={Solo}/>
         <Route path='/friends' component={YelpList}/> */}
 
-        {this.state.createGroup ? <CreateGroup setUsername = {this.props.setUsername} username = {this.state.username}/> : ''}
-        {this.state.showSolo ? <Solo username = {this.state.username}/> : ''}
-        {this.state.showFriends ? <YelpList username = {this.state.username}/> : '' }
+        {this.state.createGroup ? <CreateGroup setUsername = {this.props.setUsername} username = {this.props.username}/> : ''}
+        {this.state.showSolo ? <Solo username = {this.props.username}/> : ''}
+        {this.state.showFriends ? <YelpList username = {this.props.username} sendSuggestion = {this.sendSuggestion}/> : '' }
+        {this.state.showResult ? <Result suggestion={this.state.suggestion} userResturants={this.state.userResturants}/> : null}
 
         {/* <Route path='/' component={App}/> */}
         {/* <Route path='/createGroup' component={CreateGroup}/> */}
