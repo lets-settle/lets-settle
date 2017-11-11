@@ -4,6 +4,7 @@ import Homepage from './Homepage.jsx';
 const axios = require('axios');
 const config = require('../../../fireconfig.js')
 const firebase = require('firebase/app');
+import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
 
 const app = firebase.initializeApp(config);
 
@@ -13,10 +14,9 @@ class Login extends React.Component {
     super(props);
       this.state = {
         user: null,
-        username: '',
+        // username: '',
         email: '',
-        password: '',
-        needSignUp: false
+        password: ''
       };
 
       this.handleLoginInput = this.handleLoginInput.bind(this);
@@ -87,14 +87,16 @@ class Login extends React.Component {
     signUpButton(e) {
       e.preventDefault();
 
-      this.setState({
-        needSignUp: true
-      })
+      // this.setState({
+      //   needSignUp: true
+      // })
     };
   
   render() {
     return (
+      <Router>
     <div>
+    <img id ='title' src={require('../../dist/images/logo.png')} />
       <form className="form-horizontal" onSubmit={this.loginButton}>
         <div className="form-group">
           <div className="col-sm-10">
@@ -117,18 +119,16 @@ class Login extends React.Component {
         </div>
         <div className="form-group">
           <div className="col-sm-offset-2 col-sm-10">
-            <button type="submit" className="btn btn-danger" onClick={this.loginButton}>Login</button>
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="col-sm-offset-2 col-sm-10">
-            <button type="submit" className="btn btn-danger" onClick={this.signUpButton}>Sign Up</button>
+            <button type="submit" className="btn btn-danger" onSubmit={() => {this.props.checkLogin(true)}}>Login</button>
           </div>
         </div>
       </form>
-      {this.props.isLoggedIn && <Homepage username={this.state.username}/>}
-      {this.state.needSignUp && <Signup />}
+      <button type="click" className="btn btn-danger" onClick={() => this.props.checkSignup()}>Signup</button>
+
+      {/* {this.props.isLoggedIn && <Homepage username={this.state.username} isLoggedIn = {this.props.isLoggedIn} checkLogin = {this.props.checkLogin} />} */}
+      {/* {this.state.needSignUp && <Signup />} */}
     </div>
+    </Router>
     ) 
   }
 }

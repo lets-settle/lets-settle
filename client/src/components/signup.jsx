@@ -3,6 +3,7 @@ import Homepage from './Homepage.jsx';
 const axios = require('axios');
 const config = require('../../../fireconfig.js')
 const firebase = require('firebase');
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 // const app = firebase.initializeApp(config);
 
@@ -94,7 +95,7 @@ class Signup extends React.Component {
       e.preventDefault();
       let email = this.state.email;
       let password = this.state.password;
-
+      
       console.log('Form submitted');
       firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
         // Handle Errors here.
@@ -102,6 +103,7 @@ class Signup extends React.Component {
         var errorMessage = error.message;
         console.log('Sign Up Error!', erroroCode, errorMessage);
       }).then((result) => {
+        // this.props.checkLogin(true);
         let user = result.user;
         this.setState({
           user
@@ -133,6 +135,7 @@ class Signup extends React.Component {
   render() {  
     return (
     <div>
+      <img id ='title' src={require('../../dist/images/logo.png')} />
       <form className="form-horizontal">
         <div className='formErrors'>
           {Object.keys(this.state.formErrors).map((fieldName, i) => {
@@ -171,11 +174,15 @@ class Signup extends React.Component {
         </div>
         <div className="form-group">
           <div className="col-sm-offset-2 col-sm-10">
-            <button type="submit" className="btn btn-danger" disabled={!this.state.formValid} onClick={this.signUpSubmit}>Sign Me Up!</button>
+            <button type="submit" className="btn btn-danger" disabled={!this.state.formValid} onClick={ () => {
+              this.signUpSubmit();
+              
+            }
+          }>Sign Me Up!</button>
           </div>
         </div>
       </form>
-      {this.state.isLoggedIn && <Homepage username={this.state.username}/>}
+      {/* {this.state.isLoggedIn && <Homepage username={this.state.username}/>} */}
     </div>
     ) 
   }

@@ -2,6 +2,7 @@ import React from 'react';
 import Result from './Result.jsx';
 import YelpListEntry from './YelpListEntry.jsx';
 import CreateGroup from './CreateGroup.jsx';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 class YelpList extends React.Component {
   constructor(props) {
