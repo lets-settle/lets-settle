@@ -1,6 +1,6 @@
-const firekey = require('./firebasekey.js')
+import firebase from 'firebase'
 
-module.exports = {
+const config = {
   apiKey: "AIzaSyBBYvA5YavHvPbPJzZGXRYt3b9OV7rgF4E",
   authDomain: "yelpsettle.firebaseapp.com",
   databaseURL: "https://yelpsettle.firebaseio.com",
@@ -9,4 +9,6 @@ module.exports = {
   messagingSenderId: "737656551674"
 };
 
-// export default firebase;
+firebase.initializeApp(config);
+export const auth = firebase.auth();
+export default firebase;

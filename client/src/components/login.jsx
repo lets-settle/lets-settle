@@ -1,25 +1,17 @@
 import React from 'react';
 import Signup from './Signup.jsx';
 import Homepage from './Homepage.jsx';
-const axios = require('axios');
-const config = require('../../../fireconfig.js')
-const firebase = require('firebase/app');
 import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
-
-const app = firebase.initializeApp(config);
+import firebase, {auth} from '../../../fireconfig.js';
+import axios from 'axios';
 
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
       this.state = {
-<<<<<<< HEAD
         user: null,
-        // username: '',
-=======
-        userid: null,
-        username: '',
->>>>>>> [rebase]
+        username: '', 
         email: '',
         password: ''
       };
@@ -30,8 +22,13 @@ class Login extends React.Component {
     }
 
     componentWillMount() {
-      console.log('before login', this.state.userid);
-
+      auth.onAuthStateChanged((user) => {
+        if(user) {
+          console.log(user.email);
+        } else {
+          console.log('not logged in')
+        }
+      })
     }
 
     handleLoginInput (e) {
@@ -45,27 +42,19 @@ class Login extends React.Component {
       e.preventDefault();
       const email = this.state.email;
       const password = this.state.password;
-      let uid = '';
       
       console.log('Im logging in', this.state.email, this.state.password);
 
-      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+      auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
         .then(function() {
-          // Existing and future Auth states are now persisted in the current
-          // session only. Closing the window would clear any existing state even
-          // if a user forgets to sign out.
-          // ...
-          // New sign-in will be persisted with session persistence.
           // firebase.auth().signInWithEmailAndPassword(email, password);
         })
         .catch(function(error) {
-          // Handle Errors here.
           var errorCode = error.code;
           var errorMessage = error.message;
         });
       
-      firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-        // Handle Errors here.
+      auth.signInWithEmailAndPassword(email, password).catch(function(error) {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log('Login Error!', errorCode, errorMessage)
@@ -82,14 +71,16 @@ class Login extends React.Component {
           // });
         });
         console.log(this.state.userid)
+        console.log(this.state.userid)
         
       axios.post('/api/login', {
         email: this.state.email
         // uid: uid
       }).then(response => {
           console.log('getting username back', response.data)
-          this.props.setUsername(response.data);
-          this.props.checkLogin(true);
+          this.setState({
+            username: response.data 
+          })
         }, err => {
           console.log('cant get', err)
         })
@@ -124,27 +115,13 @@ class Login extends React.Component {
             <input type="password" className="form-control" id="inputPassword" placeholder="Password" name="password" value={this.state.password} onChange={this.handleLoginInput}/>
           </div>
         </div>
-        {/* <div className="form-group">
-          <div className="col-sm-offset-2 col-sm-10">
-            <div className="checkbox">
-              <label>
-                <input type="checkbox"/> Remember me
-              </label>
-            </div>
-          </div>
-        </div> */}
         <div className="form-group">
           <div className="col-sm-offset-2 col-sm-10">
             <button type="submit" className="btn btn-danger" onSubmit={() => {this.props.checkLogin(true)}}>Login</button>
           </div>
         </div>
       </form>
-<<<<<<< HEAD
       <button type="click" className="btn btn-danger" onClick={() => this.props.checkSignup()}>Signup</button>
-=======
-      {this.props.isLoggedIn && <Homepage username={this.state.username}/>}
-      {this.state.needSignUp && <Signup   />}
->>>>>>> [rebase]
     </div>
     </Router>
     ) 

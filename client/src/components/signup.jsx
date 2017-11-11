@@ -1,9 +1,8 @@
 import React from 'react';
 import Homepage from './Homepage.jsx';
-const axios = require('axios');
-const config = require('../../../fireconfig.js')
-const firebase = require('firebase');
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import firebase, {auth} from '../../../fireconfig.js';
+import axios from 'axios';
 
 // const app = firebase.initializeApp(config);
 
@@ -33,12 +32,14 @@ class Signup extends React.Component {
     }
 
     componentDidMount() {
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          this.setState({ user });
+      auth.onAuthStateChanged((user) => {
+        if(user) {
+          console.log(user.email);
+        } else {
+          console.log('not logged in')
         }
-      });
-    };
+      })
+    }
     
     handleUserInput (e) {
       let name = e.target.name;
@@ -95,26 +96,16 @@ class Signup extends React.Component {
       e.preventDefault();
       let email = this.state.email;
       let password = this.state.password;
-<<<<<<< HEAD
       
-=======
-      // let uid = '';
-
->>>>>>> [rebase]
       console.log('Form submitted');
 
-      firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+      auth.createUserWithEmailAndPassword(email, password).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
-        console.log('Sign Up Error!', errorCode, errorMessage);
+        console.log('Sign Up Error!', erroroCode, errorMessage);
       }).then((result) => {
-<<<<<<< HEAD
-        this.props.checkLogin(true);
-        let user = result.user;
-=======
         console.log('sign up:', result.uid);
->>>>>>> [rebase]
         this.setState({
           uid: result.uid
         });
@@ -134,15 +125,8 @@ class Signup extends React.Component {
           }).catch(err => {
             console.log('FAILED TO POST: ', err);
           })
-<<<<<<< HEAD
-          this.props.setUsername(this.state.username); 
-        }).catch(err => {
-          console.log('FAILED TO POST: ', err);
-        })
-
-=======
       });
->>>>>>> [rebase]
+
 
     }
 
