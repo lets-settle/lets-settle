@@ -24,7 +24,7 @@ class Login extends React.Component {
     componentWillMount() {
       auth.onAuthStateChanged((user) => {
         if(user) {
-          console.log(user.email);
+          console.log('authStateChange', user.email);
         } else {
           console.log('not logged in')
         }
@@ -42,17 +42,15 @@ class Login extends React.Component {
       e.preventDefault();
       const email = this.state.email;
       const password = this.state.password;
-      
-      console.log('Im logging in', this.state.email, this.state.password);
 
-      auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
-        .then(function() {
-          // firebase.auth().signInWithEmailAndPassword(email, password);
-        })
-        .catch(function(error) {
-          var errorCode = error.code;
-          var errorMessage = error.message;
-        });
+      // auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
+      //   .then(function() {
+      //     // firebase.auth().signInWithEmailAndPassword(email, password);
+      //   })
+      //   .catch(function(error) {
+      //     var errorCode = error.code;
+      //     var errorMessage = error.message;
+      //   });
       
       auth.signInWithEmailAndPassword(email, password).catch(function(error) {
         const errorCode = error.code;
@@ -60,7 +58,8 @@ class Login extends React.Component {
         console.log('Login Error!', errorCode, errorMessage)
       }).then((result) => {
         console.log('im in login: ', result);
-        console.log('i logged in', JSON.parse(Object.values(window.sessionStorage)).uid)
+        // console.log('i logged in', JSON.parse(Object.values(window.sessionStorage)).uid)
+        // console.log('i logged in', typeof Object.keys(window.sessionStorage)[0])
         // this.setState({
         //   userid: JSON.parse(Object.values(window.sessionStorage)).uid
         // })

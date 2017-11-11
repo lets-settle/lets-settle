@@ -119,7 +119,7 @@ class Signup extends React.Component {
           // uid: this.state.uid
         }).then(response => {
             console.log('Submit User Info to Server/DB', response);
-            console.log('after sending to server', this.state.uid)
+            console.log('after sending to server', this.state.username)
           }).catch(err => {
             console.log('FAILED TO POST: ', err);
           })
