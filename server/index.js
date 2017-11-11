@@ -12,10 +12,24 @@ app.use(express.static(__dirname + '/../client/dist'), bodyParser());
 
 app.use('/api', routes)
 
-io.on('connection', (client)=>{
+let groupName = "";
+
+function changeGroup(newGroupName) {
+  groupName = newGroupName;
+}
+
+module.exports = changeGroup;
+
+session = io.of(`/${groupName}`); 
+
+//var nsp = io.of('/my-namespace');
+//connet socket io session
+
+session.on('connection', (client)=>{
   client.on('aSuggestion', function(data){
     console.log('SOCKETTTT', data);
-    client.emit('showSuggestion', {'received': data});
+    //below was client instead of session before 
+    session.emit('showSuggestion', {'received': data});
     client.broadcast.emit('showSuggestion', {'received': data});
   });
   client.on('disconnect', () => console.log('disconnected'))

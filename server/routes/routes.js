@@ -14,6 +14,8 @@ router.post('/group', controllers.groupHandler);
 
 router.post('/selection', controllers.selectionHandler);
 
+router.post('/selectGrouo', controllers.selectGroup);
+
 
 
 
