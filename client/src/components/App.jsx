@@ -46,16 +46,29 @@ class App extends React.Component {
     })
   };
 
+  getComponentProps(){
+    return {
+      checkLogin: this.checkLogin,
+      checkSignup: this.checkSignup,
+      isLoggedIn: this.state.isLoggedIn,
+      setUsername = this.setUsername,
+      username = this.state.username
+    }
+  }
+
+
+
   render () {
     return (
     <Router>
     <div>
     {/* <img id ='title' src={require('../../dist/images/logo.png')} /> */}
 
-    {(!this.state.needSignUp && !this.state.isLoggedIn) && <Login checkLogin = {this.checkLogin} checkSignup = {this.checkSignup} isLoggedIn = {this.state.isLoggedIn} needSignUp = {this.state.needSignUp} setUsername = {this.setUsername} username = {this.state.username} />}
-    {(this.state.needSignUp && !this.state.isLoggedIn) && <Signup checkLogin = {this.checkLogin} checkSignup = {this.checkSignup} isLoggedIn = {this.state.isLoggedIn} setUsername = {this.setUsername} username = {this.state.username} />}
-    {this.state.isLoggedIn  && <Homepage checkLogin = {this.checkLogin} checkSignup = {this.checkSignup} isLoggedIn = {this.state.isLoggedIn}  setUsername = {this.setUsername} username = {this.state.username}  />}
+    {(!this.state.needSignUp && !this.state.isLoggedIn) && <Login {...this.getComponentProps()} />}
+    {(this.state.needSignUp && !this.state.isLoggedIn) && <Signup  {...this.getComponentProps()} />}
+    {this.state.isLoggedIn  && <Homepage {...this.getComponentProps()} />}
 
+<Route path="/login" render = {() => {<Login {...this.getComponentProps()}/>}}/>
     </div>
     </Router>
     )
