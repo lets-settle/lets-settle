@@ -118,10 +118,6 @@ class Signup extends React.Component {
       }).then(response => {
           console.log('Submit User Info to Server/DB', response);
           this.setState({
-            name: '',
-            username: '',
-            email: '',
-            password: '',
             isLoggedIn: true,
           })
           this.props.setUsername(this.state.username); 

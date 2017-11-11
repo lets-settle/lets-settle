@@ -60,6 +60,7 @@ class Login extends React.Component {
       }).then((result) => {
         console.log('im in login: ', result);
         console.log('im in login2: ', result.user);
+        this.props.checkLogin(true);
         // const user = result.user;
         // this.setState({
           //   user
@@ -70,8 +71,14 @@ class Login extends React.Component {
         email: this.state.email
       }).then(response => {
           console.log('getting username back', response.data)
+<<<<<<< HEAD
           this.props.setUsername(response.data);
           this.props.checkLogin(true);
+=======
+          this.setState({
+            username: response.data 
+          })
+>>>>>>> [add]correctly passing username state to homepage after signing up
         }, err => {
           console.log('cant get', err)
         })
