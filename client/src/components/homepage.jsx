@@ -7,23 +7,19 @@ import CreateGroup from './CreateGroup.jsx';
 const $ = require('jquery');
 import {Button, ButtonToolbar,Navbar,Nav,NavItem,NavDropdown,MenuItem } from 'react-bootstrap';
 import socketIOClient from "socket.io-client";
-const firebase = require('firebase/app');
+import firebase, {auth} from '../../../fireconfig.js';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
-
-
-
-
 
 class Homepage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-        showSolo: false,
-        showFriends: false,
-        isHidden: false,
-        createGroup: false
+      showSolo: false,
+      showFriends: false,
+      isHidden: false,
+      createGroup: false
     };
 
     this.onFriendsClick = this.onFriendsClick.bind(this)
@@ -33,17 +29,17 @@ class Homepage extends React.Component {
     }
 
     componentDidMount() {
-        const endpoint = "http://127.0.0.1:1128";
-        const socket = socketIOClient("http://127.0.0.1:1128");
-        
-        socket.emit('randomNumber', {number: Math.random()});
-        socket.on('heardRandomNumber', function(data){
-            console.log('data', data);
-        })
+      const endpoint = "http://127.0.0.1:1128";
+      const socket = socketIOClient("http://127.0.0.1:1128");
+      
+      socket.emit('randomNumber', {number: Math.random()});
+      socket.on('heardRandomNumber', function(data){
+          console.log('data', data);
+      })
     }
 
     handleEvent(){
-        this.state.socket.emit
+      this.state.socket.emit
     }
 
     onFriendsClick (e) {
@@ -64,24 +60,23 @@ class Homepage extends React.Component {
     }
 
     onCreateGroupClick() {
-        console.log('create was clicked')
+      console.log('create was clicked')
 
-        this.setState({
-            createGroup: true
-        });
-        <Link to='/createGroup'></Link>
+      this.setState({
+        createGroup: true
+      });
+      <Link to='/createGroup'></Link>
     }
 
     onLogoutClick() {
+      auth.signOut().then(function() {
+        // Sign-out successful.
         this.props.checkLogin(false);
         console.log('is it logged in?:', this.props.isLoggedIn)
-        firebase.auth().signOut().then(function() {
-            // Sign-out successful.
-
-        
-           }).catch(function(error) {
-            // An error happened.
-           });
+        // Window.localStorage.removeItem(Object.keys(window.sessionStorage)[0])
+        }).catch(function(error) {
+        // An error happened.
+        });
     }
 
   render() {

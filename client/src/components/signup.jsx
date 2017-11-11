@@ -1,11 +1,8 @@
 import React from 'react';
 import Homepage from './Homepage.jsx';
-const axios = require('axios');
-const config = require('../../../fireconfig.js')
-const firebase = require('firebase');
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
-
-// const app = firebase.initializeApp(config);
+import firebase, {auth} from '../../../fireconfig.js';
+import axios from 'axios';
 
 class Signup extends React.Component {
   constructor(props) {
@@ -21,7 +18,7 @@ class Signup extends React.Component {
         emailValid: false,
         passwordValid: false,
         formValid: false,
-        user: '',
+        uid: '',
         isLoggedIn: false
       }
 
@@ -33,12 +30,14 @@ class Signup extends React.Component {
     }
 
     componentDidMount() {
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          this.setState({ user });
+      auth.onAuthStateChanged((user) => {
+        if(user) {
+          console.log(user.email);
+        } else {
+          console.log('not logged in')
         }
-      });
-    };
+      })
+    }
     
     handleUserInput (e) {
       let name = e.target.name;
@@ -97,37 +96,32 @@ class Signup extends React.Component {
       let password = this.state.password;
       
       console.log('Form submitted');
-      firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+
+      auth.createUserWithEmailAndPassword(email, password).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
-        console.log('Sign Up Error!', errorCode, errorMessage);
+        console.log('Sign Up Error!', erroroCode, errorMessage);
       }).then((result) => {
+        console.log('sign up:', result.uid);
         this.props.checkLogin(true);
-        let user = result.user;
-        this.setState({
-          user
-        });
-      });
+        // this.setState({
+        //   uid: result.uid
+        // });
 
-      axios.post('/api/signup', {
-        name: this.state.name,
-        username: this.state.username,
-        password: this.state.password,
-        email: this.state.email
-      }).then(response => {
-          console.log('Submit User Info to Server/DB', response);
-          this.setState({
-            name: '',
-            username: '',
-            email: '',
-            password: '',
-            isLoggedIn: true,
+        axios.post('/api/signup', {
+          name: this.state.name,
+          username: this.state.username,
+          password: this.state.password,
+          email: this.state.email
+          // uid: this.state.uid
+        }).then(response => {
+            console.log('Submit User Info to Server/DB', response);
+            console.log('after sending to server', this.state.username)
+          }).catch(err => {
+            console.log('FAILED TO POST: ', err);
           })
-          this.props.setUsername(this.state.username); 
-        }).catch(err => {
-          console.log('FAILED TO POST: ', err);
-        })
+      });
 
 
     }
