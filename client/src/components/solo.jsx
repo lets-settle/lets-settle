@@ -1,6 +1,7 @@
 import React from 'react';
 import Result from './Result.jsx';
 import axios from 'axios';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 class Solo extends React.Component {
   constructor(props) {

@@ -3,6 +3,7 @@ import Homepage from './Homepage.jsx';
 const axios = require('axios');
 const config = require('../../../fireconfig.js')
 const firebase = require('firebase');
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 // const app = firebase.initializeApp(config);
 
@@ -94,14 +95,15 @@ class Signup extends React.Component {
       e.preventDefault();
       let email = this.state.email;
       let password = this.state.password;
-
+      
       console.log('Form submitted');
       firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
-        console.log('Sign Up Error!', erroroCode, errorMessage);
+        console.log('Sign Up Error!', errorCode, errorMessage);
       }).then((result) => {
+        this.props.checkLogin(true);
         let user = result.user;
         this.setState({
           user
@@ -122,6 +124,7 @@ class Signup extends React.Component {
             password: '',
             isLoggedIn: true,
           })
+          this.props.setUsername(this.state.username); 
         }).catch(err => {
           console.log('FAILED TO POST: ', err);
         })
@@ -133,6 +136,7 @@ class Signup extends React.Component {
   render() {  
     return (
     <div>
+      <img id ='title' src={require('../../dist/images/logo.png')} />
       <form className="form-horizontal">
         <div className='formErrors'>
           {Object.keys(this.state.formErrors).map((fieldName, i) => {
@@ -175,7 +179,7 @@ class Signup extends React.Component {
           </div>
         </div>
       </form>
-      {this.state.isLoggedIn && <Homepage username={this.state.username}/>}
+      {/* {this.state.isLoggedIn && <Homepage username={this.state.username}/>} */}
     </div>
     ) 
   }

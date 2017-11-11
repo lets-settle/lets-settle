@@ -2,22 +2,37 @@ var path = require('path');
 var SRC_DIR = path.join(__dirname, '/client/src');
 var DIST_DIR = path.join(__dirname, '/client/dist');
 
-module.exports = {
-  entry: `${SRC_DIR}/App.jsx`,
+const webpackConfig = {
+  entry: `${SRC_DIR}/index.jsx`,
   output: {
+    path: DIST_DIR,
     filename: 'bundle.js',
-    path: DIST_DIR
   },
-  module : {
-    loaders : [
-      {
-        test : /\.jsx?/, 
-        include : SRC_DIR,
-        loader : 'babel-loader',     
-        query: {
-          presets: ['react', 'es2015']
-        }
-      }
-    ]
-  }
+  module: {
+    loaders: [],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
+  devtool: 'inline-source-map',
 };
+
+webpackConfig.module.loaders.push({
+  test: /\.js[x]?$/,
+  exclude: /node_modules/,
+  loader: 'babel-loader',
+  options: { presets: ['es2015', 'react']},
+});
+
+webpackConfig.module.loaders.push({
+  test: /\.(css)$/,
+  loaders: ['style-loader', 'css-loader?url=false']
+});
+
+webpackConfig.module.loaders.push({
+  test: /\.(png|jpg|gif|jpeg)$/,
+  loader: 'file-loader',
+  options: {}  
+});
+
+module.exports = webpackConfig;
