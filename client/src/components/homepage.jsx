@@ -11,6 +11,74 @@ class Homepage extends React.Component {
     super(props);
 
     this.onLogoutClick = this.onLogoutClick.bind(this)
+<<<<<<< HEAD
+=======
+    this.sendSuggestion = this.sendSuggestion.bind(this)
+    // this.selectedResturant = this.selectedResturant.bind(this)
+    }
+
+    componentDidMount() {
+     socket.on('showSuggestion', data => {
+           console.log('dataaaaaaaaSOCKET', data);
+           console.log('stateeeee', this.state);
+           let rest = this.state.userResturants.concat([data]);
+           this.setState({
+             userResturants: rest
+    })
+  })
+  }
+
+    // selectedResturant(data) {
+    //     this.setState({
+    //         userResturants: this.state.userResturants.push(data)
+    //     }, function() {
+    //         console.log('selectedResturanttttt', this.state.userResturants);
+    //       });
+    // }
+
+    // handleEvent(){
+    //     this.state.socket.emit
+    // }
+
+    onFriendsClick (e) {
+      e.preventDefault();
+        console.log('friends was clicked')
+        this.setState({
+            showSolo: false,
+            showFriends: true,
+            createGroup: false,
+            showResult: false
+        });
+      }
+    onSoloClick (e) {
+      e.preventDefault();
+        console.log('solo was clicked')
+        this.setState({
+          showSolo: true,
+          showFriends: false,
+          showFriends: false,
+          createGroup: false,
+          showResult: false
+        });
+    }
+
+    onCreateGroupClick() {
+        console.log('create was clicked creategroup', this.state.createGroup, this.state.showSolo, this.state.showFriends)
+        this.setState({
+          createGroup: true,
+          showSolo: false,
+<<<<<<< HEAD
+          showFriends: false,
+          showResult: false
+<<<<<<< HEAD
+        });
+=======
+=======
+          showFriends: false
+>>>>>>> [rebase]
+      });
+>>>>>>> [rebase]
+>>>>>>> [rebase]
     }
 
     onLogoutClick() {
@@ -55,13 +123,53 @@ class Homepage extends React.Component {
             </NavDropdown>
           </Nav>
         </Navbar>
+<<<<<<< HEAD
         {/* <Link to = '/'> */}
           {/* <div>
           <img 
           id ='title' 
           src={require('http://localhost:1128/logo.png')}/>
           </div> */}
+<<<<<<< HEAD
         {/* </Link> */} 
+=======
+        {/* </Link> */}
+
+        {/* {this.state.showFriends ? 
+          <Decisions 
+            username = {this.props.username} 
+            sendSuggestion = {this.sendSuggestion}/> : '' }
+        {this.state.showResult ? 
+          <Result 
+            suggestion={this.state.suggestion} 
+            userResturants={this.state.userResturants}/> : null} */}
+=======
+        
+        <img id ='title' src={require('../../dist/images/logo.png')} />
+
+        {(!this.state.showSolo && !this.state.showFriends && !this.state.createGroup) && <ButtonToolbar>
+            <Button bsStyle="danger" bsSize="large" onClick = {this.onSoloClick}>Solo</Button>
+            <Button bsStyle="danger" bsSize="large" onClick = {this.onFriendsClick}>Friends</Button>
+        </ButtonToolbar>}
+
+
+{/* 
+        <Route path='/solo' component={Solo}/>
+        <Route path='/friends' component={YelpList}/> */}
+
+        {this.state.createGroup ? <CreateGroup setUsername = {this.props.setUsername} username = {this.props.username}/> : ''}
+        {this.state.showSolo ? <Solo username = {this.props.username}/> : ''}
+<<<<<<< HEAD
+        {this.state.showFriends ? <YelpList username = {this.props.username} sendSuggestion = {this.sendSuggestion}/> : '' }
+        {this.state.showResult ? <Result suggestion={this.state.suggestion} userResturants={this.state.userResturants}/> : null}
+=======
+        {this.state.showFriends ? <YelpList username = {this.props.username}/> : '' }
+>>>>>>> [rebase]
+
+        {/* <Route path='/' component={App}/> */}
+        {/* <Route path='/createGroup' component={CreateGroup}/> */}
+>>>>>>> [rebase]
+>>>>>>> [rebase]
     </div>
     ) 
   }
