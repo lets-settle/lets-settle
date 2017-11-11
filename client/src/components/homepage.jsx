@@ -47,7 +47,8 @@ class Homepage extends React.Component {
         console.log('friends was clicked')
         this.setState({
             showSolo: false,
-            showFriends: true
+            showFriends: true,
+            createGroup: false
         });
       }
     onSoloClick (e) {
@@ -55,17 +56,28 @@ class Homepage extends React.Component {
         console.log('solo was clicked')
         this.setState({
             showSolo: true,
-            showFriends: false
+            showFriends: false,
+            createGroup: false
         });
     }
 
     onCreateGroupClick() {
+<<<<<<< HEAD
       console.log('create was clicked')
 
       this.setState({
         createGroup: true
       });
       <Link to='/createGroup'></Link>
+=======
+        console.log('create was clicked creategroup', this.state.createGroup, this.state.showSolo, this.state.showFriends)
+
+        this.setState({
+            createGroup: true,
+            showSolo: false,
+            showFriends: false
+        });
+>>>>>>> [rebase]
     }
 
     onLogoutClick() {
@@ -102,16 +114,27 @@ class Homepage extends React.Component {
         <img id ='title' src={require('../../dist/images/logo.png')} />
 
         {(!this.state.showSolo && !this.state.showFriends && !this.state.createGroup) && <ButtonToolbar>
-            <Button bsStyle="danger" bsSize="large" onClick = {this.onSoloClick}><Link to='/solo'>Solo</Link></Button>
-            <Button bsStyle="danger" bsSize="large" onClick = {this.onFriendsClick}><Link to='/friends'>Friends</Link></Button>
+            <Button bsStyle="danger" bsSize="large" onClick = {this.onSoloClick}>Solo</Button>
+            <Button bsStyle="danger" bsSize="large" onClick = {this.onFriendsClick}>Friends</Button>
         </ButtonToolbar>}
 
+<<<<<<< HEAD
         {this.state.createGroup && <CreateGroup setUsername = {this.props.setUsername} username={this.props.username}/>}
     
         {/* <Route path='/' component={App}/> */}
+=======
+
+{/* 
+>>>>>>> [rebase]
         <Route path='/solo' component={Solo}/>
-        <Route path='/friends' component={YelpList}/>
-        <Route path='/createGroup' component={CreateGroup}/>
+        <Route path='/friends' component={YelpList}/> */}
+
+        {this.state.createGroup ? <CreateGroup setUsername = {this.props.setUsername} username = {this.state.username}/> : ''}
+        {this.state.showSolo ? <Solo username = {this.state.username}/> : ''}
+        {this.state.showFriends ? <YelpList username = {this.state.username}/> : '' }
+
+        {/* <Route path='/' component={App}/> */}
+        {/* <Route path='/createGroup' component={CreateGroup}/> */}
     </div>
     </Router>
     ) 
