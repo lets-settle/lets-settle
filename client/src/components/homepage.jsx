@@ -7,7 +7,7 @@ import CreateGroup from './CreateGroup.jsx';
 const $ = require('jquery');
 import {Button, ButtonToolbar,Navbar,Nav,NavItem,NavDropdown,MenuItem } from 'react-bootstrap';
 import socketIOClient from "socket.io-client";
-const firebase = require('firebase/app');
+import firebase, {auth} from '../../../fireconfig.js';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 
@@ -73,12 +73,11 @@ class Homepage extends React.Component {
     }
 
     onLogoutClick() {
-        this.props.checkLogin(false);
-        console.log('is it logged in?:', this.props.isLoggedIn)
         firebase.auth().signOut().then(function() {
             // Sign-out successful.
-
-        
+            this.props.checkLogin(false);
+            console.log('is it logged in?:', this.props.isLoggedIn)
+            
            }).catch(function(error) {
             // An error happened.
            });

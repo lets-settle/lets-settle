@@ -11,7 +11,7 @@ class Login extends React.Component {
     super(props);
       this.state = {
         user: null,
-        username: '', 
+        // username: '', 
         email: '',
         password: ''
       };
@@ -78,9 +78,7 @@ class Login extends React.Component {
         // uid: uid
       }).then(response => {
           console.log('getting username back', response.data)
-          this.setState({
-            username: response.data 
-          })
+          this.props.setUsername(response.data)
         }, err => {
           console.log('cant get', err)
         })

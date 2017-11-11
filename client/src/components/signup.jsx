@@ -106,9 +106,10 @@ class Signup extends React.Component {
         console.log('Sign Up Error!', erroroCode, errorMessage);
       }).then((result) => {
         console.log('sign up:', result.uid);
-        this.setState({
-          uid: result.uid
-        });
+        this.props.checkLogin(true);
+        // this.setState({
+        //   uid: result.uid
+        // });
 
         axios.post('/api/signup', {
           name: this.state.name,
@@ -119,9 +120,6 @@ class Signup extends React.Component {
         }).then(response => {
             console.log('Submit User Info to Server/DB', response);
             console.log('after sending to server', this.state.uid)
-            this.setState({
-              isLoggedIn: true,
-            })
           }).catch(err => {
             console.log('FAILED TO POST: ', err);
           })
