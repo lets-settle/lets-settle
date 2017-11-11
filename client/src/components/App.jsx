@@ -2,14 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 const $ = require('jquery');
 import Login from './Login.jsx';
+import CreateGroup from './CreateGroup.jsx';
+import Decisions from './Decisions.jsx';
 import Signup from './Signup.jsx';
+import Solo from './Solo.jsx';
+import YelpList from './YelpList.jsx';
 import Homepage from './Homepage.jsx';
 import axios from 'axios';
 import bodyParser from 'body-parser';
-import {BrowserRouter as Router, Link} from 'react-router-dom'
+import {BrowserRouter as Router, Link} from 'react-router-dom';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
-import {Button, ButtonToolbar,Navbar,Nav,NavItem,NavDropdown,MenuItem } from 'react-bootstrap';
+import {Button, Redirect, ButtonToolbar,Navbar,Nav,NavItem,NavDropdown,MenuItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+
 
 
 
@@ -46,16 +51,27 @@ class App extends React.Component {
     })
   };
 
+  getComponentProps(){
+    return {
+      checkLogin: this.checkLogin,
+      checkSignup: this.checkSignup,
+      isLoggedIn: this.state.isLoggedIn,
+      setUsername: this.setUsername,
+      username: this.state.username
+    }
+  }
+
   render () {
     return (
     <Router>
-    <div>
-    {/* <img id ='title' src={require('../../dist/images/logo.png')} /> */}
-
-    {(!this.state.needSignUp && !this.state.isLoggedIn) && <Login checkLogin = {this.checkLogin} checkSignup = {this.checkSignup} isLoggedIn = {this.state.isLoggedIn} needSignUp = {this.state.needSignUp} setUsername = {this.setUsername} username = {this.state.username} />}
-    {(this.state.needSignUp && !this.state.isLoggedIn) && <Signup checkLogin = {this.checkLogin} checkSignup = {this.checkSignup} isLoggedIn = {this.state.isLoggedIn} setUsername = {this.setUsername} username = {this.state.username} />}
-    {this.state.isLoggedIn  && <Homepage checkLogin = {this.checkLogin} checkSignup = {this.checkSignup} isLoggedIn = {this.state.isLoggedIn}  setUsername = {this.setUsername} username = {this.state.username}  />}
-
+      <div>
+        <Route exact path="/" render = {() => <Login {...this.getComponentProps()}/>}/>
+        <Route exact path="/signup" render = {() => <Signup {...this.getComponentProps()}/>}/>
+        <Route path="/homepage" render = {() => <Homepage {...this.getComponentProps()}/>}/>
+        <Route exact path="/homepage/decisions" render = {() => <Decisions {...this.getComponentProps()}/>}/>
+        <Route exact path="/homepage/creategroup" render = {() => <CreateGroup {...this.getComponentProps()}/>}/>
+        <Route exact path="/homepage/solo" render = {() => <Solo {...this.getComponentProps()}/>}/>
+        <Route exact path="/homepage/friends" render = {() => <YelpList {...this.getComponentProps()}/>}/>
     </div>
     </Router>
     )

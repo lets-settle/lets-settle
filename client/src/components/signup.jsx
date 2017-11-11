@@ -101,7 +101,7 @@ class Signup extends React.Component {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
-        console.log('Sign Up Error!', erroroCode, errorMessage);
+        console.log('Sign Up Error!', errorCode, errorMessage);
       }).then((result) => {
         console.log('sign up:', result.uid);
         this.props.checkLogin(true);
@@ -130,7 +130,11 @@ class Signup extends React.Component {
   render() {  
     return (
     <div>
-      <img id ='title' src={require('../../dist/images/logo.png')} />
+      <Link to = '/login'>
+        <img 
+          id ='title' 
+          src={require('../../dist/images/logo.png')}/>
+      </Link>
       <form className="form-horizontal">
         <div className='formErrors'>
           {Object.keys(this.state.formErrors).map((fieldName, i) => {
@@ -169,7 +173,7 @@ class Signup extends React.Component {
         </div>
         <div className="form-group">
           <div className="col-sm-offset-2 col-sm-10">
-            <button type="submit" className="btn btn-danger" disabled={!this.state.formValid} onClick={this.signUpSubmit}>Sign Me Up!</button>
+            <Link to='/homepage/decisions'> <button type="submit" className="btn btn-danger" disabled={!this.state.formValid} onClick={this.signUpSubmit}>Sign Me Up!</button></Link>
           </div>
         </div>
       </form>
