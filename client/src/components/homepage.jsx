@@ -67,14 +67,16 @@ class Homepage extends React.Component {
         this.setState({
           createGroup: true,
           showSolo: false,
-<<<<<<< HEAD
           showFriends: false,
           showResult: false
+<<<<<<< HEAD
 <<<<<<< HEAD
         });
 =======
 =======
           showFriends: false
+>>>>>>> [rebase]
+=======
 >>>>>>> [rebase]
       });
 >>>>>>> [rebase]
@@ -82,6 +84,7 @@ class Homepage extends React.Component {
     }
 
     onLogoutClick() {
+<<<<<<< HEAD
       auth.signOut().then(function() {
         // Sign-out successful.
               this.props.checkLogin(false);
@@ -93,6 +96,46 @@ class Homepage extends React.Component {
       });
     }
     
+=======
+<<<<<<< HEAD
+        auth.signOut().then(function() {
+          // Sign-out successful.
+               this.props.checkLogin(false);
+               console.log('is it logged in?:', this.props.isLoggedIn)
+          // Window.localStorage.removeItem(Object.keys(window.sessionStorage)[0])
+          }).catch(function(error) {
+          // An error happened.
+          });
+      }
+      
+      sendSuggestion(restname) {
+            this.setState({
+              suggestion: restname,
+              showResult: true,
+              showSolo: false,
+              showFriends: false,
+              createGroup: false
+            }, function() {
+              console.log('send suggestionnnnn', this.state.suggestion);
+              socket.emit('aSuggestion', this.state.suggestion);
+            });
+          }
+=======
+      auth.signOut()
+        .then(() => {
+          // Sign-out successful.
+          this.props.checkLogin(false);
+          console.log('is it logged in?:', this.props.isLoggedIn)
+        }).catch(error => {
+        // An error happened.
+        });
+    }
+>>>>>>> [rebase]
+
+
+
+
+>>>>>>> [rebase]
   render() {
     return (
       <div>
@@ -159,13 +202,8 @@ class Homepage extends React.Component {
 
         {this.state.createGroup ? <CreateGroup setUsername = {this.props.setUsername} username = {this.props.username}/> : ''}
         {this.state.showSolo ? <Solo username = {this.props.username}/> : ''}
-<<<<<<< HEAD
-        {this.state.showFriends ? <YelpList username = {this.props.username} sendSuggestion = {this.sendSuggestion}/> : '' }
-        {this.state.showResult ? <Result suggestion={this.state.suggestion} userResturants={this.state.userResturants}/> : null}
-=======
         {this.state.showFriends ? <YelpList username = {this.props.username}/> : '' }
->>>>>>> [rebase]
-
+        {this.state.showResult ? <Result suggestion={this.state.suggestion} userResturants={this.state.userResturants}/> : null}
         {/* <Route path='/' component={App}/> */}
         {/* <Route path='/createGroup' component={CreateGroup}/> */}
 >>>>>>> [rebase]

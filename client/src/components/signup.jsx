@@ -32,7 +32,8 @@ class Signup extends React.Component {
     componentDidMount() {
       auth.onAuthStateChanged((user) => {
         if(user) {
-          console.log(user.email);
+          console.log(user);
+          // this.props.checkLogin(true);
         } else {
           console.log('not logged in')
         }
