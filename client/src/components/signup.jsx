@@ -21,7 +21,7 @@ class Signup extends React.Component {
         emailValid: false,
         passwordValid: false,
         formValid: false,
-        user: '',
+        uid: '',
         isLoggedIn: false
       }
 
@@ -95,36 +95,54 @@ class Signup extends React.Component {
       e.preventDefault();
       let email = this.state.email;
       let password = this.state.password;
+<<<<<<< HEAD
       
+=======
+      // let uid = '';
+
+>>>>>>> [rebase]
       console.log('Form submitted');
+
       firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
         console.log('Sign Up Error!', errorCode, errorMessage);
       }).then((result) => {
+<<<<<<< HEAD
         this.props.checkLogin(true);
         let user = result.user;
+=======
+        console.log('sign up:', result.uid);
+>>>>>>> [rebase]
         this.setState({
-          user
+          uid: result.uid
         });
-      });
 
-      axios.post('/api/signup', {
-        name: this.state.name,
-        username: this.state.username,
-        password: this.state.password,
-        email: this.state.email
-      }).then(response => {
-          console.log('Submit User Info to Server/DB', response);
-          this.setState({
-            isLoggedIn: true,
+        axios.post('/api/signup', {
+          name: this.state.name,
+          username: this.state.username,
+          password: this.state.password,
+          email: this.state.email
+          // uid: this.state.uid
+        }).then(response => {
+            console.log('Submit User Info to Server/DB', response);
+            console.log('after sending to server', this.state.uid)
+            this.setState({
+              isLoggedIn: true,
+            })
+          }).catch(err => {
+            console.log('FAILED TO POST: ', err);
           })
+<<<<<<< HEAD
           this.props.setUsername(this.state.username); 
         }).catch(err => {
           console.log('FAILED TO POST: ', err);
         })
 
+=======
+      });
+>>>>>>> [rebase]
 
     }
 

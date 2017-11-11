@@ -8,3 +8,5 @@ module.exports = {
   storageBucket: "yelpsettle.appspot.com",
   messagingSenderId: "737656551674"
 };
+
+// export default firebase;

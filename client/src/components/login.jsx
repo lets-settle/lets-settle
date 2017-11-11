@@ -13,8 +13,13 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
       this.state = {
+<<<<<<< HEAD
         user: null,
         // username: '',
+=======
+        userid: null,
+        username: '',
+>>>>>>> [rebase]
         email: '',
         password: ''
       };
@@ -24,33 +29,40 @@ class Login extends React.Component {
       this.signUpButton = this.signUpButton.bind(this);
     }
 
+    componentWillMount() {
+      console.log('before login', this.state.userid);
+
+    }
+
     handleLoginInput (e) {
       const name = e.target.name;
       const value = e.target.value;
       this.setState({[name]: value})
     }
+
     
     loginButton (e) {
       e.preventDefault();
       const email = this.state.email;
       const password = this.state.password;
+      let uid = '';
       
       console.log('Im logging in', this.state.email, this.state.password);
 
-      // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-      //   .then(function() {
-      //     // Existing and future Auth states are now persisted in the current
-      //     // session only. Closing the window would clear any existing state even
-      //     // if a user forgets to sign out.
-      //     // ...
-      //     // New sign-in will be persisted with session persistence.
-      //     return firebase.auth().signInWithEmailAndPassword(email, password);
-      //   })
-      //   .catch(function(error) {
-      //     // Handle Errors here.
-      //     var errorCode = error.code;
-      //     var errorMessage = error.message;
-      //   });
+      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+        .then(function() {
+          // Existing and future Auth states are now persisted in the current
+          // session only. Closing the window would clear any existing state even
+          // if a user forgets to sign out.
+          // ...
+          // New sign-in will be persisted with session persistence.
+          // firebase.auth().signInWithEmailAndPassword(email, password);
+        })
+        .catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+        });
       
       firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
         // Handle Errors here.
@@ -59,25 +71,21 @@ class Login extends React.Component {
         console.log('Login Error!', errorCode, errorMessage)
       }).then((result) => {
         console.log('im in login: ', result);
-        console.log('im in login2: ', result.user);
+        console.log('i logged in', JSON.parse(Object.values(window.sessionStorage)).uid)
+        // this.setState({
+        //   userid: JSON.parse(Object.values(window.sessionStorage)).uid
+        // })
         this.props.checkLogin(true);
         // const user = result.user;
         // this.setState({
           //   user
           // });
         });
-
-      firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-          // User is signed in.
-          console.log(user, 'is logged in')
-        } else {
-          // No user is signed in.
-        }
-      });
+        console.log(this.state.userid)
         
       axios.post('/api/login', {
         email: this.state.email
+        // uid: uid
       }).then(response => {
           console.log('getting username back', response.data)
           this.props.setUsername(response.data);
@@ -116,7 +124,7 @@ class Login extends React.Component {
             <input type="password" className="form-control" id="inputPassword" placeholder="Password" name="password" value={this.state.password} onChange={this.handleLoginInput}/>
           </div>
         </div>
-        <div className="form-group">
+        {/* <div className="form-group">
           <div className="col-sm-offset-2 col-sm-10">
             <div className="checkbox">
               <label>
@@ -124,14 +132,19 @@ class Login extends React.Component {
               </label>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="form-group">
           <div className="col-sm-offset-2 col-sm-10">
             <button type="submit" className="btn btn-danger" onSubmit={() => {this.props.checkLogin(true)}}>Login</button>
           </div>
         </div>
       </form>
+<<<<<<< HEAD
       <button type="click" className="btn btn-danger" onClick={() => this.props.checkSignup()}>Signup</button>
+=======
+      {this.props.isLoggedIn && <Homepage username={this.state.username}/>}
+      {this.state.needSignUp && <Signup   />}
+>>>>>>> [rebase]
     </div>
     </Router>
     ) 
