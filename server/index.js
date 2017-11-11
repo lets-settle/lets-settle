@@ -13,9 +13,10 @@ app.use(express.static(__dirname + '/../client/dist'), bodyParser());
 app.use('/api', routes)
 
 io.on('connection', (client)=>{
-  client.on('randomNumber', function(data){
-    client.emit('heardRandomNumber', {'received': data});
-    client.broadcast.emit('heardRandomNumber', {'received': data});
+  client.on('aSuggestion', function(data){
+    console.log('SOCKETTTT', data);
+    client.emit('showSuggestion', {'received': data});
+    client.broadcast.emit('showSuggestion', {'received': data});
   });
   client.on('disconnect', () => console.log('disconnected'))
 })

@@ -7,29 +7,32 @@ class YelpListEntry extends React.Component {
     super(props);
     
     this.state = {
-      color: true,
+      change: false,
       suggestion: ''
     };
 
-    this.sendSuggestion = this.sendSuggestion.bind(this);
+    // this.sendSuggestion = this.sendSuggestion.bind(this);
   }
 
-  sendSuggestion() {
-    this.setState({
-      suggestion: this.props.suggestion.name
-    }, function() {
-      console.log('send suggestionnnnn', this.state.suggestion);
-    });
-  }
+  // sendSuggestion() {
+  //   this.setState({
+  //     suggestion: this.props.suggestion.name,
+  //     change: true
+  //   }, function() {
+  //     console.log('send suggestionnnnn', this.state.suggestion);
+  //   });
+
+    // socket.emit('', this.state.suggestion)
+  // }
 
   render() {
 
     return (
     <div>
-     <img src ={this.props.suggestion.image_url} className="rounded img-fluid img-thumbnail"/> 
-     <h3><a href={this.props.suggestion.url} target="_blank">{this.props.suggestion.name}</a></h3> 
-     <button onClick={this.sendSuggestion}>Suggest!</button>
-     <Result suggestion={this.state.suggestion}/>
+     <img src ={this.props.resturant.image_url} className="rounded img-fluid img-thumbnail"/> 
+     <h3><a href={this.props.resturant.url} target="_blank">{this.props.resturant.name}</a></h3> 
+     <button onClick={() => {this.props.sendSuggestion(this.props.resturant.name)}}>Suggest!</button>
+     {/* {this.state.change ? <Result suggestion={this.state.suggestion}/> : null} */}
     </div>
     ) 
   }

@@ -82,8 +82,8 @@ render() {
           </div>
         </form>
   
-        {this.state.resturants.map( suggestion => 
-          (<YelpListEntry suggestion={suggestion}/>)
+        {this.state.resturants.map( resturant => 
+          (<YelpListEntry resturant={resturant} sendSuggestion={this.props.sendSuggestion}/>)
         )}
   
       </div>

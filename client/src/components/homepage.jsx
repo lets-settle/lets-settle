@@ -4,6 +4,7 @@ import App from './App.jsx';
 import Solo from './Solo.jsx';
 import Login from './Login.jsx';
 import CreateGroup from './CreateGroup.jsx';
+import Result from './result'
 const $ = require('jquery');
 import {Button, ButtonToolbar,Navbar,Nav,NavItem,NavDropdown,MenuItem } from 'react-bootstrap';
 import socketIOClient from "socket.io-client";
@@ -11,38 +12,52 @@ import firebase, {auth} from '../../../fireconfig.js';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 
-
-
+//   const endpoint = "http://127.0.0.1:1128";
+const socket = socketIOClient("http://127.0.0.1:1128");
 
 class Homepage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-        showSolo: false,
-        showFriends: false,
-        isHidden: false,
-        createGroup: false
+      showSolo: false,
+      showFriends: false,
+      isHidden: false,
+      createGroup: false,
+      suggestion: '',
+      showResult: false,
+      userResturants: []
     };
 
     this.onFriendsClick = this.onFriendsClick.bind(this)
     this.onSoloClick = this.onSoloClick.bind(this)
     this.onCreateGroupClick = this.onCreateGroupClick.bind(this)
     this.onLogoutClick = this.onLogoutClick.bind(this)
+    this.sendSuggestion = this.sendSuggestion.bind(this)
+    // this.selectedResturant = this.selectedResturant.bind(this)
     }
 
-    componentDidMount() {
-        const endpoint = "http://127.0.0.1:1128";
-        const socket = socketIOClient("http://127.0.0.1:1128");
-        
-        socket.emit('randomNumber', {number: Math.random()});
-        socket.on('heardRandomNumber', function(data){
-            console.log('data', data);
+    componentWillMount() {      
+      socket.on('showSuggestion', data => {
+          console.log('dataaaaaaaaSOCKET', data);
+          console.log('stateeeee', this.state);
+          let rest = this.state.userResturants.concat([data]);
+          this.setState({
+            userResturants: rest
         })
+      })
     }
+
+    // selectedResturant(data) {
+    //     this.setState({
+    //         userResturants: this.state.userResturants.push(data)
+    //     }, function() {
+    //         console.log('selectedResturanttttt', this.state.userResturants);
+    //       });
+    // }
 
     handleEvent(){
-        this.state.socket.emit
+      this.state.socket.emit
     }
 
     onFriendsClick (e) {
@@ -50,7 +65,9 @@ class Homepage extends React.Component {
         console.log('friends was clicked')
         this.setState({
             showSolo: false,
-            showFriends: true
+            showFriends: true,
+            createGroup: false,
+            showResult: false
         });
       }
     onSoloClick (e) {
@@ -58,30 +75,47 @@ class Homepage extends React.Component {
         console.log('solo was clicked')
         this.setState({
             showSolo: true,
-            showFriends: false
+            showFriends: false,
+            createGroup: false,
+            showResult: false
         });
     }
 
     onCreateGroupClick() {
-        console.log('create was clicked creategroup', this.state.createGroup, this.state.showSolo, this.state.showFriends)
-        this.setState({
-            createGroup: true,
-            showSolo: false,
-            showFriends: false
-        });
+      console.log('create was clicked creategroup', this.state.createGroup, this.state.showSolo, this.state.showFriends)
+      this.setState({
+          createGroup: true,
+          showSolo: false,
+          showFriends: false,
+          showResult: false
+      });
     }
 
     onLogoutClick() {
+      auth.signOut().then(function() {
+        // Sign-out successful.
         this.props.checkLogin(false);
         console.log('is it logged in?:', this.props.isLoggedIn)
-        firebase.auth().signOut().then(function() {
-            // Sign-out successful.
-
-        
-           }).catch(function(error) {
-            // An error happened.
-           });
+        // Window.localStorage.removeItem(Object.keys(window.sessionStorage)[0])
+        }).catch(function(error) {
+        // An error happened.
+        });
     }
+
+    sendSuggestion(restname) {
+        this.setState({
+          suggestion: restname,
+          showResult: true,
+          showSolo: false,
+          showFriends: false,
+          createGroup: false
+        }, function() {
+          console.log('send suggestionnnnn', this.state.suggestion);
+          socket.emit('aSuggestion', this.state.suggestion);
+        });
+    }
+
+
 
   render() {
     return (
@@ -106,16 +140,22 @@ class Homepage extends React.Component {
         <img id ='title' src={require('../../dist/images/logo.png')} />
 
         {(!this.state.showSolo && !this.state.showFriends && !this.state.createGroup) && <ButtonToolbar>
-            <Button bsStyle="danger" bsSize="large" onClick = {this.onSoloClick}><Link to='/solo'>Solo</Link></Button>
-            <Button bsStyle="danger" bsSize="large" onClick = {this.onFriendsClick}><Link to='/friends'>Friends</Link></Button>
+            <Button bsStyle="danger" bsSize="large" onClick = {this.onSoloClick}>Solo</Button>
+            <Button bsStyle="danger" bsSize="large" onClick = {this.onFriendsClick}>Friends</Button>
         </ButtonToolbar>}
 
-        {this.state.createGroup && <CreateGroup setUsername = {this.props.setUsername}/>}
-    
-        {/* <Route path='/' component={App}/> */}
+
+{/* 
         <Route path='/solo' component={Solo}/>
-        <Route path='/friends' component={YelpList}/>
-        <Route path='/createGroup' component={CreateGroup}/>
+        <Route path='/friends' component={YelpList}/> */}
+
+        {this.state.createGroup ? <CreateGroup setUsername = {this.props.setUsername} username = {this.props.username}/> : ''}
+        {this.state.showSolo ? <Solo username = {this.props.username}/> : ''}
+        {this.state.showFriends ? <YelpList username = {this.props.username} sendSuggestion = {this.sendSuggestion}/> : '' }
+        {this.state.showResult ? <Result suggestion={this.state.suggestion} userResturants={this.state.userResturants}/> : null}
+
+        {/* <Route path='/' component={App}/> */}
+        {/* <Route path='/createGroup' component={CreateGroup}/> */}
     </div>
     </Router>
     ) 
