@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
-
+import Result from './Result.jsx';
 
 class YelpListEntry extends React.Component {
   constructor(props) {
@@ -11,31 +11,32 @@ class YelpListEntry extends React.Component {
       suggestion: ''
     };
 
-    this.changeColor = this.changeColor.bind(this);
-    this.suggestionSelected = this.suggestionSelected.bind(this);
+    this.sendSuggestion = this.sendSuggestion.bind(this);
   }
 
-  changeColor() {
+  sendSuggestion() {
     this.setState({
-      color: !this.state.color
-    })
-  };
-
-  suggestionSelected(e) {
-    this.setState({
-      suggestion: e.target.value
-    })
-    console.log('SUGGESTIONNN', this.state.suggestion);
+      suggestion: this.props.suggestion.name
+    }, function() {
+      console.log('send suggestionnnnn', this.state.suggestion);
+    });
   }
 
   render() {
-    let bgColor = this.state.color ? "white" : "green"
+
     return (
-    <div style={{backgroundColor: bgColor}} value={this.state.suggestion}  onClick={this.changeColor}>
-     {this.props.suggestion}
+    <div>
+     <img src ={this.props.suggestion.image_url} className="rounded img-fluid img-thumbnail"/> 
+     <h3><a href={this.props.suggestion.url} target="_blank">{this.props.suggestion.name}</a></h3> 
+     <button onClick={this.sendSuggestion}>Suggest!</button>
+     <Result suggestion={this.state.suggestion}/>
     </div>
     ) 
   }
 }
 
 export default YelpListEntry;
+
+//     let bgColor = this.state.color ? "white" : "green"
+// style={{backgroundColor: bgColor}} value={this.state.suggestion}  onClick={this.changeColor}
+     /* {this.props.suggestion} */

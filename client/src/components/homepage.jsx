@@ -111,7 +111,7 @@ class Homepage extends React.Component {
             <Button bsStyle="danger" bsSize="large" onClick = {this.onFriendsClick}><Link to='/friends'>Friends</Link></Button>
         </ButtonToolbar>}
 
-        {this.state.createGroup && <CreateGroup setUsername = {this.props.setUsername}/>}
+        {this.state.createGroup && <CreateGroup setUsername = {this.props.setUsername} username={this.props.username}/>}
     
         {/* <Route path='/' component={App}/> */}
         <Route path='/solo' component={Solo}/>
