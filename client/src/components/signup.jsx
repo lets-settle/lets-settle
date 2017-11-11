@@ -4,8 +4,6 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import firebase, {auth} from '../../../fireconfig.js';
 import axios from 'axios';
 
-// const app = firebase.initializeApp(config);
-
 class Signup extends React.Component {
   constructor(props) {
     super(props);

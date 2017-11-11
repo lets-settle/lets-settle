@@ -5,7 +5,6 @@ import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
 import firebase, {auth} from '../../../fireconfig.js';
 import axios from 'axios';
 
-
 class Login extends React.Component {
   constructor(props) {
     super(props);
