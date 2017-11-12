@@ -24,6 +24,7 @@ class Login extends React.Component {
       auth.onAuthStateChanged((user) => {
         if(user) {
           console.log('authStateChange', user.email);
+          this.props.history.push("homepage/decisions");
         } else {
           console.log('not logged in')
         }

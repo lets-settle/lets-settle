@@ -33,6 +33,7 @@ class YelpListEntry extends React.Component {
      <h3><a href={this.props.resturant.url} target="_blank">{this.props.resturant.name}</a></h3> 
      <button onClick={() => {this.props.sendSuggestion(this.props.resturant.name)}}>Suggest!</button>
      {/* {this.state.change ? <Result suggestion={this.state.suggestion}/> : null} */}
+     <Route exact path="/homepage/friends/results" render = {() => <Results {...this.getComponentProps()}/>}/>
     </div>
     ) 
   }
