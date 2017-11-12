@@ -4,7 +4,6 @@ import Homepage from './Homepage.jsx';
 import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
 import firebase, {auth} from '../../../fireconfig.js';
 import axios from 'axios';
-import {browserHistory} from 'react-router-dom';
 import {withRouter} from "react-router-dom";
 
 class Login extends React.Component {
@@ -124,14 +123,12 @@ class Login extends React.Component {
         </div>
         <div className="form-group">
           <div className="col-sm-offset-2 col-sm-10">
-            {/* <Link to ='/homepage/decisions'> */}
               <button 
                 type="submit" 
                 className="btn btn-danger" 
                 onSubmit={() => {this.props.checkLogin(true)}}>
                 Login
               </button>
-            {/* </Link> */}
           </div>
         </div>
       </form>
