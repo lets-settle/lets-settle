@@ -18,8 +18,7 @@ class Signup extends React.Component {
         emailValid: false,
         passwordValid: false,
         formValid: false,
-        uid: '',
-        isLoggedIn: false
+        uid: ''
       }
 
       this.handleUserInput = this.handleUserInput.bind(this);
@@ -177,7 +176,6 @@ class Signup extends React.Component {
           </div>
         </div>
       </form>
-      {/* {this.state.isLoggedIn && <Homepage username={this.state.username}/>} */}
     </div>
     ) 
   }

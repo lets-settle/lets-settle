@@ -4,6 +4,8 @@ import YelpListEntry from './YelpListEntry.jsx';
 import CreateGroup from './CreateGroup.jsx';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 const axios = require('axios');
+import socketIOClient from "socket.io-client";
+const socket = socketIOClient("http://127.0.0.1:1128");
 
 class YelpList extends React.Component {
   constructor(props) {
@@ -11,12 +13,26 @@ class YelpList extends React.Component {
   
     this.state = {
       resturants : [],
-      groups: []
+      groups: [],
+      suggestion: '',
+      showResult: false,
+      userResturants: []
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.sendSuggestion = this.sendSuggestion.bind(this)
 
     };
+    componentDidMount() {
+      socket.on('showSuggestion', data => {
+            console.log('dataaaaaaaaSOCKET', data);
+            console.log('stateeeee', this.state);
+            let rest = this.state.userResturants.concat([data]);
+            this.setState({
+              userResturants: rest
+     })
+   })
+   }
 
     componentWillMount() {
       console.log('mounttttt', this.props.username)
@@ -57,7 +73,16 @@ class YelpList extends React.Component {
           console.log(err)
         })  
     };
+  sendSuggestion(restname) {
+    this.setState({
+      suggestion: restname,
+      showResult: true
 
+    }, function() {
+      console.log('send suggestionnnnn', this.state.suggestion);
+      socket.emit('aSuggestion', this.state.suggestion);
+    });
+  }
 render() {
       return (
       <div>
