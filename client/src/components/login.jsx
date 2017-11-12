@@ -35,6 +35,7 @@ class Login extends React.Component {
     componentWillMount() {
       auth.onAuthStateChanged((user) => {
         if(user) {
+<<<<<<< HEAD
           console.log('authStateChange', user.email);
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -76,6 +77,12 @@ class Login extends React.Component {
 =======
           // this.props.history.push("homepage/decisions");
 >>>>>>> [rebase]
+>>>>>>> [rebase]
+=======
+          console.log('authStateChange', user.uid);
+          // if (user.uid === JSON.parse(Object.values(window.sessionStorage)).uid) {
+          //   this.props.history.push("homepage/decisions");
+          // }
 >>>>>>> [rebase]
         } else {
           console.log('not logged in')
@@ -125,7 +132,7 @@ class Login extends React.Component {
 >>>>>>> [rebase]
       auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
         .then(function() {
-          auth.signInWithEmailAndPassword(email, password);
+          // firebase.auth().signInWithEmailAndPassword(email, password);
         })
         .catch(function(error) {
           var errorCode = error.code;
@@ -218,7 +225,7 @@ class Login extends React.Component {
         <button 
           type="click" 
           className="btn btn-danger">
-          Signup
+          Singup
         </button>
       </Link>
     </div>
