@@ -6,9 +6,6 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 
 
-let groupname = '';
-module.exports.groupname = groupname;
-
 class Homepage extends React.Component {
   constructor(props) {
     super(props);
@@ -62,8 +59,7 @@ class Homepage extends React.Component {
           showSolo: false,
           showFriends: false,
           createGroup: false
-        }, function() {
-          console.log('HOMEPAGEE', module.exports.groupname);  
+        }, function() { 
           console.log('send suggestionnnnn', this.state.suggestion);
           socket.emit('aSuggestion', this.state.suggestion);
         });
