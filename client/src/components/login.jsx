@@ -4,6 +4,8 @@ import Homepage from './Homepage.jsx';
 import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
 import firebase, {auth} from '../../../fireconfig.js';
 import axios from 'axios';
+import {browserHistory} from 'react-router-dom';
+import {withRouter} from "react-router-dom";
 
 class Login extends React.Component {
   constructor(props) {
@@ -17,18 +19,17 @@ class Login extends React.Component {
 
       this.handleLoginInput = this.handleLoginInput.bind(this);
       this.loginButton = this.loginButton.bind(this);
-      this.signUpButton = this.signUpButton.bind(this);
     }
 
-    componentWillMount() {
-      auth.onAuthStateChanged((user) => {
-        if(user) {
-          console.log('authStateChange', user.email);
-        } else {
-          console.log('not logged in')
-        }
-      })
-    }
+    // componentWillMount() {
+    //   auth.onAuthStateChanged((user) => {
+    //     if(user) {
+    //       console.log('authStateChange', user.email);
+    //     } else {
+    //       console.log('not logged in')
+    //     }
+    //   })
+    // }
 
     handleLoginInput (e) {
       const name = e.target.name;
@@ -36,7 +37,6 @@ class Login extends React.Component {
       this.setState({[name]: value})
     }
 
-    
     loginButton (e) {
       e.preventDefault();
       const email = this.state.email;
@@ -63,6 +63,7 @@ class Login extends React.Component {
         //   userid: JSON.parse(Object.values(window.sessionStorage)).uid
         // })
         this.props.checkLogin(true);
+
         // const user = result.user;
         // this.setState({
           //   user
@@ -77,6 +78,7 @@ class Login extends React.Component {
       }).then(response => {
           console.log('getting username back', response.data)
           this.props.setUsername(response.data)
+          this.props.history.push("homepage/decisions");
         }, err => {
           console.log('cant get', err)
         })
@@ -85,14 +87,6 @@ class Login extends React.Component {
         email: '',
         password: ''
       });
-    };
-    
-    signUpButton(e) {
-      e.preventDefault();
-
-      // this.setState({
-      //   needSignUp: true
-      // })
     };
   
   render() {
@@ -130,14 +124,14 @@ class Login extends React.Component {
         </div>
         <div className="form-group">
           <div className="col-sm-offset-2 col-sm-10">
-            <Link to ='/homepage/decisions'>
+            {/* <Link to ='/homepage/decisions'> */}
               <button 
                 type="submit" 
                 className="btn btn-danger" 
                 onSubmit={() => {this.props.checkLogin(true)}}>
                 Login
               </button>
-            </Link>
+            {/* </Link> */}
           </div>
         </div>
       </form>
@@ -153,4 +147,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);

@@ -24,7 +24,7 @@ class App extends React.Component {
     this.state = { 
       isLoggedIn: false,
       needSignUp: false,
-      username: '',
+      username: ''
     }
     this.checkLogin = this.checkLogin.bind(this)
     this.checkSignup = this.checkSignup.bind(this)

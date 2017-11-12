@@ -60,8 +60,6 @@ class CreateGroup extends React.Component {
     })
 
     alert('GROUP CREATED')
-    
-
   };
 
     
@@ -72,13 +70,11 @@ class CreateGroup extends React.Component {
       <form className="form-horizontal">
         <div className="input-group">
           <input ref="group_name" type="text" placeholder="New Group"/>
-
             <label htmlFor="inputName" className="col-sm-2 control-label">Add Friends: </label>
             <input type="text" className="col-sm-2 control-label" value={this.state.friend} onChange={this.addFriend}/>
             <span className="input-group-btn">
               <button className="btn btn-default" type="button" onClick={this.pushFriend}>Add!</button>
             </span> 
- 
         </div>
       </form>
       <div>
