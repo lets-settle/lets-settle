@@ -118,7 +118,7 @@ render() {
         </form>
   
         {this.state.resturants.map( resturant => 
-          (<YelpListEntry resturant={resturant} sendSuggestion={this.props.sendSuggestion}/>)
+          (<YelpListEntry resturant={resturant} sendSuggestion={this.sendSuggestion}/>)
         )}
         <Route exact path="/homepage/friends/result" render = {() => <Results userResturants = {this.state.userResturants}/>}/>
       </div>
