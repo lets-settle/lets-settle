@@ -1,21 +1,12 @@
 import React from 'react';
 import Result from './Result.jsx';
-import YelpListEntry from './YelpListEntry.jsx';
+// import YelpListEntry from './YelpListEntry.jsx';
 import CreateGroup from './CreateGroup.jsx';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 const axios = require('axios');
 import socketIOClient from "socket.io-client";
 const socket = socketIOClient("http://127.0.0.1:1128");
-<<<<<<< HEAD
-<<<<<<< HEAD
 import {withRouter} from "react-router-dom";
-=======
-=======
-let homepage = require('./homepage');
->>>>>>> Add yelplist groupSelect logic and rebase
->>>>>>> Add yelplist groupSelect logic and rebase
-=======
->>>>>>> rebase
 
 class YelpList extends React.Component {
   constructor(props) {
@@ -24,15 +15,13 @@ class YelpList extends React.Component {
     this.state = {
       resturants : [],
       groups: [],
-      suggestion: '',
       showResult: false,
       userResturants: []
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.sendSuggestion = this.sendSuggestion.bind(this)
-
     };
+
     componentDidMount() {
       socket.on('showSuggestion', data => {
         console.log('dataaaaaaaaSOCKET', data);
@@ -41,7 +30,7 @@ class YelpList extends React.Component {
         this.setState({
           userResturants: rest
           })
-        this.props.history.push("homepage/yelplist/result");
+        // this.props.history.push("homepage/yelplist/result");
    })
    }
 
@@ -84,16 +73,7 @@ class YelpList extends React.Component {
           console.log(err)
         })  
     };
-  sendSuggestion(restname) {
-    this.setState({
-      suggestion: restname,
-      showResult: true
 
-    }, function() {
-      console.log('send suggestionnnnn', this.state.suggestion);
-      socket.emit('aSuggestion', this.state.suggestion);
-    });
-  }
 render() {
       return (
       <div>
@@ -118,12 +98,25 @@ render() {
         </form>
   
         {this.state.resturants.map( resturant => 
-          (<YelpListEntry resturant={resturant} sendSuggestion={this.sendSuggestion}/>)
+          (<div>
+            <img src ={resturant.image_url} className="rounded img-fluid img-thumbnail"/> 
+            <h3><a href={resturant.url} target="_blank">{resturant.name}</a></h3>
+            <Link to = '/homepage/result'>
+              <button onClick={() => this.props.sendSuggestion(resturant.name)}>
+                Suggestion!
+              </button>
+            </Link> 
+          </div>)
         )}
-        <Route exact path="/homepage/friends/result" render = {() => <Results userResturants = {this.state.userResturants}/>}/>
+      
       </div>
       ) 
     }
   }
   
   export default YelpList;
+
+
+  // (<YelpListEntry resturant={resturant} sendSuggestion={this.sendSuggestion}/>)
+          /* <Route exact path="/homepage/friends/result" render = {() => <Result userResturants = {this.state.userResturants}/>}/> */
+            // <button onClick={() => {this.sendSuggestion(resturant.name)}}>Suggest!</button>

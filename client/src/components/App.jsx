@@ -8,6 +8,7 @@ import Signup from './Signup.jsx';
 import Solo from './Solo.jsx';
 import YelpList from './YelpList.jsx';
 import Homepage from './Homepage.jsx';
+import Result from './result';
 import axios from 'axios';
 import bodyParser from 'body-parser';
 import {BrowserRouter as Router, Link} from 'react-router-dom';
@@ -24,11 +25,14 @@ class App extends React.Component {
     this.state = { 
       isLoggedIn: false,
       needSignUp: false,
-      username: ''
+      username: '',
+      suggestion: ''      
     }
     this.checkLogin = this.checkLogin.bind(this)
     this.checkSignup = this.checkSignup.bind(this)
     this.setUsername = this.setUsername.bind(this)
+    this.sendSuggestion = this.sendSuggestion.bind(this)
+    
   }
 
  checkLogin(status) {
@@ -50,6 +54,16 @@ class App extends React.Component {
       username: name
     })
   };
+  
+    sendSuggestion(restname) {
+      console.log('INSIDE SENDSEGGESTION');
+      this.setState({
+        suggestion: restname
+      }, function() {
+        console.log('send suggestionnnnn', this.state.suggestion);
+        socket.emit('aSuggestion', this.state.suggestion);
+      });   
+    };
 
   getComponentProps(){
     return {
@@ -57,9 +71,10 @@ class App extends React.Component {
       checkSignup: this.checkSignup,
       isLoggedIn: this.state.isLoggedIn,
       setUsername: this.setUsername,
-      username: this.state.username
+      username: this.state.username,
+      sendSuggestion: this.sendSuggestion
     }
-  }
+  };
 
   render () {
     return (
@@ -72,6 +87,8 @@ class App extends React.Component {
         <Route exact path="/homepage/creategroup" render = {() => <CreateGroup {...this.getComponentProps()}/>}/>
         <Route exact path="/homepage/solo" render = {() => <Solo {...this.getComponentProps()}/>}/>
         <Route exact path="/homepage/friends" render = {() => <YelpList {...this.getComponentProps()}/>}/>
+        <Route exact path="/homepage/result" render = {() => <Result {...this.getComponentProps()}/>}/>}
+
     </div>
     </Router>
     )
