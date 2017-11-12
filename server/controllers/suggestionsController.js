@@ -2,8 +2,10 @@ var yelpRequest = require('./helpers.js')
 var model = require('../../database/models/model.js')
 var db = require('../../database/index.js')
 var key = require('../config.js')
-var changeGroup = require('../index');
+//var changeGroup = require('../index');
 
+//console.log("this is changeGroup updated!! +++++++======", changeGroup.changeGroup)
+var groupname = "";
   
   module.exports.signupHandler = function (req, res) {
     var name = req.body.name;
@@ -109,10 +111,13 @@ var changeGroup = require('../index');
   }
 
   module.exports.selectGroup = function(req, res) {
-    changeGroup(req.body.group_name)
+    
+    groupname = req.body.group_name
     res.send("group selected!")
+    
   }
 
+  module.exports.groupname = groupname;
 
 
 

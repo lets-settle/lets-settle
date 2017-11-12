@@ -18,6 +18,9 @@ import { LinkContainer } from 'react-router-bootstrap';
 import socketIOClient from "socket.io-client";
 const socket = socketIOClient("http://127.0.0.1:1128");
 
+// const socket = io(`/${group}`);
+// console.log('THIS IS GROUP', group);
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -26,13 +29,16 @@ class App extends React.Component {
       needSignUp: false,
       username: '',
       suggestion: '',
-      userResturants: []     
+      userResturants: [],
+      groupRoom: '',
+      room: ''     
     }
     this.checkLogin = this.checkLogin.bind(this)
     this.checkSignup = this.checkSignup.bind(this)
     this.setUsername = this.setUsername.bind(this)
     this.sendSuggestion = this.sendSuggestion.bind(this)
-    
+    this.selectGroup = this.selectGroup.bind(this);
+
   }
 
  checkLogin(status) {
@@ -56,25 +62,65 @@ class App extends React.Component {
   };
   
     sendSuggestion(rest) {
-      console.log('INSIDE SENDSEGGESTION');
       this.setState({
         suggestion : rest
       }, function() {
         console.log('suggestionnnnn OBJECT', this.state.suggestion);
         socket.emit('aSuggestion', this.state.suggestion);
-      });   
+      });  
+      
+      // socket.emit('aSuggestion', this.state.suggestion);
+      
     };
+    
+    selectGroup(e) {
+      this.setState({
+        room: e.target.value
+      })
+      
+      //room = this.state.selectedGroup;
+      
+      // axios.post('/api/selectGroup',{
+      //   group_name: this.state.selectedGroup})
+      //   .then(response => {
+      //     console.log(response);
+      //   }).catch(err => {
+      //         console.log(err)
+      //       })
+    }
 
     componentDidMount() {
       socket.on('showSuggestion', data => {
-        console.log('dataaaaaaaaSOCKET', data);
+        console.log('dataaaaaaaaSOCKET', data.received);
         console.log('stateeeee', this.state);
-        let rest = this.state.userResturants.concat(data);
+        let rest = this.state.userResturants.concat([data.received]);
         this.setState({
           userResturants: rest
           })
-   })
+    })
    }
+
+    // componentWillMount() {
+    //   // socket.on('showSuggestion', function(data) {
+    //   //   console.log('INCOME MESSAGE:', data);
+    //   // })
+    //   // socket.on(this.state.room, data => {
+    //   //   console.log('dataaaaaaaaSOCKET', data);
+    //   //   console.log('stateeeee', this.state);
+    //   //   let rest = this.state.userResturants.concat(data);
+    //   //   this.setState({
+    //   //     userResturants: rest
+    //   //     })
+    //   // })
+    //   socket.on('showSuggestion', data => {
+    //     console.log('dataaaaaaaaSOCKET', data);
+    //   })
+
+    //   let rest = this.state.userResturants.concat(data);
+    //   this.setState({
+    //     userResturants: rest
+    //     })
+    // }
 
   getComponentProps(){
     return {
@@ -85,7 +131,8 @@ class App extends React.Component {
       username: this.state.username,
       sendSuggestion: this.sendSuggestion,
       suggestion: this.state.suggestion,
-      userResturants: this.state.userResturants
+      userResturants: this.state.userResturants,
+      selectGroup: this.selectGroup
     }
   };
 
