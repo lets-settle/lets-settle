@@ -89,9 +89,9 @@ class Homepage extends React.Component {
     onLogoutClick() {
       auth.signOut().then(function() {
         // Sign-out successful.
-        this.props.checkLogin(false);
-        window.sessionStorage.clear()
-        console.log('is it logged in?:', this.props.isLoggedIn)
+              this.props.checkLogin(false);
+              console.log('is it logged in?:', this.props.isLoggedIn)
+        // Window.localStorage.removeItem(Object.keys(window.sessionStorage)[0])
         }).catch(function(error) {
         // An error happened.
         console.log('there was an error logging out', error)

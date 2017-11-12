@@ -20,92 +20,16 @@ class Login extends React.Component {
       this.loginButton = this.loginButton.bind(this);
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> [rebase] refactor after rebase and fixing login/signup
-=======
-<<<<<<< HEAD
->>>>>>> [rebase]
-=======
->>>>>>> [rebase]
     componentWillMount() {
       auth.onAuthStateChanged((user) => {
         if(user) {
-<<<<<<< HEAD
           console.log('authStateChange', user.email);
-<<<<<<< HEAD
-<<<<<<< HEAD
           // this.props.history.push("homepage/decisions");
-=======
-=======
->>>>>>> [rebase]
-<<<<<<< HEAD
-          this.props.history.push("homepage/decisions");
-=======
-=======
-=======
->>>>>>> [rebase] refactor after rebase and fixing login/signup
-<<<<<<< HEAD
-=======
->>>>>>> [rebase]
-    // componentWillMount() {
-    //   auth.onAuthStateChanged((user) => {
-    //     if(user) {
-    //       console.log('authStateChange', user.email);
-    //     } else {
-    //       console.log('not logged in')
-    //     }
-    //   })
-    // }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    componentWillMount() {
-      auth.onAuthStateChanged((user) => {
-        if(user) {
-          console.log('authStateChange', user);
-          // this.props.checkLogin(true);
->>>>>>> [rebase]
->>>>>>> [rebase]
-<<<<<<< HEAD
->>>>>>> [rebase] refactor after rebase and fixing login/signup
-=======
-=======
-          // this.props.history.push("homepage/decisions");
->>>>>>> [rebase]
->>>>>>> [rebase]
-=======
-          console.log('authStateChange', user.uid);
-          // if (user.uid === JSON.parse(Object.values(window.sessionStorage)).uid) {
-          //   this.props.history.push("homepage/decisions");
-          // }
->>>>>>> [rebase]
         } else {
           console.log('not logged in')
         }
       })
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
->>>>>>> [rebase]
->>>>>>> [rebase]
-=======
->>>>>>> [rebase] refactor after rebase and fixing login/signup
-<<<<<<< HEAD
->>>>>>> [rebase] refactor after rebase and fixing login/signup
-=======
-=======
->>>>>>> [rebase]
->>>>>>> [rebase]
-=======
->>>>>>> [rebase]
 
     handleLoginInput (e) {
       const name = e.target.name;
@@ -117,6 +41,7 @@ class Login extends React.Component {
       e.preventDefault();
       const email = this.state.email;
       const password = this.state.password;
+<<<<<<< HEAD
 
 <<<<<<< HEAD
       // auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
@@ -130,9 +55,12 @@ class Login extends React.Component {
       
 =======
 >>>>>>> [rebase]
+=======
+      
+>>>>>>> [add] refactor after rebasing
       auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
         .then(function() {
-          // firebase.auth().signInWithEmailAndPassword(email, password);
+          return auth.signInWithEmailAndPassword(email, password);
         })
         .catch(function(error) {
           var errorCode = error.code;
@@ -157,8 +85,6 @@ class Login extends React.Component {
           //   user
           // });
         });
-        console.log(this.state.userid)
-        console.log(this.state.userid)
         
       axios.post('/api/login', {
         email: this.state.email
@@ -225,7 +151,7 @@ class Login extends React.Component {
         <button 
           type="click" 
           className="btn btn-danger">
-          Singup
+          Signup
         </button>
       </Link>
     </div>
