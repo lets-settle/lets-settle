@@ -144,9 +144,8 @@ class Login extends React.Component {
       <Link to = '/signup'>
         <button 
           type="click" 
-          className="btn btn-danger" 
-          onClick={() => this.props.checkSignup()}>
-          signup
+          className="btn btn-danger">
+          Singup
         </button>
       </Link>
     </div>
