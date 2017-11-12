@@ -6,6 +6,7 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 const axios = require('axios');
 import socketIOClient from "socket.io-client";
 const socket = socketIOClient("http://127.0.0.1:1128");
+import {withRouter} from "react-router-dom";
 
 class YelpList extends React.Component {
   constructor(props) {
@@ -25,12 +26,13 @@ class YelpList extends React.Component {
     };
     componentDidMount() {
       socket.on('showSuggestion', data => {
-            console.log('dataaaaaaaaSOCKET', data);
-            console.log('stateeeee', this.state);
-            let rest = this.state.userResturants.concat([data]);
-            this.setState({
-              userResturants: rest
-     })
+        console.log('dataaaaaaaaSOCKET', data);
+        console.log('stateeeee', this.state);
+        let rest = this.state.userResturants.concat([data]);
+        this.setState({
+          userResturants: rest
+          })
+        this.props.history.push("homepage/yelplist/result");
    })
    }
 
@@ -109,7 +111,7 @@ render() {
         {this.state.resturants.map( resturant => 
           (<YelpListEntry resturant={resturant} sendSuggestion={this.props.sendSuggestion}/>)
         )}
-  
+        <Route exact path="/homepage/friends/result" render = {() => <Results userResturants = {this.state.userResturants}/>}/>
       </div>
       ) 
     }
