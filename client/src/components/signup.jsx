@@ -3,6 +3,7 @@ import Homepage from './Homepage.jsx';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import firebase, {auth} from '../../../fireconfig.js';
 import axios from 'axios';
+import {withRouter} from "react-router-dom";
 
 class Signup extends React.Component {
   constructor(props) {
@@ -117,6 +118,7 @@ class Signup extends React.Component {
           // uid: this.state.uid
         }).then(response => {
           this.props.setUsername(this.state.username)
+          this.props.history.push("homepage/decisions");
             console.log('Submit User Info to Server/DB', response);
             console.log('after sending to server', this.props.username)
           }).catch(err => {
@@ -174,7 +176,7 @@ class Signup extends React.Component {
         </div>
         <div className="form-group">
           <div className="col-sm-offset-2 col-sm-10">
-            <Link to='/homepage/decisions'> <button type="submit" className="btn btn-danger" disabled={!this.state.formValid} onClick={this.signUpSubmit}>Sign Me Up!</button></Link>
+            <button type="submit" className="btn btn-danger" disabled={!this.state.formValid} onClick={this.signUpSubmit}>Sign Me Up!</button>
           </div>
         </div>
       </form>
@@ -183,4 +185,4 @@ class Signup extends React.Component {
   }
 }
 
-export default Signup;
+export default withRouter(Signup);
