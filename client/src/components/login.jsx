@@ -20,16 +20,65 @@ class Login extends React.Component {
       this.loginButton = this.loginButton.bind(this);
     }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> [rebase] refactor after rebase and fixing login/signup
     componentWillMount() {
       auth.onAuthStateChanged((user) => {
         if(user) {
           console.log('authStateChange', user.email);
+<<<<<<< HEAD
           // this.props.history.push("homepage/decisions");
+=======
+<<<<<<< HEAD
+          this.props.history.push("homepage/decisions");
+=======
+=======
+=======
+>>>>>>> [rebase] refactor after rebase and fixing login/signup
+<<<<<<< HEAD
+    // componentWillMount() {
+    //   auth.onAuthStateChanged((user) => {
+    //     if(user) {
+    //       console.log('authStateChange', user.email);
+=======
+    // componentWillMount() {
+    //   auth.onAuthStateChanged((user) => {
+    //     if(user) {
+    //       console.log('authStateChange', user);
+    //       // this.props.checkLogin(true);
+>>>>>>> [rebase] refactor after rebase and fixing login/signup
+    //     } else {
+    //       console.log('not logged in')
+    //     }
+    //   })
+    // }
+<<<<<<< HEAD
+=======
+    componentWillMount() {
+      auth.onAuthStateChanged((user) => {
+        if(user) {
+          console.log('authStateChange', user);
+          // this.props.checkLogin(true);
+>>>>>>> [rebase]
+>>>>>>> [rebase]
+>>>>>>> [rebase] refactor after rebase and fixing login/signup
         } else {
           console.log('not logged in')
         }
       })
     }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> [rebase]
+>>>>>>> [rebase]
+=======
+>>>>>>> [rebase] refactor after rebase and fixing login/signup
+>>>>>>> [rebase] refactor after rebase and fixing login/signup
 
     handleLoginInput (e) {
       const name = e.target.name;
@@ -51,6 +100,15 @@ class Login extends React.Component {
       //     var errorMessage = error.message;
       //   });
       
+      auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
+        .then(function() {
+          return auth.signInWithEmailAndPassword(email, password);
+        })
+        .catch(function(error) {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+        });
+      
       auth.signInWithEmailAndPassword(email, password).catch(function(error) {
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -69,8 +127,6 @@ class Login extends React.Component {
           //   user
           // });
         });
-        console.log(this.state.userid)
-        console.log(this.state.userid)
         
       axios.post('/api/login', {
         email: this.state.email

@@ -12,6 +12,7 @@ class Homepage extends React.Component {
 
     this.onLogoutClick = this.onLogoutClick.bind(this)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     this.sendSuggestion = this.sendSuggestion.bind(this)
     // this.selectedResturant = this.selectedResturant.bind(this)
@@ -81,10 +82,11 @@ class Homepage extends React.Component {
       });
 >>>>>>> [rebase]
 >>>>>>> [rebase]
+=======
+>>>>>>> [rebase] refactor after rebase and fixing login/signup
     }
 
     onLogoutClick() {
-<<<<<<< HEAD
       auth.signOut().then(function() {
         // Sign-out successful.
               this.props.checkLogin(false);
@@ -96,6 +98,7 @@ class Homepage extends React.Component {
       });
     }
     
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
         auth.signOut().then(function() {
@@ -136,6 +139,8 @@ class Homepage extends React.Component {
 
 
 >>>>>>> [rebase]
+=======
+>>>>>>> [rebase] refactor after rebase and fixing login/signup
   render() {
     return (
       <div>
@@ -167,14 +172,17 @@ class Homepage extends React.Component {
           </Nav>
         </Navbar>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> [rebase] refactor after rebase and fixing login/signup
         {/* <Link to = '/'> */}
           {/* <div>
           <img 
           id ='title' 
           src={require('http://localhost:1128/logo.png')}/>
           </div> */}
-<<<<<<< HEAD
         {/* </Link> */} 
+<<<<<<< HEAD
 =======
         {/* </Link> */}
 
@@ -208,6 +216,8 @@ class Homepage extends React.Component {
         {/* <Route path='/createGroup' component={CreateGroup}/> */}
 >>>>>>> [rebase]
 >>>>>>> [rebase]
+=======
+>>>>>>> [rebase] refactor after rebase and fixing login/signup
     </div>
     ) 
   }

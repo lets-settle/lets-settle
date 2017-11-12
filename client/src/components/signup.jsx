@@ -18,8 +18,29 @@ class Signup extends React.Component {
         usernameValid: false,
         emailValid: false,
         passwordValid: false,
+<<<<<<< HEAD
         formValid: false
         // uid: ''
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+        formValid: false
+        // uid: ''
+=======
+<<<<<<< HEAD
+        formValid: false,
+        uid: ''
+=======
+        formValid: false
+        // uid: '',
+        // isLoggedIn: false
+>>>>>>> [rebase] refactor and checking if checkLogin function is being invoked upon form submission
+>>>>>>> [rebase] refactor and checking if checkLogin function is being invoked upon form submission
+=======
+        formValid: false,
+        uid: ''
+>>>>>>> [rebase] refactor after rebase and fixing login/signup
+>>>>>>> [rebase] refactor after rebase and fixing login/signup
       }
 
       this.handleUserInput = this.handleUserInput.bind(this);
