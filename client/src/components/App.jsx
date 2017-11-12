@@ -15,9 +15,8 @@ import {BrowserRouter as Router, Link} from 'react-router-dom';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import {Button, Redirect, ButtonToolbar,Navbar,Nav,NavItem,NavDropdown,MenuItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-
-
-
+import socketIOClient from "socket.io-client";
+const socket = socketIOClient("http://127.0.0.1:1128");
 
 class App extends React.Component {
   constructor(props) {
@@ -26,7 +25,8 @@ class App extends React.Component {
       isLoggedIn: false,
       needSignUp: false,
       username: '',
-      suggestion: ''      
+      suggestion: '',
+      userResturants: []     
     }
     this.checkLogin = this.checkLogin.bind(this)
     this.checkSignup = this.checkSignup.bind(this)
@@ -55,15 +55,26 @@ class App extends React.Component {
     })
   };
   
-    sendSuggestion(restname) {
+    sendSuggestion(rest) {
       console.log('INSIDE SENDSEGGESTION');
       this.setState({
-        suggestion: restname
+        suggestion : rest
       }, function() {
-        console.log('send suggestionnnnn', this.state.suggestion);
+        console.log('suggestionnnnn OBJECT', this.state.suggestion);
         socket.emit('aSuggestion', this.state.suggestion);
       });   
     };
+
+    componentDidMount() {
+      socket.on('showSuggestion', data => {
+        console.log('dataaaaaaaaSOCKET', data);
+        console.log('stateeeee', this.state);
+        let rest = this.state.userResturants.concat(data);
+        this.setState({
+          userResturants: rest
+          })
+   })
+   }
 
   getComponentProps(){
     return {
@@ -72,7 +83,9 @@ class App extends React.Component {
       isLoggedIn: this.state.isLoggedIn,
       setUsername: this.setUsername,
       username: this.state.username,
-      sendSuggestion: this.sendSuggestion
+      sendSuggestion: this.sendSuggestion,
+      suggestion: this.state.suggestion,
+      userResturants: this.state.userResturants
     }
   };
 

@@ -4,8 +4,6 @@ import Result from './Result.jsx';
 import CreateGroup from './CreateGroup.jsx';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 const axios = require('axios');
-import socketIOClient from "socket.io-client";
-const socket = socketIOClient("http://127.0.0.1:1128");
 import {withRouter} from "react-router-dom";
 
 class YelpList extends React.Component {
@@ -15,24 +13,11 @@ class YelpList extends React.Component {
     this.state = {
       resturants : [],
       groups: [],
-      showResult: false,
-      userResturants: []
+      showResult: false
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     };
-
-    componentDidMount() {
-      socket.on('showSuggestion', data => {
-        console.log('dataaaaaaaaSOCKET', data);
-        console.log('stateeeee', this.state);
-        let rest = this.state.userResturants.concat([data]);
-        this.setState({
-          userResturants: rest
-          })
-        // this.props.history.push("homepage/yelplist/result");
-   })
-   }
 
     componentWillMount() {
       console.log('mounttttt USERNAMEEEEEEEE', this.props.username)
@@ -102,7 +87,7 @@ render() {
             <img src ={resturant.image_url} className="rounded img-fluid img-thumbnail"/> 
             <h3><a href={resturant.url} target="_blank">{resturant.name}</a></h3>
             <Link to = '/homepage/result'>
-              <button onClick={() => this.props.sendSuggestion(resturant.name)}>
+              <button onClick={() => this.props.sendSuggestion(resturant)}>
                 Suggestion!
               </button>
             </Link> 
