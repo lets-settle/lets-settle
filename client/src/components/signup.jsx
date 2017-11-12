@@ -19,6 +19,7 @@ class Signup extends React.Component {
         emailValid: false,
         passwordValid: false,
 <<<<<<< HEAD
+<<<<<<< HEAD
         formValid: false
         // uid: ''
 =======
@@ -41,6 +42,10 @@ class Signup extends React.Component {
         uid: ''
 >>>>>>> [rebase] refactor after rebase and fixing login/signup
 >>>>>>> [rebase] refactor after rebase and fixing login/signup
+=======
+        formValid: false
+        // uid: ''
+>>>>>>> [rebase]
       }
 
       this.handleUserInput = this.handleUserInput.bind(this);
@@ -125,6 +130,17 @@ class Signup extends React.Component {
         var errorMessage = error.message;
         console.log('Sign Up Error!', errorCode, errorMessage);
       }).then((result) => {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> [rebase] refactor and checking if checkLogin function is being invoked upon form submission
+=======
+>>>>>>> [rebase]
+>>>>>>> [rebase]
         // console.log('sign up:', result.uid);
         this.props.checkLogin(true);
        

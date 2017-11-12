@@ -24,7 +24,11 @@ class Login extends React.Component {
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> [rebase] refactor after rebase and fixing login/signup
+=======
+<<<<<<< HEAD
+>>>>>>> [rebase]
     componentWillMount() {
       auth.onAuthStateChanged((user) => {
         if(user) {
@@ -39,22 +43,18 @@ class Login extends React.Component {
 =======
 >>>>>>> [rebase] refactor after rebase and fixing login/signup
 <<<<<<< HEAD
+=======
+>>>>>>> [rebase]
     // componentWillMount() {
     //   auth.onAuthStateChanged((user) => {
     //     if(user) {
     //       console.log('authStateChange', user.email);
-=======
-    // componentWillMount() {
-    //   auth.onAuthStateChanged((user) => {
-    //     if(user) {
-    //       console.log('authStateChange', user);
-    //       // this.props.checkLogin(true);
->>>>>>> [rebase] refactor after rebase and fixing login/signup
     //     } else {
     //       console.log('not logged in')
     //     }
     //   })
     // }
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
     componentWillMount() {
@@ -78,7 +78,12 @@ class Login extends React.Component {
 >>>>>>> [rebase]
 =======
 >>>>>>> [rebase] refactor after rebase and fixing login/signup
+<<<<<<< HEAD
 >>>>>>> [rebase] refactor after rebase and fixing login/signup
+=======
+=======
+>>>>>>> [rebase]
+>>>>>>> [rebase]
 
     handleLoginInput (e) {
       const name = e.target.name;
@@ -91,6 +96,7 @@ class Login extends React.Component {
       const email = this.state.email;
       const password = this.state.password;
 
+<<<<<<< HEAD
       // auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
       //   .then(function() {
       //     // firebase.auth().signInWithEmailAndPassword(email, password);
@@ -100,6 +106,8 @@ class Login extends React.Component {
       //     var errorMessage = error.message;
       //   });
       
+=======
+>>>>>>> [rebase]
       auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
         .then(function() {
           return auth.signInWithEmailAndPassword(email, password);
@@ -127,6 +135,8 @@ class Login extends React.Component {
           //   user
           // });
         });
+        console.log(this.state.userid)
+        console.log(this.state.userid)
         
       axios.post('/api/login', {
         email: this.state.email
@@ -182,8 +192,9 @@ class Login extends React.Component {
           <div className="col-sm-offset-2 col-sm-10">
               <button 
                 type="submit" 
-                className="btn btn-danger" 
-                onSubmit={() => {this.props.checkLogin(true)}}>
+                className="btn btn-danger"
+                onClick={() => {this.loginButton}}
+                /* onSubmit={() => {this.props.checkLogin(true)}}> */
                 Login
               </button>
           </div>
