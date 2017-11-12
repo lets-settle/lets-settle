@@ -17,8 +17,8 @@ class Signup extends React.Component {
         usernameValid: false,
         emailValid: false,
         passwordValid: false,
-        formValid: false,
-        uid: ''
+        formValid: false
+        // uid: ''
       }
 
       this.handleUserInput = this.handleUserInput.bind(this);
@@ -102,8 +102,9 @@ class Signup extends React.Component {
         var errorMessage = error.message;
         console.log('Sign Up Error!', errorCode, errorMessage);
       }).then((result) => {
-        console.log('sign up:', result.uid);
+        // console.log('sign up:', result.uid);
         this.props.checkLogin(true);
+       
         // this.setState({
         //   uid: result.uid
         // });
@@ -115,8 +116,9 @@ class Signup extends React.Component {
           email: this.state.email
           // uid: this.state.uid
         }).then(response => {
+          this.props.setUsername(this.state.username)
             console.log('Submit User Info to Server/DB', response);
-            console.log('after sending to server', this.state.username)
+            console.log('after sending to server', this.props.username)
           }).catch(err => {
             console.log('FAILED TO POST: ', err);
           })
