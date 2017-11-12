@@ -4,9 +4,9 @@ import YelpListEntry from './YelpListEntry.jsx';
 import CreateGroup from './CreateGroup.jsx';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 const axios = require('axios');
-<<<<<<< HEAD
 import socketIOClient from "socket.io-client";
 const socket = socketIOClient("http://127.0.0.1:1128");
+<<<<<<< HEAD
 <<<<<<< HEAD
 import {withRouter} from "react-router-dom";
 =======
@@ -14,6 +14,8 @@ import {withRouter} from "react-router-dom";
 let homepage = require('./homepage');
 >>>>>>> Add yelplist groupSelect logic and rebase
 >>>>>>> Add yelplist groupSelect logic and rebase
+=======
+>>>>>>> rebase
 
 class YelpList extends React.Component {
   constructor(props) {
@@ -22,7 +24,6 @@ class YelpList extends React.Component {
     this.state = {
       resturants : [],
       groups: [],
-<<<<<<< HEAD
       suggestion: '',
       showResult: false,
       userResturants: []
@@ -31,13 +32,6 @@ class YelpList extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.sendSuggestion = this.sendSuggestion.bind(this)
 
-=======
-      selectedGroup: ''
-    };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.selectGroup = this.selectGroup.bind(this);
->>>>>>> Add yelplist groupSelect logic and rebase
     };
     componentDidMount() {
       socket.on('showSuggestion', data => {
@@ -95,29 +89,11 @@ class YelpList extends React.Component {
       suggestion: restname,
       showResult: true
 
-<<<<<<< HEAD
     }, function() {
       console.log('send suggestionnnnn', this.state.suggestion);
       socket.emit('aSuggestion', this.state.suggestion);
     });
   }
-=======
-    selectGroup(e) {
-      this.setState({
-        selectedGroup: e.target.value
-      }, function(){
-        console.log('GROUPPPPPPP', this.state.selectedGroup)
-      })
-      // axios.post('/api/selection',searchData)
-      // .then(response => {
-      //    console.log(response);
-      //   }).catch(err => {
-      //     console.log(err)
-      //   })  
-
-    };
-
->>>>>>> Add yelplist groupSelect logic and rebase
 render() {
       return (
       <div>
