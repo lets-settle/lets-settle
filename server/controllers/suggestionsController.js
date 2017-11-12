@@ -5,7 +5,7 @@ var key = require('../config.js')
 //var changeGroup = require('../index');
 
 //console.log("this is changeGroup updated!! +++++++======", changeGroup.changeGroup)
-var groupname = "";
+
   
   module.exports.signupHandler = function (req, res) {
     var name = req.body.name;
@@ -110,12 +110,52 @@ var groupname = "";
     })
   }
 
+  var groupname = "";
+  var memberCount = 0;
+  
+
   module.exports.selectGroup = function(req, res) {
-    
     groupname = req.body.group_name
+    console.log('this is your groupname =========', req.body)
+    //find out how many are in this group and store it in a memberCount
+    model.Group.findOne({where: {group_name: groupname}}).then(function(group){
+      model.UserGroup.findAndCountAll({where: {groupid: group.id}}).then(function(usersInGroup) {
+        memberCount = usersInGroup.count;
+      }) 
+    })
     res.send("group selected!")
     
   }
+
+
+  var restaurants = [];
+  module.exports.handleSuggestion = function(req, res) {
+    //check if restaurants.length === group.length
+    //console.log('this is restaurant ==========', restaurants)
+    
+
+    // model.Group.findOne({where: {group_name: groupname}}).then(function(group){
+    //   model.UserGroup.findAndCountAll({where: {groupid: group.id}}).then(function(usersInGroup) {
+    //     memberCount = usersInGroup.count;
+    //     console.log('this is menmberCount ==========', memberCount)
+    //   }) 
+    // })
+    console.log('member count =============', memberCount)
+    console.log('RESTURANT =============', restaurants);
+
+    if(restaurants.length === memberCount) {
+    
+      console.log('RESSSTTTT ==== COUNTTTTT')
+      var random = Math.floor(Math.random() * memberCount);
+      res.json(restaurants[random]);
+    }
+  }
+
+
+  
+
+  module.exports.restaurants = restaurants;
+
 
   module.exports.groupname = groupname;
 

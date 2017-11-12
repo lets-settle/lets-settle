@@ -31,7 +31,8 @@ class App extends React.Component {
       suggestion: '',
       userResturants: [],
       groupRoom: '',
-      room: ''     
+      selectedGroup: '',
+      final: ''     
     }
     this.checkLogin = this.checkLogin.bind(this)
     this.checkSignup = this.checkSignup.bind(this)
@@ -69,24 +70,29 @@ class App extends React.Component {
         socket.emit('aSuggestion', this.state.suggestion);
       });  
       
-      // socket.emit('aSuggestion', this.state.suggestion);
+      axios.post('/api/suggestion')
+        .then(response => {
+          this.setState({
+            final: response.data
+          })
+        }).catch(err => {
+          console.log(err)
+      })
       
     };
     
     selectGroup(e) {
       this.setState({
-        room: e.target.value
+        selectedGroup: e.target.value
+      }, function() {
+        axios.post('/api/selectGroup',{
+          group_name: this.state.selectedGroup})
+          .then(response => {
+            console.log(response);
+          }).catch(err => {
+                console.log(err)
+        })
       })
-      
-      //room = this.state.selectedGroup;
-      
-      // axios.post('/api/selectGroup',{
-      //   group_name: this.state.selectedGroup})
-      //   .then(response => {
-      //     console.log(response);
-      //   }).catch(err => {
-      //         console.log(err)
-      //       })
     }
 
     componentDidMount() {
@@ -100,28 +106,6 @@ class App extends React.Component {
     })
    }
 
-    // componentWillMount() {
-    //   // socket.on('showSuggestion', function(data) {
-    //   //   console.log('INCOME MESSAGE:', data);
-    //   // })
-    //   // socket.on(this.state.room, data => {
-    //   //   console.log('dataaaaaaaaSOCKET', data);
-    //   //   console.log('stateeeee', this.state);
-    //   //   let rest = this.state.userResturants.concat(data);
-    //   //   this.setState({
-    //   //     userResturants: rest
-    //   //     })
-    //   // })
-    //   socket.on('showSuggestion', data => {
-    //     console.log('dataaaaaaaaSOCKET', data);
-    //   })
-
-    //   let rest = this.state.userResturants.concat(data);
-    //   this.setState({
-    //     userResturants: rest
-    //     })
-    // }
-
   getComponentProps(){
     return {
       checkLogin: this.checkLogin,
@@ -132,7 +116,8 @@ class App extends React.Component {
       sendSuggestion: this.sendSuggestion,
       suggestion: this.state.suggestion,
       userResturants: this.state.userResturants,
-      selectGroup: this.selectGroup
+      selectGroup: this.selectGroup,
+      final: this.state.final
     }
   };
 

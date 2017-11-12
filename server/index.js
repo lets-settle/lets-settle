@@ -15,40 +15,11 @@ app.use(express.static(__dirname + '/../client/dist'), bodyParser());
 
 app.use('/api', routes)
 
-//let groupName = "";
-
-// module.exports.changeGroup = (newGroupName) => {
-//   groupName = newGroupName;
-// }
-
-//module.exports = changeGroup;
-
-// session = io.of(`/${controllers.groupName}`); 
-
-//var nsp = io.of('/my-namespace');
-//connet socket io session
-
-// socket.on('connection', function(room) {
-//   socket.join(room)
-// })
-
-// io.sockets.on('connection', function(socket) {
-//   socket.on('room', function(room) {
-//     socket.join(room);
-//     //room = room;
-//   })
-// })
-
-// let room = "awesome"
-
-// io.sockets.in(room).emit('showSuggestion', 'TESTING');
-
-//var nsp = io.of('/my-namespace');
-//connet socket io session
 
 io.on('connection', (client)=>{
   client.on('aSuggestion', function(data){
     console.log('SOCKETTTT', data);
+    controllers.restaurants.push(data)
     //below was client instead of session before 
     io.emit('showSuggestion', {'received': data});
     // client.broadcast.emit('showSuggestion', {'received': data});

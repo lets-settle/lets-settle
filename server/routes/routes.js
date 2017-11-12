@@ -16,6 +16,7 @@ router.post('/selection', controllers.selectionHandler);
 
 router.post('/selectGroup', controllers.selectGroup);
 
+router.post('/suggestion', controllers.handleSuggestion)
 
 
 
