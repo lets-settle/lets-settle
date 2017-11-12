@@ -21,6 +21,7 @@ class Login extends React.Component {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -29,13 +30,18 @@ class Login extends React.Component {
 =======
 <<<<<<< HEAD
 >>>>>>> [rebase]
+=======
+>>>>>>> [rebase]
     componentWillMount() {
       auth.onAuthStateChanged((user) => {
         if(user) {
           console.log('authStateChange', user.email);
 <<<<<<< HEAD
+<<<<<<< HEAD
           // this.props.history.push("homepage/decisions");
 =======
+=======
+>>>>>>> [rebase]
 <<<<<<< HEAD
           this.props.history.push("homepage/decisions");
 =======
@@ -64,13 +70,20 @@ class Login extends React.Component {
           // this.props.checkLogin(true);
 >>>>>>> [rebase]
 >>>>>>> [rebase]
+<<<<<<< HEAD
 >>>>>>> [rebase] refactor after rebase and fixing login/signup
+=======
+=======
+          // this.props.history.push("homepage/decisions");
+>>>>>>> [rebase]
+>>>>>>> [rebase]
         } else {
           console.log('not logged in')
         }
       })
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 =======
@@ -83,6 +96,8 @@ class Login extends React.Component {
 =======
 =======
 >>>>>>> [rebase]
+>>>>>>> [rebase]
+=======
 >>>>>>> [rebase]
 
     handleLoginInput (e) {
@@ -110,7 +125,7 @@ class Login extends React.Component {
 >>>>>>> [rebase]
       auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
         .then(function() {
-          return auth.signInWithEmailAndPassword(email, password);
+          auth.signInWithEmailAndPassword(email, password);
         })
         .catch(function(error) {
           var errorCode = error.code;
@@ -192,9 +207,8 @@ class Login extends React.Component {
           <div className="col-sm-offset-2 col-sm-10">
               <button 
                 type="submit" 
-                className="btn btn-danger"
-                onClick={() => {this.loginButton}}
-                /* onSubmit={() => {this.props.checkLogin(true)}}> */
+                className="btn btn-danger" 
+                onSubmit={() => {this.props.checkLogin(true)}}>
                 Login
               </button>
           </div>
@@ -204,7 +218,7 @@ class Login extends React.Component {
         <button 
           type="click" 
           className="btn btn-danger">
-          Singup
+          Signup
         </button>
       </Link>
     </div>
