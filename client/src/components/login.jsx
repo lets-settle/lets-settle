@@ -20,15 +20,15 @@ class Login extends React.Component {
       this.loginButton = this.loginButton.bind(this);
     }
 
-    // componentWillMount() {
-    //   auth.onAuthStateChanged((user) => {
-    //     if(user) {
-    //       console.log('authStateChange', user.email);
-    //     } else {
-    //       console.log('not logged in')
-    //     }
-    //   })
-    // }
+    componentWillMount() {
+      auth.onAuthStateChanged((user) => {
+        if(user) {
+          console.log('authStateChange', user.email);
+        } else {
+          console.log('not logged in')
+        }
+      })
+    }
 
     handleLoginInput (e) {
       const name = e.target.name;
