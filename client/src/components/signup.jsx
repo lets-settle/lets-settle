@@ -103,11 +103,7 @@ class Signup extends React.Component {
         var errorMessage = error.message;
         console.log('Sign Up Error!', errorCode, errorMessage);
       }).then((result) => {
-<<<<<<< HEAD
         // console.log('sign up:', result.uid);
-=======
-        //console.log('sign up:', result.uid);
->>>>>>> rabase
         this.props.checkLogin(true);
        
         // this.setState({
