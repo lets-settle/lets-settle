@@ -46,7 +46,7 @@ class YelpList extends React.Component {
    }
 
     componentWillMount() {
-      console.log('mounttttt', this.props.username)
+      console.log('mounttttt USERNAMEEEEEEEE', this.props.username)
       let username = this.props.username;
       axios.post('/api/group', {username: username})
       .then(response => {

@@ -14,7 +14,6 @@ class Homepage extends React.Component {
     }
 
     onLogoutClick() {
-<<<<<<< HEAD
       auth.signOut().then(function() {
         // Sign-out successful.
               this.props.checkLogin(false);
@@ -26,34 +25,6 @@ class Homepage extends React.Component {
       });
     }
     
-=======
-        auth.signOut().then(function() {
-          // Sign-out successful.
-               this.props.checkLogin(false);
-               console.log('is it logged in?:', this.props.isLoggedIn)
-          // Window.localStorage.removeItem(Object.keys(window.sessionStorage)[0])
-          }).catch(function(error) {
-          // An error happened.
-          });
-      }
-      
-      sendSuggestion(restname) {
-            this.setState({
-              suggestion: restname,
-              showResult: true,
-              showSolo: false,
-              showFriends: false,
-              createGroup: false
-            }, function() {
-              console.log('send suggestionnnnn', this.state.suggestion);
-              socket.emit('aSuggestion', this.state.suggestion);
-            });
-          }
-
-
-
-
->>>>>>> Add yelplist groupSelect logic and rebase
   render() {
     return (
       <div>
