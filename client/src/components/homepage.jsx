@@ -50,21 +50,6 @@ class Homepage extends React.Component {
             });
           }
 
-<<<<<<< HEAD
-=======
-    sendSuggestion(restInfo) {
-        this.setState({
-          suggestion: restInfo,
-          showResult: true,
-          showSolo: false,
-          showFriends: false,
-          createGroup: false
-        }, function() { 
-          console.log('send suggestionnnnn', this.state.suggestion);
-          socket.emit('aSuggestion', this.state.suggestion);
-        });
-    }
->>>>>>> Add yelplist groupSelect logic and rebase
 
 
 
