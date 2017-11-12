@@ -1,11 +1,9 @@
 import React from 'react';
 import Result from './Result.jsx';
-import YelpListEntry from './YelpListEntry.jsx';
+// import YelpListEntry from './YelpListEntry.jsx';
 import CreateGroup from './CreateGroup.jsx';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 const axios = require('axios');
-import socketIOClient from "socket.io-client";
-const socket = socketIOClient("http://127.0.0.1:1128");
 import {withRouter} from "react-router-dom";
 
 class YelpList extends React.Component {
@@ -15,29 +13,14 @@ class YelpList extends React.Component {
     this.state = {
       resturants : [],
       groups: [],
-      suggestion: '',
-      showResult: false,
-      userResturants: []
+      showResult: false
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.sendSuggestion = this.sendSuggestion.bind(this)
-
     };
-    componentDidMount() {
-      socket.on('showSuggestion', data => {
-        console.log('dataaaaaaaaSOCKET', data);
-        console.log('stateeeee', this.state);
-        let rest = this.state.userResturants.concat([data]);
-        this.setState({
-          userResturants: rest
-          })
-        this.props.history.push("homepage/yelplist/result");
-   })
-   }
 
     componentWillMount() {
-      console.log('mounttttt', this.props.username)
+      console.log('mounttttt USERNAMEEEEEEEE', this.props.username)
       let username = this.props.username;
       axios.post('/api/group', {username: username})
       .then(response => {
@@ -75,21 +58,12 @@ class YelpList extends React.Component {
           console.log(err)
         })  
     };
-  sendSuggestion(restname) {
-    this.setState({
-      suggestion: restname,
-      showResult: true
 
-    }, function() {
-      console.log('send suggestionnnnn', this.state.suggestion);
-      socket.emit('aSuggestion', this.state.suggestion);
-    });
-  }
 render() {
       return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <select ref="group" id="inlineFormCustomSelect">
+          <select ref="group" id="inlineFormCustomSelect" onChange={this.selectGroup}>
             <option value="">Group</option>
             {this.state.groups.map((group, i) => <option key={i} value={group}>{group}</option>)}
           </select>
@@ -109,12 +83,25 @@ render() {
         </form>
   
         {this.state.resturants.map( resturant => 
-          (<YelpListEntry resturant={resturant} sendSuggestion={this.props.sendSuggestion}/>)
+          (<div>
+            <img src ={resturant.image_url} className="rounded img-fluid img-thumbnail"/> 
+            <h3><a href={resturant.url} target="_blank">{resturant.name}</a></h3>
+            <Link to = '/homepage/result'>
+              <button onClick={() => this.props.sendSuggestion(resturant)}>
+                Suggestion!
+              </button>
+            </Link> 
+          </div>)
         )}
-        <Route exact path="/homepage/friends/result" render = {() => <Results userResturants = {this.state.userResturants}/>}/>
+      
       </div>
       ) 
     }
   }
   
   export default YelpList;
+
+
+  // (<YelpListEntry resturant={resturant} sendSuggestion={this.sendSuggestion}/>)
+          /* <Route exact path="/homepage/friends/result" render = {() => <Result userResturants = {this.state.userResturants}/>}/> */
+            // <button onClick={() => {this.sendSuggestion(resturant.name)}}>Suggest!</button>
