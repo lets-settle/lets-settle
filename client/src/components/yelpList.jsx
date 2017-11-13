@@ -13,7 +13,8 @@ class YelpList extends React.Component {
     this.state = {
       resturants : [],
       groups: [],
-      showResult: false
+      showResult: false,
+      selectedGroup: ''
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -63,7 +64,7 @@ render() {
       return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <select ref="group" id="inlineFormCustomSelect" onChange={this.selectGroup}>
+          <select ref="group" id="inlineFormCustomSelect" onChange={this.props.selectGroup}>
             <option value="">Group</option>
             {this.state.groups.map((group, i) => <option key={i} value={group}>{group}</option>)}
           </select>

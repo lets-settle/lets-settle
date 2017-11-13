@@ -11,8 +11,8 @@ class Result extends React.Component {
     return (
     <div>
       RESULLTTTTTTTTTT
-      {this.props.suggestion.name}
-      {/* {this.props.userResturants.map((resturant) => (<div>{resturant.received}</div>))} */}
+      {this.props.userResturants.map((resturant) => (<div>{resturant.name}</div>))}
+      {this.props.final}
     </div>
     ) 
   }

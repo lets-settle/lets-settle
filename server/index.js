@@ -6,34 +6,39 @@ let db = require('../database/index.js');
 let model = require('../database/models/model.js')
 let bodyParser = require('body-parser')
 const server = http.createServer(app);
+// const socketio = require('socket.io');
+const controllers = require('./controllers/suggestionsController')
+// let io = socketio.listen(server);
 const io = require('socket.io')(server);
 
 app.use(express.static(__dirname + '/../client/dist'), bodyParser());
 
 app.use('/api', routes)
 
-let groupName = "";
 
-function changeGroup(newGroupName) {
-  groupName = newGroupName;
-}
-
-module.exports = changeGroup;
-
-session = io.of(`/${groupName}`); 
-
-//var nsp = io.of('/my-namespace');
-//connet socket io session
-
-session.on('connection', (client)=>{
+io.on('connection', (client)=>{
   client.on('aSuggestion', function(data){
     console.log('SOCKETTTT', data);
+    controllers.restaurants.push(data)
     //below was client instead of session before 
-    session.emit('showSuggestion', {'received': data});
-    client.broadcast.emit('showSuggestion', {'received': data});
+    io.emit('showSuggestion', {'received': data});
+    // client.broadcast.emit('showSuggestion', {'received': data});
   });
   client.on('disconnect', () => console.log('disconnected'))
 })
+
+//CODE TESTING 
+// io.on('connection', (client)=>{ 
+//   console.log('SOCKETGROUPPPPPP',controllers.groupname)
+
+//   client.on(controllers.groupname, function(data){
+//     console.log('SOCKETTTT', data);
+//     //below was client instead of session before 
+//     client.emit(controllers.groupname, {'received': data});
+//     // client.broadcast.to(controllers.groupName).emit('showSuggestion', {'received': data});
+//   });
+//   client.on('disconnect', () => console.log('disconnected'))
+// })
 
 const port = 1128;
 
