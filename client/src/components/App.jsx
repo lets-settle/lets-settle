@@ -72,6 +72,7 @@ class App extends React.Component {
       
       axios.post('/api/suggestion')
         .then(response => {
+          console.log('FINALLLLLL result----------', response.data)
           this.setState({
             final: response.data
           })
