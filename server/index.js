@@ -16,7 +16,8 @@ app.use(express.static(__dirname + '/../client/dist'), bodyParser());
 app.use('/api', routes)
 
 
-io.on('connection', (client)=>{
+//module.exports.activateSocket = function() {
+  io.on('connection', (client)=>{
   client.on('aSuggestion', function(data){
     console.log('SOCKETTTT', data);
     controllers.restaurants.push(data)
@@ -26,6 +27,12 @@ io.on('connection', (client)=>{
   });
   client.on('disconnect', () => console.log('disconnected'))
 })
+//}
+
+module.exports.emitSender = function(data) {
+  console.log("this is data inside of emitsender!! =====================", data)
+  io.emit('finalSuggestion', data);
+}
 
 //CODE TESTING 
 // io.on('connection', (client)=>{ 

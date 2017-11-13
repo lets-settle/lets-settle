@@ -89,7 +89,7 @@ render() {
             <h3><a href={resturant.url} target="_blank">{resturant.name}</a></h3>
             <Link to = '/homepage/result'>
               <button onClick={() => this.props.sendSuggestion(resturant)}>
-                Suggestion!
+                Suggest!
               </button>
             </Link> 
           </div>)

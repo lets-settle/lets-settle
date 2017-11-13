@@ -2,6 +2,7 @@ var yelpRequest = require('./helpers.js')
 var model = require('../../database/models/model.js')
 var db = require('../../database/index.js')
 var key = require('../config.js')
+var server = require('../index')
 //var changeGroup = require('../index');
 
 //console.log("this is changeGroup updated!! +++++++======", changeGroup.changeGroup)
@@ -117,6 +118,8 @@ var key = require('../config.js')
   module.exports.selectGroup = function(req, res) {
     groupname = req.body.group_name
     console.log('this is your groupname =========', req.body)
+
+    //server.activateSocket()
     //find out how many are in this group and store it in a memberCount
     model.Group.findOne({where: {group_name: groupname}}).then(function(group){
       model.UserGroup.findAndCountAll({where: {groupid: group.id}}).then(function(usersInGroup) {
@@ -147,7 +150,14 @@ var key = require('../config.js')
     
       console.log('RESSSTTTT ==== COUNTTTTT')
       var random = Math.floor(Math.random() * memberCount);
-      res.json(restaurants[random]);
+      //res.json(restaurants[random]);
+      //io.emit(restaurants[random]);
+      console.log('this is restaurant inside of handlesuggestion!!! =========', restaurants[random]);
+      server.emitSender(restaurants[random])
+
+
+    } else {
+      res.send('suggestion received');
     }
   }
 
