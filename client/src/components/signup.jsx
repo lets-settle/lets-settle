@@ -18,34 +18,8 @@ class Signup extends React.Component {
         usernameValid: false,
         emailValid: false,
         passwordValid: false,
-<<<<<<< HEAD
-<<<<<<< HEAD
         formValid: false
         // uid: ''
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-        formValid: false
-        // uid: ''
-=======
-<<<<<<< HEAD
-        formValid: false,
-        uid: ''
-=======
-        formValid: false
-        // uid: '',
-        // isLoggedIn: false
->>>>>>> [rebase] refactor and checking if checkLogin function is being invoked upon form submission
->>>>>>> [rebase] refactor and checking if checkLogin function is being invoked upon form submission
-=======
-        formValid: false,
-        uid: ''
->>>>>>> [rebase] refactor after rebase and fixing login/signup
->>>>>>> [rebase] refactor after rebase and fixing login/signup
-=======
-        formValid: false
-        // uid: ''
->>>>>>> [rebase]
       }
 
       this.handleUserInput = this.handleUserInput.bind(this);
@@ -130,20 +104,6 @@ class Signup extends React.Component {
         var errorMessage = error.message;
         console.log('Sign Up Error!', errorCode, errorMessage);
       }).then((result) => {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> [rebase] refactor and checking if checkLogin function is being invoked upon form submission
-=======
->>>>>>> [rebase]
->>>>>>> [rebase]
-=======
->>>>>>> [rebase]
         // console.log('sign up:', result.uid);
         this.props.checkLogin(true);
        
@@ -174,51 +134,53 @@ class Signup extends React.Component {
   render() {  
     return (
     <div>
-      <Link to = '/'>
+      <Link to = '/login'>
         <img 
           id ='title' 
-          src={require('../../dist/images/yelpsettle.png')}/>
+          src={require('../../dist/images/logo.png')}/>
       </Link>
-      <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-md-6">
-            <form className="form-horizontal">
-              <div className='formErrors'>
-                {Object.keys(this.state.formErrors).map((fieldName, i) => {
-                  if(this.state.formErrors[fieldName].length > 0){
-                    return (
-                      <p key={i}>{fieldName} {this.state.formErrors[fieldName]}</p>
-                    )        
-                  } else {
-                    return '';
-                  }
-                })}
-              </div>
-              <div className={`form-group ${this.errorClass(this.state.formErrors.name)}`}>
-                <label htmlFor="inputName" className="control-label">Full Name</label>
-                <input className="form-control" id="inputName" placeholder="Full Name" name="name" value={this.state.name} onChange={this.handleUserInput}/> 
-              </div>
-              <div className={`form-group ${this.errorClass(this.state.formErrors.username)}`}>
-                <label htmlFor="inputUsername" className="control-label">Username</label>
-                <input className="form-control" id="inputUsername" placeholder="Username" name="username" value={this.state.username} onChange={this.handleUserInput}/>
-              </div>
-              <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
-                <label htmlFor="inputEmail" className="control-label">Email</label>
-                <input type="email" className="form-control" id="inputEmail" placeholder="Email" name="email" value={this.state.email} onChange={this.handleUserInput}/>
-              </div>
-              <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
-                <label htmlFor="inputPassword" className="control-label">Password</label>
-                <input type="password" className="form-control" id="inputPassword" placeholder="Password" name="password" value={this.state.password} onChange={this.handleUserInput}/>
-              </div>
-              <div className="form-group">
-                <div>
-                  <button type="submit" className="btn btn-danger" disabled={!this.state.formValid} onClick={this.signUpSubmit}>Sign Me Up!</button>
-                </div>
-              </div>
-            </form>
+      <form className="form-horizontal">
+        <div className='formErrors'>
+          {Object.keys(this.state.formErrors).map((fieldName, i) => {
+            if(this.state.formErrors[fieldName].length > 0){
+              return (
+                <p key={i}>{fieldName} {this.state.formErrors[fieldName]}</p>
+              )        
+            } else {
+              return '';
+            }
+          })}
+        </div>
+        <div className={`form-group ${this.errorClass(this.state.formErrors.name)}`}>
+          <label htmlFor="inputName" className="col-sm-2 control-label">Full Name</label>
+          <div className="col-sm-10">
+            <input className="form-control" id="inputName" placeholder="Full Name" name="name" value={this.state.name} onChange={this.handleUserInput}/> 
           </div>
         </div>
-      </div>
+        <div className={`form-group ${this.errorClass(this.state.formErrors.username)}`}>
+          <label htmlFor="inputUsername" className="col-sm-2 control-label">Username</label>
+          <div className="col-sm-10">
+            <input className="form-control" id="inputUsername" placeholder="Username" name="username" value={this.state.username} onChange={this.handleUserInput}/>
+          </div>
+        </div>
+        <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
+          <label htmlFor="inputEmail" className="col-sm-2 control-label">Email</label>
+          <div className="col-sm-10">
+            <input type="email" className="form-control" id="inputEmail" placeholder="Email" name="email" value={this.state.email} onChange={this.handleUserInput}/>
+          </div>
+        </div>
+        <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
+          <label htmlFor="inputPassword" className="col-sm-2 control-label">Password</label>
+          <div className="col-sm-10">
+            <input type="password" className="form-control" id="inputPassword" placeholder="Password" name="password" value={this.state.password} onChange={this.handleUserInput}/>
+          </div>
+        </div>
+        <div className="form-group">
+          <div className="col-sm-offset-2 col-sm-10">
+            <button type="submit" className="btn btn-danger" disabled={!this.state.formValid} onClick={this.signUpSubmit}>Sign Me Up!</button>
+          </div>
+        </div>
+      </form>
     </div>
     ) 
   }
