@@ -73,9 +73,6 @@ class App extends React.Component {
       axios.post('/api/suggestion')
         .then(response => {
           console.log('FINALLLLLL result----------', response.data)
-          this.setState({
-            final: response.data
-          })
         }).catch(err => {
           console.log(err)
       })
@@ -105,6 +102,14 @@ class App extends React.Component {
           userResturants: rest
           })
     })
+
+    socket.on('finalSuggestion', data => {
+      console.log('dataaaaaaaaSOCKET', data.received);
+      this.setState({
+        final: data
+        })
+  })
+
    }
 
   getComponentProps(){

@@ -57,7 +57,7 @@ class Solo extends React.Component {
         <button type="submit" className="btn btn-primary">Search</button>
         </div>
       </form>
-      <img src ={this.state.resturant.image_url} className="rounded img-fluid img-thumbnail"/> 
+      <img src ={this.state.resturant.image_url}/> 
       <h3><a href={this.state.resturant.url} target="_blank">{this.state.resturant.name}</a></h3> 
     </div>
     ) 
