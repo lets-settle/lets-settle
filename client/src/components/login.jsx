@@ -25,11 +25,11 @@ class Login extends React.Component {
         if(user) {
           console.log('authStateChange', user.email);
           // this.props.history.push("homepage/decisions");
+          this.props.history.push("homepage/decisions");
         } else {
           console.log('not logged in')
         }
       })
-    }
 
     handleLoginInput (e) {
       const name = e.target.name;
@@ -41,9 +41,7 @@ class Login extends React.Component {
       e.preventDefault();
       const email = this.state.email;
       const password = this.state.password;
-<<<<<<< HEAD
 
-<<<<<<< HEAD
       // auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
       //   .then(function() {
       //     // firebase.auth().signInWithEmailAndPassword(email, password);
@@ -53,11 +51,6 @@ class Login extends React.Component {
       //     var errorMessage = error.message;
       //   });
       
-=======
->>>>>>> [rebase]
-=======
-      
->>>>>>> [add] refactor after rebasing
       auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
         .then(function() {
           return auth.signInWithEmailAndPassword(email, password);
@@ -79,12 +72,12 @@ class Login extends React.Component {
         //   userid: JSON.parse(Object.values(window.sessionStorage)).uid
         // })
         this.props.checkLogin(true);
-
         // const user = result.user;
         // this.setState({
           //   user
           // });
         });
+
         
       axios.post('/api/login', {
         email: this.state.email
@@ -140,7 +133,7 @@ class Login extends React.Component {
           <div className="col-sm-offset-2 col-sm-10">
               <button 
                 type="submit" 
-                className="btn btn-danger" 
+                className="btn btn-danger"
                 onSubmit={() => {this.props.checkLogin(true)}}>
                 Login
               </button>
