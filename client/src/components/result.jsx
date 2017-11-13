@@ -12,7 +12,7 @@ class Result extends React.Component {
     <div>
       RESULLTTTTTTTTTT
       {this.props.userResturants.map((resturant) => (<div>{resturant.name}</div>))}
-      {this.props.final}
+      <div> FINAL CHOICE: {this.props.final.name}</div>
     </div>
     ) 
   }

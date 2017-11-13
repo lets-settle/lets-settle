@@ -72,6 +72,7 @@ class App extends React.Component {
       
       axios.post('/api/suggestion')
         .then(response => {
+          console.log('FINALLLLLL result----------', response.data)
           this.setState({
             final: response.data
           })
@@ -132,7 +133,7 @@ class App extends React.Component {
         <Route exact path="/homepage/creategroup" render = {() => <CreateGroup {...this.getComponentProps()}/>}/>
         <Route exact path="/homepage/solo" render = {() => <Solo {...this.getComponentProps()}/>}/>
         <Route exact path="/homepage/friends" render = {() => <YelpList {...this.getComponentProps()}/>}/>
-        <Route exact path="/homepage/result" render = {() => <Result {...this.getComponentProps()}/>}/>}
+        <Route exact path="/homepage/result" render = {() => <Result {...this.getComponentProps()}/>}/>
 
     </div>
     </Router>

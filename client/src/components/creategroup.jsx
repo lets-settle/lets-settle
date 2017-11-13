@@ -83,11 +83,9 @@ class CreateGroup extends React.Component {
             <li className="list-group-item">{f}</li>
           )}
         </ul>
-        {/* <Link to = '/creategroup'>  */}
-          <button>
+          <button onClick={this.sendGroup}>
             Create Group
           </button>
-        {/* </Link> */}
       </div>   
     </div>
     ) 
