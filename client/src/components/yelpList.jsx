@@ -63,38 +63,41 @@ class YelpList extends React.Component {
 render() {
       return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <select ref="group" id="inlineFormCustomSelect" onChange={this.props.selectGroup}>
-            <option value="">Group</option>
-            {this.state.groups.map((group, i) => <option key={i} value={group}>{group}</option>)}
-          </select>
-  
-          <div className="form-inline">
-          <input type="text" className="form-control" id="inlineFormInput" placeholder="type" ref="term"/>
-          <input type="text" className="form-control" id="inlineFormInputGroup" placeholder="location" ref="location"/>
-          <select ref="price" id="inlineFormCustomSelect">
-            <option>Price</option>
-            <option>$</option>
-            <option>$$</option>
-            <option>$$$</option>
-            <option>$$$$</option>
-          </select>
-          <button type="submit" className="btn btn-primary">Search</button>
-          </div>
-        </form>
-  
-        {this.state.resturants.map( resturant => 
-          (<div>
-            <img src ={resturant.image_url} className="rounded img-fluid img-thumbnail"/> 
-            <h3><a href={resturant.url} target="_blank">{resturant.name}</a></h3>
-            <Link to = '/homepage/result'>
-              <button onClick={() => this.props.sendSuggestion(resturant)}>
-                Suggest!
-              </button>
-            </Link> 
-          </div>)
-        )}
+        <div className="container">
+          <div className="row justify-content-center">
+            <form onSubmit={this.handleSubmit}>
+              <select ref="group" id="inlineFormCustomSelect" onChange={this.props.selectGroup}>
+                <option value="">Group</option>
+                {this.state.groups.map((group, i) => <option key={i} value={group}>{group}</option>)}
+              </select>
       
+              <div className="form-inline" id="search-bar">
+              <input type="text" className="form-control" id="inlineFormInput" placeholder="type" ref="term"/>
+              <input type="text" className="form-control" id="inlineFormInputGroup" placeholder="location" ref="location"/>
+              <select ref="price" id="inlineFormCustomSelect">
+                <option>Price</option>
+                <option>$</option>
+                <option>$$</option>
+                <option>$$$</option>
+                <option>$$$$</option>
+              </select>
+              <button type="submit" className="btn btn-danger">Search</button>
+              </div>
+            </form>
+      
+            {this.state.resturants.map( resturant => 
+              (<div>
+                <img src ={resturant.image_url} className="rounded img-fluid img-thumbnail"/> 
+                <h3><a href={resturant.url} target="_blank">{resturant.name}</a></h3>
+                <Link to = '/homepage/result'>
+                  <button onClick={() => this.props.sendSuggestion(resturant)}>
+                    Suggest!
+                  </button>
+                </Link> 
+              </div>)
+            )}
+          </div>
+        </div>
       </div>
       ) 
     }

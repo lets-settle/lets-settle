@@ -134,10 +134,10 @@ class Signup extends React.Component {
   render() {  
     return (
     <div>
-      <Link to = '/login'>
+      <Link to = '/'>
         <img 
           id ='title' 
-          src={require('../../dist/images/logo.png')}/>
+          src={require('../../dist/images/yelpsettle.png')}/>
       </Link>
       <form className="form-horizontal">
         <div className='formErrors'>

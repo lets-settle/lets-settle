@@ -43,23 +43,29 @@ class Solo extends React.Component {
   render() {
     return (
       <div>
-      <form onSubmit={this.handleSubmit}>
-        <div className="form-inline">
-        <input type="text" className="form-control" id="inlineFormInput" placeholder="type" ref="term"/>
-        <input type="text" className="form-control" id="inlineFormInputGroup" placeholder="location" ref="location"/>
-        <select ref="price" id="inlineFormCustomSelect">
-          <option>Price</option>
-          <option>$</option>
-          <option>$$</option>
-          <option>$$$</option>
-          <option>$$$$</option>
-        </select>
-        <button type="submit" className="btn btn-primary">Search</button>
+        <div className="container">
+          <div className="row justify-content-center">
+            <form id="search-bar" onSubmit={this.handleSubmit}>
+              <div className="form-inline">
+              <input type="text" className="form-control" id="inlineFormInput" placeholder="type" ref="term"/>
+              <input type="text" className="form-control" id="inlineFormInputGroup" placeholder="location" ref="location"/>
+              <select ref="price" id="inlineFormCustomSelect">
+                <option>Price</option>
+                <option>$</option>
+                <option>$$</option>
+                <option>$$$</option>
+                <option>$$$$</option>
+              </select>
+              <button type="submit" className="btn btn-danger">Search</button>
+              </div>
+            </form>
+            <img src ={this.state.resturant.image_url} id="img"/> 
+          </div>
+          <div className="row justify-content-center" id="restaurant">
+            <h3><a href={this.state.resturant.url} target="_blank" id="restaurant-name">{this.state.resturant.name}</a></h3> 
+          </div>
         </div>
-      </form>
-      <img src ={this.state.resturant.image_url}/> 
-      <h3><a href={this.state.resturant.url} target="_blank">{this.state.resturant.name}</a></h3> 
-    </div>
+      </div>
     ) 
   }
 }
