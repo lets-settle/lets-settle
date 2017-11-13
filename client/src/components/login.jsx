@@ -102,51 +102,61 @@ class Login extends React.Component {
       <Link to = '/'>
         <img 
           id ='title' 
-          src={require('../../dist/images/logo.png')}/>
+          src={require('../../dist/images/yelpsettle.png')}/>
       </Link>
-      <form 
-        className="form-horizontal" 
-        onSubmit={this.loginButton}>
-        <div className="form-group">
-          <div className="col-sm-10">
-            <input className="form-control" 
-              id="inputEmail" 
-              placeholder="Email" 
-              name="email" 
-              value={this.state.email} 
-              onChange={this.handleLoginInput}/>
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-md-6">
+            <form 
+              className="form-horizontal" 
+              onSubmit={this.loginButton}>
+              <div className="form-group">
+                <input className="form-control" 
+                  id="inputEmail" 
+                  placeholder="Email" 
+                  name="email" 
+                  value={this.state.email} 
+                  onChange={this.handleLoginInput}/>
+              </div>
+              <div className="form-group">
+                <input 
+                  type="password" 
+                  className="form-control" 
+                  id="inputPassword" 
+                  placeholder="Password" 
+                  name="password" 
+                  value={this.state.password} 
+                  onChange={this.handleLoginInput}/>
+              </div>
+              <div className="form-group" id="login-buttons">
+                <div>
+                    <button 
+                      type="submit" 
+                      className="btn btn-danger"
+                      onSubmit={() => {this.props.checkLogin(true)}}>
+                      Login
+                    </button>
+                  <Link to = '/signup'>
+                    <button 
+                      type="click" 
+                      className="btn btn-danger"
+                      id="settle-button">
+                      Let's Settle!
+                    </button>
+                  </Link>
+              </div>
+            </div>
+            </form>
           </div>
         </div>
-        <div className="form-group">
-          <div className="col-sm-10">
-            <input 
-              type="password" 
-              className="form-control" 
-              id="inputPassword" 
-              placeholder="Password" 
-              name="password" 
-              value={this.state.password} 
-              onChange={this.handleLoginInput}/>
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="col-sm-offset-2 col-sm-10">
-              <button 
-                type="submit" 
-                className="btn btn-danger"
-                onSubmit={() => {this.props.checkLogin(true)}}>
-                Login
-              </button>
-          </div>
-        </div>
-      </form>
-      <Link to = '/signup'>
+      </div>
+      {/* <Link to = '/signup'>
         <button 
           type="click" 
           className="btn btn-danger">
           Signup
         </button>
-      </Link>
+      </Link> */}
     </div>
     ) 
   }

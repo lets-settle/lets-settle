@@ -24,3 +24,25 @@ button {
     align-items: center;
     justify-content: center;
 }
+
+#settle-button {
+    margin-left:15px;
+}
+
+#nav-title {
+    min-width: 90px;
+}
+
+#squad {
+    margin-left: 112px;
+}
+
+#squad, #solo {
+    padding: 40px 80px 40px 80px;
+    font-size: 35px;
+    text-transform: uppercase;
+}
+
+#decision-button {
+    margin-top: 18%;
+}

@@ -13,14 +13,13 @@ class Homepage extends React.Component {
     this.onLogoutClick = this.onLogoutClick.bind(this)
     }
 
-    onLogoutClick() {
+    onLogoutClick(e) {
+      e.preventDefault();
       auth.signOut().then(function() {
-        // Sign-out successful.
               this.props.checkLogin(false);
               console.log('is it logged in?:', this.props.isLoggedIn)
         // Window.localStorage.removeItem(Object.keys(window.sessionStorage)[0])
         }).catch(function(error) {
-        // An error happened.
         console.log('there was an error logging out', error)
       });
     }
@@ -28,40 +27,34 @@ class Homepage extends React.Component {
   render() {
     return (
       <div>
-      <Navbar>
-        <Navbar.Header>
-            <Navbar.Brand>
+        <div>
+          <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
+            <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"></span>
+            </button>
             <LinkContainer to = '/homepage/decisions'>
-              <a href="#">Yelp Settle</a>
-              </LinkContainer>
-            </Navbar.Brand>
-        </Navbar.Header>
-          <Nav>
-            <NavDropdown eventKey={3} title={this.props.username}  id="basic-nav-dropdown">
-            <LinkContainer to = '/homepage/creategroup'>
-              <MenuItem onSelect={this.onCreateGroupClick} 
-                eventKey={3.1}>
-                Create Group
-              </MenuItem>
+              <a className="navbar-brand" href="#" id="nav-title">
+                {/* <img src={require('../../dist/images/yelpsettle.png')}/> */}
+                Yelp Settle
+              </a>
             </LinkContainer>
-              <MenuItem divider />
-              <LinkContainer to = '/'>
-              <MenuItem 
-                onSelect={() => {this.props.checkLogin(false)}} 
-                eventKey={3.2}>
-                Log Out
-              </MenuItem>
-              </LinkContainer>
-            </NavDropdown>
-          </Nav>
-        </Navbar>
-        {/* <Link to = '/'> */}
-          {/* <div>
-          <img 
-          id ='title' 
-          src={require('http://localhost:1128/logo.png')}/>
-          </div> */}
-        {/* </Link> */} 
+
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {this.props.username}
+                </a>
+                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <LinkContainer to = '/homepage/creategroup'>
+                    <a className="dropdown-item" href="#">Create Group</a>
+                  </LinkContainer>
+                  <div className="dropdown-divider"></div>
+                  <LinkContainer to = '/'>
+                    <a className="dropdown-item" href="#" onSelect={() => {this.props.checkLogin(false)}}>Log out</a>
+                  </LinkContainer>
+                </div>
+            </div>
+          </nav>
+        </div>
     </div>
     ) 
   }
