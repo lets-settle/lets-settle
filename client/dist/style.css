@@ -50,6 +50,7 @@ button {
 #img {
   margin-top: 25px;
   border-radius: 15px;
+  max-width: 615px;
 }
 
 #restaurant {
@@ -61,7 +62,7 @@ button {
 }
 
 #inlineFormCustomSelect {
-  margin-right: 40px;
+  margin-right: 22px;
   border-radius: 3px;
   padding: 8px 10px;
 }
@@ -72,4 +73,31 @@ button {
 
 #search-bar {
   margin-top: 20px;
+}
+
+#error {
+  color: #d60000;
+}
+
+#restr {
+  margin-top: 6px;
+}
+
+#grp-restaurant-name {
+  color: #a50000;
+  margin-right: 20px;
+}
+
+#final-choice {
+  margin-top: 30px;
+  border-top: solid 1px;
+  padding-top: 15px;
+}
+
+#suggestions {
+  text-align: center;
+}
+
+#final-choice {
+  text-align: center;
 }
