@@ -11,7 +11,6 @@ class Login extends React.Component {
     super(props);
       this.state = {
         user: null,
-        // username: '', 
         email: '',
         password: ''
       };
@@ -56,8 +55,8 @@ class Login extends React.Component {
           return auth.signInWithEmailAndPassword(email, password);
         })
         .catch(function(error) {
-          var errorCode = error.code;
-          var errorMessage = error.message;
+          let errorCode = error.code;
+          let errorMessage = error.message;
         });
       
       auth.signInWithEmailAndPassword(email, password).catch(function(error) {
@@ -66,24 +65,13 @@ class Login extends React.Component {
         console.log('Login Error!', errorCode, errorMessage)
       }).then((result) => {
         console.log('im in login: ', result);
-        // console.log('i logged in', JSON.parse(Object.values(window.sessionStorage)).uid)
-        // console.log('i logged in', typeof Object.keys(window.sessionStorage)[0])
-        // this.setState({
-        //   userid: JSON.parse(Object.values(window.sessionStorage)).uid
-        // })
         this.props.checkLogin(true);
-        // const user = result.user;
-        // this.setState({
-          //   user
-          // });
         });
 
         
       axios.post('/api/login', {
         email: this.state.email
-        // uid: uid
       }).then(response => {
-          console.log('getting username back', response.data)
           this.props.setUsername(response.data)
           this.props.history.push("homepage/decisions");
         }, err => {
@@ -150,13 +138,6 @@ class Login extends React.Component {
           </div>
         </div>
       </div>
-      {/* <Link to = '/signup'>
-        <button 
-          type="click" 
-          className="btn btn-danger">
-          Signup
-        </button>
-      </Link> */}
     </div>
     ) 
   }
