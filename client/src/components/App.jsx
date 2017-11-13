@@ -38,14 +38,9 @@ class App extends React.Component {
     this.checkSignup = this.checkSignup.bind(this)
     this.setUsername = this.setUsername.bind(this)
     this.sendSuggestion = this.sendSuggestion.bind(this)
-<<<<<<< HEAD
     this.selectGroup = this.selectGroup.bind(this);
 
   }
-=======
-    
-  };
->>>>>>> [add] refactor after rebasing
 
  checkLogin(status) {
     this.setState({
@@ -67,7 +62,6 @@ class App extends React.Component {
     })
   };
   
-<<<<<<< HEAD
     sendSuggestion(rest) {
       this.setState({
         suggestion : rest
@@ -117,28 +111,6 @@ class App extends React.Component {
   })
 
    }
-=======
-  sendSuggestion(rest) {
-    console.log('INSIDE SENDSEGGESTION');
-    this.setState({
-      suggestion : rest
-    }, function() {
-      console.log('suggestionnnnn OBJECT', this.state.suggestion);
-      socket.emit('aSuggestion', this.state.suggestion);
-    });   
-  };
-
-  componentDidMount() {
-    socket.on('showSuggestion', data => {
-      console.log('dataaaaaaaaSOCKET', data);
-      console.log('stateeeee', this.state);
-      let rest = this.state.userResturants.concat(data);
-      this.setState({
-        userResturants: rest
-      })
-    })
-  };
->>>>>>> [add] refactor after rebasing
 
   getComponentProps(){
     return {
@@ -175,3 +147,5 @@ class App extends React.Component {
 }
 
 export default App;
+
+

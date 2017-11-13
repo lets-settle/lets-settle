@@ -25,11 +25,11 @@ class Login extends React.Component {
         if(user) {
           console.log('authStateChange', user.email);
           // this.props.history.push("homepage/decisions");
-          this.props.history.push("homepage/decisions");
         } else {
           console.log('not logged in')
         }
       })
+    }
 
     handleLoginInput (e) {
       const name = e.target.name;

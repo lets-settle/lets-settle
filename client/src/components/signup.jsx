@@ -131,6 +131,7 @@ class Signup extends React.Component {
         console.log('Sign Up Error!', errorCode, errorMessage);
       }).then((result) => {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -140,6 +141,8 @@ class Signup extends React.Component {
 >>>>>>> [rebase] refactor and checking if checkLogin function is being invoked upon form submission
 =======
 >>>>>>> [rebase]
+>>>>>>> [rebase]
+=======
 >>>>>>> [rebase]
         // console.log('sign up:', result.uid);
         this.props.checkLogin(true);
