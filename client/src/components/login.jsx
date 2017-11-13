@@ -141,7 +141,7 @@ class Login extends React.Component {
                       type="click" 
                       className="btn btn-danger"
                       id="settle-button">
-                      Let's Settle!
+                      Sign Up
                     </button>
                   </Link>
               </div>
