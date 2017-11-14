@@ -9,20 +9,18 @@ import { LinkContainer } from 'react-router-bootstrap';
 class Homepage extends React.Component {
   constructor(props) {
     super(props);
-
     this.onLogoutClick = this.onLogoutClick.bind(this)
-    }
+  }
 
-    onLogoutClick(e) {
-      e.preventDefault();
-      auth.signOut().then(function() {
-              this.props.checkLogin(false);
-              console.log('is it logged in?:', this.props.isLoggedIn)
-        // Window.localStorage.removeItem(Object.keys(window.sessionStorage)[0])
-        }).catch(function(error) {
+  onLogoutClick(e) {
+    e.preventDefault();
+    auth.signOut()
+      .then(function() {
+        this.props.checkLogin(false);
+      }).catch(function(error) {
         console.log('there was an error logging out', error)
-      });
-    }
+    });
+  }
     
   render() {
     return (
@@ -34,11 +32,9 @@ class Homepage extends React.Component {
             </button>
             <LinkContainer to = '/homepage/decisions'>
               <a className="navbar-brand" href="#" id="nav-title">
-                {/* <img src={require('../../dist/images/yelpsettle.png')}/> */}
                 Yelp Settle
               </a>
             </LinkContainer>
-
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {this.props.username}

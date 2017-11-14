@@ -6,13 +6,11 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 class Solo extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       resturant: ''
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
-
   }
 
   handleSubmit(e) {
@@ -25,19 +23,16 @@ class Solo extends React.Component {
         searchData[ref] = this.refs[ref].value;
       }
     }
-    console.log('SOLOOOOO DATA', searchData);
     e.target.reset();
 
     axios.post('/api/solo',searchData)
     .then(response => {
-       console.log(response.data);
        this.setState({
          resturant : response.data
        });  
       }).catch(err => {
         console.log(err)
       })  
-    
   };  
   
   render() {

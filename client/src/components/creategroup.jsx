@@ -34,23 +34,19 @@ class CreateGroup extends React.Component {
       friendList: this.state.friendsList.push(this.state.friend),
       friend: ''
     })
-    console.log('submit friend', this.state.friendsList);
   };
 
   sendGroup() {
-
     const create = {
       users : this.state.friendsList
     };
+
     for (const ref in this.refs) {
       create[ref] = this.refs[ref].value;
     }
-    console.log('CREATEDDDDD', create);
 
     axios.post('/api/newgroup', create)
     .then(response => {
-     //get back the list of groups?
-      console.log('DB CREATEEEEEEEDDDD');
     }).catch(err => {
       console.log(err)
     })
@@ -66,27 +62,34 @@ class CreateGroup extends React.Component {
   render() {
     return (
     <div>
-      GROUP PAGE
-      <form className="form-horizontal">
-        <div className="input-group">
-          <input ref="group_name" type="text" placeholder="New Group"/>
-            <label htmlFor="inputName" className="col-sm-2 control-label">Add Friends: </label>
-            <input type="text" className="col-sm-2 control-label" value={this.state.friend} onChange={this.addFriend}/>
-            <span className="input-group-btn">
-              <button className="btn btn-default" type="button" onClick={this.pushFriend}>Add!</button>
-            </span> 
+      <div className="container" id="create-group">
+        <div className="row justify-content-center">
+          <form className="form-horizontal">
+            <div className="input-group">
+              <input ref="group_name" type="text" placeholder="New Group" id="group-name" />
+                <label htmlFor="inputName" id="add-friends" className="control-label">Add Friends: </label>
+                <input type="text" className="control-label" id="" value={this.state.friend} onChange={this.addFriend}/>
+                <span className="input-group-btn">
+                  <button className="btn btn-default" type="button" onClick={this.pushFriend}>Add!</button>
+                </span> 
+            </div>
+          </form>
         </div>
-      </form>
-      <div>
-        <ul className="list-group">
-          {this.state.friendsList.map( f => 
-            <li className="list-group-item">{f}</li>
-          )}
-        </ul>
-          <button onClick={this.sendGroup}>
-            Create Group
-          </button>
-      </div>   
+        <div className="row justify-content-center" id="group-list">
+          <div>
+            <ul className="list-group">
+              {this.state.friendsList.map( f =>
+                <div id="friends">
+                  <li className="list-group-item">{f}</li>
+                </div>
+              )}
+            </ul>
+              <button id="create-group" onClick={this.sendGroup}>
+                Create Group
+              </button>   
+        </div>
+      </div>
+    </div>
     </div>
     ) 
   }

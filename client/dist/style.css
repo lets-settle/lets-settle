@@ -101,3 +101,28 @@ button {
 #final-choice {
   text-align: center;
 }
+
+#create-group {
+  margin-top: 20px;
+}
+
+#group-name {
+  margin-right: 15px;
+}
+
+#add-friends {
+  margin-right: 16px;
+  margin-top: 5px;
+}
+
+#group-list {
+  margin-top: 20px;
+}
+
+#create-group {
+  margin-top: 25px;
+}
+
+#friends {
+  text-align: center;
+}

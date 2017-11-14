@@ -15,74 +15,63 @@ class Login extends React.Component {
         password: ''
       };
 
-      this.handleLoginInput = this.handleLoginInput.bind(this);
-      this.loginButton = this.loginButton.bind(this);
-    }
+    this.handleLoginInput = this.handleLoginInput.bind(this);
+    this.loginButton = this.loginButton.bind(this);
+  }
 
-    componentWillMount() {
-      auth.onAuthStateChanged((user) => {
-        if(user) {
-          console.log('authStateChange', user.email);
-          // this.props.history.push("homepage/decisions");
-        } else {
-          console.log('not logged in')
-        }
+  componentWillMount() {
+    auth.onAuthStateChanged((user) => {
+      if(user) {
+        console.log('authStateChange', user.email);
+      } else {
+        console.log('not logged in')
+      }
+    })
+  }
+
+  handleLoginInput (e) {
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState({[name]: value})
+  }
+
+  loginButton (e) {
+    e.preventDefault();
+    const email = this.state.email;
+    const password = this.state.password;
+    
+    auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
+      .then(function() {
+        return auth.signInWithEmailAndPassword(email, password);
       })
-    }
-
-    handleLoginInput (e) {
-      const name = e.target.name;
-      const value = e.target.value;
-      this.setState({[name]: value})
-    }
-
-    loginButton (e) {
-      e.preventDefault();
-      const email = this.state.email;
-      const password = this.state.password;
-
-      // auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
-      //   .then(function() {
-      //     // firebase.auth().signInWithEmailAndPassword(email, password);
-      //   })
-      //   .catch(function(error) {
-      //     var errorCode = error.code;
-      //     var errorMessage = error.message;
-      //   });
-      
-      auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
-        .then(function() {
-          return auth.signInWithEmailAndPassword(email, password);
-        })
-        .catch(function(error) {
-          let errorCode = error.code;
-          let errorMessage = error.message;
-        });
-      
-      auth.signInWithEmailAndPassword(email, password).catch(function(error) {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log('Login Error!', errorCode, errorMessage)
-      }).then((result) => {
-        console.log('im in login: ', result);
-        this.props.checkLogin(true);
-        });
-
-        
-      axios.post('/api/login', {
-        email: this.state.email
-      }).then(response => {
-          this.props.setUsername(response.data)
-          this.props.history.push("homepage/decisions");
-        }, err => {
-          console.log('cant get', err)
-        })
-                
-      this.setState({
-        email: '',
-        password: ''
+      .catch(function(error) {
+        let errorCode = error.code;
+        let errorMessage = error.message;
       });
-    };
+    
+    auth.signInWithEmailAndPassword(email, password).catch(function(error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log('Login Error!', errorCode, errorMessage)
+    }).then((result) => {
+      this.props.checkLogin(true);
+      });
+
+      
+    axios.post('/api/login', {
+      email: this.state.email
+    }).then(response => {
+        this.props.setUsername(response.data)
+        this.props.history.push("homepage/decisions");
+      }, err => {
+        console.log('cant get', err)
+      })
+              
+    this.setState({
+      email: '',
+      password: ''
+    });
+  };
   
   render() {
     return (

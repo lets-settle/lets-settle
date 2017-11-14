@@ -19,116 +19,102 @@ class Signup extends React.Component {
         emailValid: false,
         passwordValid: false,
         formValid: false
-        // uid: ''
       }
 
-      this.handleUserInput = this.handleUserInput.bind(this);
-      this.validateField = this.validateField.bind(this);
-      this.validateForm = this.validateForm.bind(this);
-      this.errorClass = this.errorClass.bind(this);
-      this.signUpSubmit = this.signUpSubmit.bind(this);
-    }
+    this.handleUserInput = this.handleUserInput.bind(this);
+    this.validateField = this.validateField.bind(this);
+    this.validateForm = this.validateForm.bind(this);
+    this.errorClass = this.errorClass.bind(this);
+    this.signUpSubmit = this.signUpSubmit.bind(this);
+  }
 
-    componentDidMount() {
-      auth.onAuthStateChanged((user) => {
-        if(user) {
-          console.log(user);
-          // this.props.checkLogin(true);
-        } else {
-          console.log('not logged in')
-        }
-      })
-    }
-    
-    handleUserInput (e) {
-      let name = e.target.name;
-      let value = e.target.value;
-      this.setState({[name]: value},
-        () => { this.validateField(name, value) });
-
-    }
-      
-    validateField(fieldName, value) {
-      let fieldValidationErrors = this.state.formErrors;
-      let nameValid = this.state.nameValid;
-      let usernameValid = this.state.usernameValid;
-      let emailValid = this.state.emailValid;
-      let passwordValid = this.state.passwordValid;
-      
-      switch(fieldName) {
-        case 'name':
-        nameValid = value.length > 0;
-        fieldValidationErrors.name = nameValid ? '': ' field is empty';
-        break;
-        case 'username':
-        usernameValid = value.length > 0;
-        fieldValidationErrors.username = usernameValid ? '': ' field is empty';
-        break;
-        case 'email':
-        emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-        fieldValidationErrors.email = emailValid ? '' : ' is invalid';
-        break;
-        case 'password':
-        passwordValid = value.length >= 6;
-        fieldValidationErrors.password = passwordValid ? '': ' is too short';
-        break;
-        default:
-        break;
+  componentDidMount() {
+    auth.onAuthStateChanged((user) => {
+      if(user) {
+        console.log(user);
+      } else {
+        console.log('not logged in')
       }
-      this.setState({formErrors: fieldValidationErrors,
-        nameValid: nameValid,
-        usernameValid: usernameValid,
-        emailValid: emailValid,
-        passwordValid: passwordValid
-      }, this.validateForm);
-    }
+    })
+  }
+  
+  handleUserInput (e) {
+    let name = e.target.name;
+    let value = e.target.value;
+    this.setState({[name]: value},
+      () => { this.validateField(name, value) });
+  }
       
-    validateForm() {
-      this.setState({formValid: this.state.nameValid && this.state.usernameValid && this.state.emailValid && this.state.passwordValid});
-    }
+  validateField(fieldName, value) {
+    let fieldValidationErrors = this.state.formErrors;
+    let nameValid = this.state.nameValid;
+    let usernameValid = this.state.usernameValid;
+    let emailValid = this.state.emailValid;
+    let passwordValid = this.state.passwordValid;
     
-    errorClass(error) {
-      return(error.length === 0 ? '' : 'has-error');
+    switch(fieldName) {
+      case 'name':
+      nameValid = value.length > 0;
+      fieldValidationErrors.name = nameValid ? '': ' field is empty';
+      break;
+      case 'username':
+      usernameValid = value.length > 0;
+      fieldValidationErrors.username = usernameValid ? '': ' field is empty';
+      break;
+      case 'email':
+      emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+      fieldValidationErrors.email = emailValid ? '' : ' is invalid';
+      break;
+      case 'password':
+      passwordValid = value.length >= 6;
+      fieldValidationErrors.password = passwordValid ? '': ' is too short';
+      break;
+      default:
+      break;
     }
-
-    signUpSubmit (e) {
-      e.preventDefault();
-      let email = this.state.email;
-      let password = this.state.password;
+    this.setState({formErrors: fieldValidationErrors,
+      nameValid: nameValid,
+      usernameValid: usernameValid,
+      emailValid: emailValid,
+      passwordValid: passwordValid
+    }, this.validateForm);
+  }
       
-      console.log('Form submitted');
+  validateForm() {
+    this.setState({formValid: this.state.nameValid && this.state.usernameValid && this.state.emailValid && this.state.passwordValid});
+  }
+    
+  errorClass(error) {
+    return(error.length === 0 ? '' : 'has-error');
+  }
 
-      auth.createUserWithEmailAndPassword(email, password).catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        console.log('Sign Up Error!', errorCode, errorMessage);
-      }).then((result) => {
-        // console.log('sign up:', result.uid);
-        this.props.checkLogin(true);
-       
-        // this.setState({
-        //   uid: result.uid
-        // });
+  signUpSubmit (e) {
+    e.preventDefault();
+    let email = this.state.email;
+    let password = this.state.password;
+    
+    console.log('Form submitted');
 
-        axios.post('/api/signup', {
-          name: this.state.name,
-          username: this.state.username,
-          password: this.state.password,
-          email: this.state.email
-          // uid: this.state.uid
-        }).then(response => {
-          this.props.setUsername(this.state.username)
-          this.props.history.push("homepage/decisions");
-            console.log('Submit User Info to Server/DB', response);
-            console.log('after sending to server', this.props.username)
-          }).catch(err => {
-            console.log('FAILED TO POST: ', err);
-          })
-      });
+    auth.createUserWithEmailAndPassword(email, password).catch(function(error) {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log('Sign Up Error!', errorCode, errorMessage);
+    }).then((result) => {
+      this.props.checkLogin(true);
 
-
-    }
+      axios.post('/api/signup', {
+        name: this.state.name,
+        username: this.state.username,
+        password: this.state.password,
+        email: this.state.email
+      }).then(response => {
+        this.props.setUsername(this.state.username)
+        this.props.history.push("homepage/decisions");
+        }).catch(err => {
+          console.log('FAILED TO POST: ', err);
+        })
+    });
+  }
 
 
   render() {  
