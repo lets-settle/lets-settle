@@ -1,26 +1,128 @@
 #title {
-    display: block;
-    margin: 0 auto;
+  display: block;
+  margin: 0 auto;
 }
 
 #titlesettle {
-    text-align: center;
-    margin: 35px auto; 
-    margin: -40px 20px;
+  text-align: center;
+  margin: 35px auto; 
+  margin: -40px 20px;
 }
 
 button {
-    background-color: #D32323;
-    display: block;
-    border: none;
-    color: white;
-    border-radius: 10px;
-    padding: 10px 25px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background-color: #D32323;
+  display: block;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#settle-button {
+    margin-left:15px;
+}
+
+#nav-title {
+  min-width: 90px;
+}
+
+#squad {
+  margin-left: 112px;
+}
+
+#squad, #solo {
+  padding: 40px 80px 40px 80px;
+  font-size: 35px;
+  text-transform: uppercase;
+}
+
+#decision-button {
+  margin-top: 18%;
+}
+
+#img {
+  margin-top: 25px;
+  border-radius: 15px;
+  max-width: 615px;
+}
+
+#restaurant {
+  margin-top: 10px;
+}
+
+#restaurant-name {
+  color: #a50000;
+}
+
+#inlineFormCustomSelect {
+  margin-right: 22px;
+  border-radius: 3px;
+  padding: 8px 10px;
+}
+
+#inlineFormInput, #inlineFormInputGroup {
+  margin-right: 10px;
+}
+
+#search-bar {
+  margin-top: 20px;
+}
+
+#error {
+  color: #d60000;
+}
+
+#restr {
+  margin-top: 6px;
+}
+
+#grp-restaurant-name {
+  color: #a50000;
+  margin-right: 20px;
+}
+
+#final-choice {
+  margin-top: 30px;
+  border-top: solid 1px;
+  padding-top: 15px;
+}
+
+#suggestions {
+  text-align: center;
+}
+
+#final-choice {
+  text-align: center;
+}
+
+#create-group {
+  margin-top: 20px;
+}
+
+#group-name {
+  margin-right: 15px;
+}
+
+#add-friends {
+  margin-right: 16px;
+  margin-top: 5px;
+}
+
+#group-list {
+  margin-top: 20px;
+}
+
+#create-group {
+  margin-top: 25px;
+}
+
+#friends {
+  text-align: center;
 }

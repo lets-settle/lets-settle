@@ -18,9 +18,6 @@ import { LinkContainer } from 'react-router-bootstrap';
 import socketIOClient from "socket.io-client";
 const socket = socketIOClient("http://127.0.0.1:1128");
 
-// const socket = io(`/${group}`);
-// console.log('THIS IS GROUP', group);
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -47,7 +44,7 @@ class App extends React.Component {
       isLoggedIn: status
     });
     console.log('this is from app is this logged in?:', this.state.isLoggedIn)
-  }
+  };
 
   checkSignup() {
     this.setState({
@@ -62,52 +59,47 @@ class App extends React.Component {
     })
   };
   
-    sendSuggestion(rest) {
-      this.setState({
-        suggestion : rest
-      }, function() {
-        console.log('suggestionnnnn OBJECT', this.state.suggestion);
-        socket.emit('aSuggestion', this.state.suggestion);
-      });  
-      
-      axios.post('/api/suggestion')
+  sendSuggestion(rest) {
+    this.setState({
+      suggestion : rest
+    }, function() {
+      socket.emit('aSuggestion', this.state.suggestion);
+    });  
+    
+    axios.post('/api/suggestion')
+      .then(response => {
+      }).catch(err => {
+        console.log(err)
+    })
+    
+  };
+  
+  selectGroup(e) {
+    this.setState({
+      selectedGroup: e.target.value
+    }, function() {
+      axios.post('/api/selectGroup',{
+        group_name: this.state.selectedGroup})
         .then(response => {
-          console.log('FINALLLLLL result----------', response.data)
+          console.log(response);
         }).catch(err => {
           console.log(err)
       })
-      
-    };
-    
-    selectGroup(e) {
-      this.setState({
-        selectedGroup: e.target.value
-      }, function() {
-        axios.post('/api/selectGroup',{
-          group_name: this.state.selectedGroup})
-          .then(response => {
-            console.log(response);
-          }).catch(err => {
-                console.log(err)
-        })
-      })
-    }
-
-    componentDidMount() {
-      socket.on('showSuggestion', data => {
-        console.log('dataaaaaaaaSOCKET', data.received);
-        console.log('stateeeee', this.state);
-        let rest = this.state.userResturants.concat([data.received]);
-        this.setState({
-          userResturants: rest
-          })
     })
+  }
 
-    socket.on('finalSuggestion', data => {
-      console.log('dataaaaaaaaSOCKET', data.received);
+  componentDidMount() {
+    socket.on('showSuggestion', data => {
+      let rest = this.state.userResturants.concat([data.received]);
       this.setState({
-        final: data
-        })
+        userResturants: rest
+      })
+  })
+
+  socket.on('finalSuggestion', data => {
+    this.setState({
+      final: data
+    })
   })
 
    }

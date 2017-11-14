@@ -11,83 +11,67 @@ class Login extends React.Component {
     super(props);
       this.state = {
         user: null,
-        // username: '', 
         email: '',
         password: ''
       };
 
-      this.handleLoginInput = this.handleLoginInput.bind(this);
-      this.loginButton = this.loginButton.bind(this);
-    }
+    this.handleLoginInput = this.handleLoginInput.bind(this);
+    this.loginButton = this.loginButton.bind(this);
+  }
 
-    componentWillMount() {
-      auth.onAuthStateChanged((user) => {
-        if(user) {
-          console.log('authStateChange', user.email);
-          // this.props.history.push("homepage/decisions");
-        } else {
-          console.log('not logged in')
-        }
+  componentWillMount() {
+    auth.onAuthStateChanged((user) => {
+      if(user) {
+        console.log('authStateChange', user.email);
+      } else {
+        console.log('not logged in')
+      }
+    })
+  }
+
+  handleLoginInput (e) {
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState({[name]: value})
+  }
+
+  loginButton (e) {
+    e.preventDefault();
+    const email = this.state.email;
+    const password = this.state.password;
+    
+    auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
+      .then(function() {
+        return auth.signInWithEmailAndPassword(email, password);
       })
-    }
-
-    handleLoginInput (e) {
-      const name = e.target.name;
-      const value = e.target.value;
-      this.setState({[name]: value})
-    }
-
-    loginButton (e) {
-      e.preventDefault();
-      const email = this.state.email;
-      const password = this.state.password;
-
-      // auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
-      //   .then(function() {
-      //     // firebase.auth().signInWithEmailAndPassword(email, password);
-      //   })
-      //   .catch(function(error) {
-      //     var errorCode = error.code;
-      //     var errorMessage = error.message;
-      //   });
-      
-      auth.signInWithEmailAndPassword(email, password).catch(function(error) {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log('Login Error!', errorCode, errorMessage)
-      }).then((result) => {
-        console.log('im in login: ', result);
-        // console.log('i logged in', JSON.parse(Object.values(window.sessionStorage)).uid)
-        // console.log('i logged in', typeof Object.keys(window.sessionStorage)[0])
-        // this.setState({
-        //   userid: JSON.parse(Object.values(window.sessionStorage)).uid
-        // })
-        this.props.checkLogin(true);
-
-        // const user = result.user;
-        // this.setState({
-          //   user
-          // });
-        });
-        console.log(this.state.userid)
-        console.log(this.state.userid)
-        
-      axios.post('/api/login', {
-        email: this.state.email
-        // uid: uid
-      }).then(response => {
-          console.log('getting username back', response.data)
-          this.props.setUsername(response.data)
-          this.props.history.push("homepage/decisions");
-        }, err => {
-          console.log('cant get', err)
-        })
-                
-      this.setState({
-        email: '',
-        password: ''
+      .catch(function(error) {
+        let errorCode = error.code;
+        let errorMessage = error.message;
       });
-    };
+    
+    auth.signInWithEmailAndPassword(email, password).catch(function(error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log('Login Error!', errorCode, errorMessage)
+    }).then((result) => {
+      this.props.checkLogin(true);
+      });
+
+      
+    axios.post('/api/login', {
+      email: this.state.email
+    }).then(response => {
+        this.props.setUsername(response.data)
+        this.props.history.push("homepage/decisions");
+      }, err => {
+        console.log('cant get', err)
+      })
+              
+    this.setState({
+      email: '',
+      password: ''
+    });
+  };
   
   render() {
     return (
@@ -95,51 +79,54 @@ class Login extends React.Component {
       <Link to = '/'>
         <img 
           id ='title' 
-          src={require('../../dist/images/logo.png')}/>
+          src={require('../../dist/images/yelpsettle.png')}/>
       </Link>
-      <form 
-        className="form-horizontal" 
-        onSubmit={this.loginButton}>
-        <div className="form-group">
-          <div className="col-sm-10">
-            <input className="form-control" 
-              id="inputEmail" 
-              placeholder="Email" 
-              name="email" 
-              value={this.state.email} 
-              onChange={this.handleLoginInput}/>
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-md-6">
+            <form 
+              className="form-horizontal" 
+              onSubmit={this.loginButton}>
+              <div className="form-group">
+                <input className="form-control" 
+                  id="inputEmail" 
+                  placeholder="Email" 
+                  name="email" 
+                  value={this.state.email} 
+                  onChange={this.handleLoginInput}/>
+              </div>
+              <div className="form-group">
+                <input 
+                  type="password" 
+                  className="form-control" 
+                  id="inputPassword" 
+                  placeholder="Password" 
+                  name="password" 
+                  value={this.state.password} 
+                  onChange={this.handleLoginInput}/>
+              </div>
+              <div className="form-group" id="login-buttons">
+                <div>
+                    <button 
+                      type="submit" 
+                      className="btn btn-danger"
+                      onSubmit={() => {this.props.checkLogin(true)}}>
+                      Login
+                    </button>
+                  <Link to = '/signup'>
+                    <button 
+                      type="click" 
+                      className="btn btn-danger"
+                      id="settle-button">
+                      Sign Up
+                    </button>
+                  </Link>
+              </div>
+            </div>
+            </form>
           </div>
         </div>
-        <div className="form-group">
-          <div className="col-sm-10">
-            <input 
-              type="password" 
-              className="form-control" 
-              id="inputPassword" 
-              placeholder="Password" 
-              name="password" 
-              value={this.state.password} 
-              onChange={this.handleLoginInput}/>
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="col-sm-offset-2 col-sm-10">
-              <button 
-                type="submit" 
-                className="btn btn-danger" 
-                onSubmit={() => {this.props.checkLogin(true)}}>
-                Login
-              </button>
-          </div>
-        </div>
-      </form>
-      <Link to = '/signup'>
-        <button 
-          type="click" 
-          className="btn btn-danger">
-          Singup
-        </button>
-      </Link>
+      </div>
     </div>
     ) 
   }

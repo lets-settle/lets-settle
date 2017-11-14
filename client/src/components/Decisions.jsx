@@ -10,12 +10,16 @@ class Decisions extends React.Component {
 
   render() {
     return (
-        <div>
+       <div>
+        <div className="container" id="decision-button">
+          <div className="row justify-content-center">
             <ButtonToolbar>
-                <Link to = "/homepage/solo"><Button bsStyle="danger" bsSize="large" >Solo</Button></Link>
-                <Link to = "/homepage/friends"><Button bsStyle="danger" bsSize="large" >Friends</Button></Link>
+                <Link to = "/homepage/solo"><Button bsStyle="danger" bsSize="large" id="solo">Solo</Button></Link>
+                <Link to = "/homepage/friends"><Button bsStyle="danger" bsSize="large" id="squad">Squad</Button></Link>
             </ButtonToolbar>
+          </div>
         </div>
+      </div>
     ) 
   }
 }
