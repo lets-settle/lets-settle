@@ -141,25 +141,21 @@ class Signup extends React.Component {
                 })}
               </div>
               <div className={`form-group ${this.errorClass(this.state.formErrors.name)}`}>
-                <label htmlFor="inputName" className="control-label">Full Name</label>
                 <div>
                   <input className="form-control" id="inputName" placeholder="Full Name" name="name" value={this.state.name} onChange={this.handleUserInput}/> 
                 </div>
               </div>
               <div className={`form-group ${this.errorClass(this.state.formErrors.username)}`}>
-                <label htmlFor="inputUsername" className="control-label">Username</label>
                 <div>
                   <input className="form-control" id="inputUsername" placeholder="Username" name="username" value={this.state.username} onChange={this.handleUserInput}/>
                 </div>
               </div>
               <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
-                <label htmlFor="inputEmail" className="control-label">Email</label>
                 <div>
                   <input type="email" className="form-control" id="inputEmail" placeholder="Email" name="email" value={this.state.email} onChange={this.handleUserInput}/>
                 </div>
               </div>
               <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
-                <label htmlFor="inputPassword" className="control-label">Password</label>
                 <div>
                   <input type="password" className="form-control" id="inputPassword" placeholder="Password" name="password" value={this.state.password} onChange={this.handleUserInput}/>
                 </div>
