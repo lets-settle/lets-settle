@@ -91,7 +91,6 @@ class Signup extends React.Component {
   signUpSubmit (e) {
     e.preventDefault();
     let email = this.state.email;
-    let password = this.state.password;
     
     console.log('Form submitted');
 
@@ -105,7 +104,6 @@ class Signup extends React.Component {
       axios.post('/api/signup', {
         name: this.state.name,
         username: this.state.username,
-        password: this.state.password,
         email: this.state.email
       }).then(response => {
         this.props.setUsername(this.state.username)

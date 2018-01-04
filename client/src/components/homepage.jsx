@@ -32,7 +32,7 @@ class Homepage extends React.Component {
             </button>
             <LinkContainer to = '/homepage/decisions'>
               <a className="navbar-brand" href="#" id="nav-title">
-                Yelp Settle
+                Let's Settle
               </a>
             </LinkContainer>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
