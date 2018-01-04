@@ -1,7 +1,7 @@
 {
-  "name": "yelpsettle",
+  "name": "letssettle",
   "version": "1.0.0",
-  "description": "yelp settle",
+  "description": "lets settle",
   "main": "index.js",
   "scripts": {
     "react-dev": "webpack -d --watch",
